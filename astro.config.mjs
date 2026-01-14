@@ -4,7 +4,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
-  site: 'https://forensicdarkness.com',
+  site: 'https://whenmoon-afk.github.io',
+  base: '/forensic-darkness-site/',
   integrations: [mdx(), sitemap(), tailwind()],
   output: 'static',
   prefetch: {
