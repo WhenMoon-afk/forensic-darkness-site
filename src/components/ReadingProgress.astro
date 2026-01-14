@@ -1,0 +1,30 @@
+---
+// Reading progress bar - shows scroll progress through article
+---
+
+<div
+  id="reading-progress"
+  class="fixed top-0 left-0 h-1 bg-fd-primary z-50 transition-all duration-100"
+  style="width: 0%"
+  role="progressbar"
+  aria-label="Reading progress"
+  aria-valuemin="0"
+  aria-valuemax="100"
+  aria-valuenow="0"
+></div>
+
+<script is:inline>
+  const progressBar = document.getElementById('reading-progress');
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    progressBar.style.width = progress + '%';
+    progressBar.setAttribute('aria-valuenow', Math.round(progress));
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
