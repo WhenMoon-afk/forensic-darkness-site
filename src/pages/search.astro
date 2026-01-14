@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Search" description="Search articles on Forensic Darkness">
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Search</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        Find articles about serial killers, forensic psychology, and victim resources.
+      </p>
+
+      <div id="search" class="search-container"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* Pagefind UI customization for dark theme */
+  :root {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #8b5cf6;
+    --pagefind-ui-text: #e5e7eb;
+    --pagefind-ui-background: #1a1a2e;
+    --pagefind-ui-border: #374151;
+    --pagefind-ui-tag: #8b5cf6;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 8px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: inherit;
+  }
+
+  .pagefind-ui__search-input {
+    background: #16213e !important;
+    color: #e5e7eb !important;
+  }
+
+  .pagefind-ui__search-input::placeholder {
+    color: #6b7280 !important;
+  }
+
+  .pagefind-ui__result {
+    background: #16213e !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .pagefind-ui__result:hover {
+    background: #1a1a2e !important;
+  }
+
+  .pagefind-ui__result-link {
+    color: #8b5cf6 !important;
+  }
+
+  .pagefind-ui__result-link:hover {
+    color: #a78bfa !important;
+  }
+
+  .pagefind-ui__result-excerpt {
+    color: #9ca3af !important;
+  }
+
+  .pagefind-ui__button {
+    background: #8b5cf6 !important;
+    color: white !important;
+  }
+
+  .pagefind-ui__button:hover {
+    background: #7c3aed !important;
+  }
+</style>
+
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', async () => {
+    const pagefindPath = '/pagefind/pagefind-ui.js';
+    try {
+      const module = await import(/* @vite-ignore */ pagefindPath);
+      new module.PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        showImages: false,
+        excerptLength: 15,
+      });
+    } catch (e) {
+      document.getElementById('search').innerHTML =
+        '<p class="text-fd-muted">Search index is being built. Please try again after deployment.</p>';
+    }
+  });
+</script>
+
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
