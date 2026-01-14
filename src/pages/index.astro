@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const recentPosts = sortedPosts.slice(0, 6);
+
+// Calculate reading time
+const getReadingTime = (body?: string) => {
+  if (!body) return 1;
+  const wordCount = body.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+};
+
+// Strip markdown for clean excerpt
+const getExcerpt = (body?: string) => {
+  if (!body) return '';
+  return body
+    .replace(/^#+\s+.*/gm, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+    .replace(/`[^`]+`/g, '')
+    .replace(/\n+/g, ' ')
+    .trim()
+    .substring(0, 200) + '...';
+};
+
+// Extract first image from post content
+const getFirstImage = (body?: string): string | undefined => {
+  if (!body) return undefined;
+  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return match ? match[1] : undefined;
+};
+---
+
+<BaseLayout title="Forensic Darkness">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-b from-fd-card to-fd-dark py-20 lg:py-32">
+    <div class="container text-center">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight">
+        Forensic Darkness
+      </h1>
+      <p class="text-xl md:text-2xl text-fd-muted max-w-3xl mx-auto mb-8">
+        Serial Killers & Awareness
+      </p>
+      <p class="text-lg text-fd-text/80 max-w-2xl mx-auto mb-10">
+        Victims being informed with help and resources. Exploring criminal psychology, forensic science, and providing support for crime victims.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="/blog" class="btn btn-primary">
+          Explore Articles
+        </a>
+        <a href="/resources" class="btn btn-secondary">
+          Victim Resources
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Statement -->
+  <section class="py-16 border-b border-gray-800">
+    <div class="container">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-display font-bold mb-6">Don't Be Scared, Be Aware!</h2>
+        <p class="text-fd-muted text-lg leading-relaxed">
+          Serial killers don't just hatch overnight—they are the product of years of circumstances and thought processes. This site provides information about mental illnesses and personality disorders common among offenders, as well as help for victims and families. We need to know our enemy to educate our children on how to stay safe.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Articles -->
+  <section class="py-16">
+    <div class="container">
+      <div class="flex items-center justify-between mb-10">
+        <h2 class="text-2xl md:text-3xl font-display font-bold">Recent Articles</h2>
+        <a href="/blog" class="text-fd-primary hover:text-fd-accent flex items-center gap-2">
+          View All
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentPosts.map(post => (
+          <ArticleCard
+            title={post.data.title}
+            slug={post.data.slug || post.slug}
+            date={post.data.date}
+            excerpt={getExcerpt(post.body)}
+            image={post.data.image || getFirstImage(post.body)}
+            tags={post.data.tags}
+            readingTime={getReadingTime(post.body)}
+          />
+        ))}
+      </div>
+
+      {recentPosts.length === 0 && (
+        <p class="text-center text-fd-muted py-12">No articles yet. Check back soon!</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Resource Cards -->
+  <section class="py-16 bg-fd-card/30">
+    <div class="container">
+      <h2 class="text-2xl md:text-3xl font-display font-bold text-center mb-10">Victim Resources</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <a href="https://ovc.ojp.gov/" target="_blank" rel="noopener noreferrer" class="card hover:border-fd-primary transition-colors group">
+          <h3 class="font-display font-bold mb-2 group-hover:text-fd-primary">Office for Victims of Crime</h3>
+          <p class="text-sm text-fd-muted">Federal resources and support for crime victims</p>
+        </a>
+
+        <a href="https://www.thehotline.org/" target="_blank" rel="noopener noreferrer" class="card hover:border-fd-primary transition-colors group">
+          <h3 class="font-display font-bold mb-2 group-hover:text-fd-primary">National DV Hotline</h3>
+          <p class="text-sm text-fd-muted">1-800-799-7233 - 24/7 support for domestic violence</p>
+        </a>
+
+        <a href="https://988lifeline.org/" target="_blank" rel="noopener noreferrer" class="card hover:border-fd-primary transition-colors group">
+          <h3 class="font-display font-bold mb-2 group-hover:text-fd-primary">988 Suicide & Crisis Lifeline</h3>
+          <p class="text-sm text-fd-muted">Call or text 988 for mental health crisis support</p>
+        </a>
+
+        <a href="https://www.doenetwork.org/" target="_blank" rel="noopener noreferrer" class="card hover:border-fd-primary transition-colors group">
+          <h3 class="font-display font-bold mb-2 group-hover:text-fd-primary">Doe Network</h3>
+          <p class="text-sm text-fd-muted">Help identify missing persons and unidentified remains</p>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
