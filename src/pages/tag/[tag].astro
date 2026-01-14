@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+  // Get all unique tags
+  const allTags = [...new Set(posts.flatMap(post => post.data.tags || []))];
+
+  return allTags.map(tag => {
+    const tagSlug = tag.toLowerCase().replace(/\s+/g, '-');
+    const filteredPosts = posts.filter(post =>
+      post.data.tags?.some(t => t.toLowerCase().replace(/\s+/g, '-') === tagSlug)
+    );
+    return {
+      params: { tag: tagSlug },
+      props: { tag, posts: filteredPosts },
+    };
+  });
+}
+
+const { tag, posts } = Astro.props;
+const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Helper functions
+const getReadingTime = (body?: string) => {
+  if (!body) return 1;
+  return Math.max(1, Math.ceil(body.split(/\s+/).filter(Boolean).length / 200));
+};
+
+const getExcerpt = (body?: string) => {
+  if (!body) return '';
+  return body
+    .replace(/^#+\s+.*/gm, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+    .replace(/`[^`]+`/g, '')
+    .replace(/\n+/g, ' ')
+    .trim()
+    .substring(0, 200) + '...';
+};
+
+const getFirstImage = (body?: string): string | undefined => {
+  if (!body) return undefined;
+  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return match ? match[1] : undefined;
+};
+---
+
+<BaseLayout title={`Tag: ${tag}`} description={`Articles tagged with "${tag}" on Forensic Darkness.`}>
+  <section class="py-12">
+    <div class="container">
+      <div class="mb-10">
+        <a href="/blog" class="text-fd-muted hover:text-fd-primary text-sm flex items-center gap-1 mb-4">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+          Back to Blog
+        </a>
+        <h1 class="text-4xl font-display font-bold">
+          Tag: <span class="text-fd-primary">{tag}</span>
+        </h1>
+        <p class="text-fd-muted mt-2">{sortedPosts.length} article{sortedPosts.length !== 1 ? 's' : ''}</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedPosts.map(post => (
+          <ArticleCard
+            title={post.data.title}
+            slug={post.data.slug || post.slug}
+            date={post.data.date}
+            excerpt={getExcerpt(post.body)}
+            image={post.data.image || getFirstImage(post.body)}
+            tags={post.data.tags}
+            readingTime={getReadingTime(post.body)}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
