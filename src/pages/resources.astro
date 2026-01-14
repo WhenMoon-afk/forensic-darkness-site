@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const resources = [
+  {
+    category: 'Crime Victim Support',
+    items: [
+      {
+        title: 'Office for Victims of Crime (OVC)',
+        url: 'https://ovc.ojp.gov/',
+        description: 'Federal resources and programs for crime victims, including compensation and assistance.'
+      },
+      {
+        title: 'National Center for Victims of Crime',
+        url: 'https://victimsofcrime.org/',
+        description: 'Advocacy and resources for crime victims and their families.'
+      }
+    ]
+  },
+  {
+    category: 'Domestic Violence',
+    items: [
+      {
+        title: 'National Domestic Violence Hotline',
+        url: 'https://www.thehotline.org/',
+        description: '1-800-799-7233 or text START to 88788. 24/7 confidential support.'
+      },
+      {
+        title: 'DocuSAFE App',
+        url: 'https://www.techsafety.org/docusafe',
+        description: 'Free app to document and store evidence of abuse safely.'
+      }
+    ]
+  },
+  {
+    category: 'Mental Health & Crisis',
+    items: [
+      {
+        title: '988 Suicide & Crisis Lifeline',
+        url: 'https://988lifeline.org/',
+        description: 'Call or text 988 for 24/7 mental health crisis support.'
+      },
+      {
+        title: 'Crisis Text Line',
+        url: 'https://www.crisistextline.org/',
+        description: 'Text HOME to 741741 for free 24/7 crisis support.'
+      }
+    ]
+  },
+  {
+    category: 'Missing Persons',
+    items: [
+      {
+        title: 'Doe Network',
+        url: 'https://www.doenetwork.org/',
+        description: 'International center for unidentified and missing persons. Help bring closure to families.'
+      },
+      {
+        title: 'NamUs',
+        url: 'https://namus.nij.ojp.gov/',
+        description: 'National Missing and Unidentified Persons System database.'
+      }
+    ]
+  },
+  {
+    category: 'Child Safety',
+    items: [
+      {
+        title: 'National Sex Offender Registry',
+        url: 'https://www.nsopw.gov/',
+        description: "Search sex offender registries by name, address, or location. Know who's in your neighborhood."
+      },
+      {
+        title: 'National Center for Missing & Exploited Children',
+        url: 'https://www.missingkids.org/',
+        description: 'Resources for child safety and reporting missing children.'
+      }
+    ]
+  },
+  {
+    category: 'Substance Abuse',
+    items: [
+      {
+        title: 'SAMHSA National Helpline',
+        url: 'https://www.samhsa.gov/find-help/national-helpline',
+        description: '1-800-662-4357. Free 24/7 treatment referral service.'
+      },
+      {
+        title: 'Pill Identifier (WebMD)',
+        url: 'https://www.webmd.com/pill-identification/default.htm',
+        description: 'Identify unknown pills by shape, color, and imprint.'
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout title="Resources" description="Victim support resources, hotlines, and help for crime victims, domestic violence survivors, and families.">
+  <section class="py-12">
+    <div class="container">
+      <h1 class="text-4xl font-display font-bold mb-4">Victim Resources</h1>
+      <p class="text-fd-muted text-lg mb-10 max-w-3xl">
+        Forensic Darkness is committed to supporting crime victims and their families. Below are trusted resources for various types of support and assistance.
+      </p>
+
+      <div class="grid gap-8">
+        {resources.map(section => (
+          <div>
+            <h2 class="text-2xl font-display font-bold mb-4 pb-2 border-b border-gray-700">
+              {section.category}
+            </h2>
+            <div class="grid md:grid-cols-2 gap-4">
+              {section.items.map(resource => (
+                <a
+                  href={resource.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="card hover:border-fd-primary transition-colors group"
+                >
+                  <h3 class="font-display font-bold mb-2 group-hover:text-fd-primary flex items-center gap-2">
+                    {resource.title}
+                    <svg class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </h3>
+                  <p class="text-sm text-fd-muted">{resource.description}</p>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 p-6 bg-fd-warning/10 border border-fd-warning/30 rounded-lg">
+        <h3 class="font-display font-bold text-fd-warning mb-2">Emergency Situations</h3>
+        <p class="text-fd-text/80">
+          If you are in immediate danger, call <strong>911</strong> immediately. These resources are for support and information—they cannot replace emergency services.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
