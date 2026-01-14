@@ -1,0 +1,71 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import ContentWarning from '../../components/ContentWarning.astro';
+import { getCollection } from 'astro:content';
+
+// Get posts with serial killer related tags
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const serialKillerTags = ['serial killer', 'serial killers', 'serial murder', 'serial killer traits', 'serial killer behavior'];
+
+const filteredPosts = posts.filter(post => {
+  const tags = post.data.tags?.map(t => t.toLowerCase()) || [];
+  return serialKillerTags.some(tag => tags.includes(tag));
+});
+
+const sortedPosts = filteredPosts.sort((a, b) =>
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout title="Serial Killers" description="Articles exploring serial killer psychology, case studies, and forensic analysis.">
+  <section class="py-12">
+    <div class="container">
+      <h1 class="text-4xl font-display font-bold mb-4">Serial Killers</h1>
+      <p class="text-fd-muted text-lg mb-8 max-w-3xl">
+        Exploring the psychology, behavior, and case studies of serial killers. Understanding these individuals helps us protect our communities.
+      </p>
+
+      <ContentWarning type="disturbing" />
+
+      <div class="mt-10">
+        <h2 class="text-2xl font-display font-bold mb-6">Featured Topics</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          <a href="/tag/serial-killer-traits" class="card text-center hover:border-fd-primary transition-colors">
+            <h3 class="font-bold">Traits & Behavior</h3>
+            <p class="text-sm text-fd-muted">Warning signs</p>
+          </a>
+          <a href="/tag/case-study" class="card text-center hover:border-fd-primary transition-colors">
+            <h3 class="font-bold">Case Studies</h3>
+            <p class="text-sm text-fd-muted">Historical analysis</p>
+          </a>
+          <a href="/tag/forensic-science" class="card text-center hover:border-fd-primary transition-colors">
+            <h3 class="font-bold">Forensic Science</h3>
+            <p class="text-sm text-fd-muted">Investigation methods</p>
+          </a>
+          <a href="/tag/psychopath" class="card text-center hover:border-fd-primary transition-colors">
+            <h3 class="font-bold">Psychology</h3>
+            <p class="text-sm text-fd-muted">Understanding the mind</p>
+          </a>
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-display font-bold mb-6">Articles</h2>
+      {sortedPosts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {sortedPosts.map(post => (
+            <ArticleCard
+              title={post.data.title}
+              slug={post.data.slug || post.slug}
+              date={post.data.date}
+              excerpt={post.body?.substring(0, 200) + '...'}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="text-fd-muted py-8">No articles in this category yet.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
