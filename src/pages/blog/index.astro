@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Calculate reading time for each post
+const getReadingTime = (body?: string) => {
+  if (!body) return 1;
+  const wordCount = body.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+};
+
+// Strip markdown for clean excerpt
+const getExcerpt = (body?: string) => {
+  if (!body) return '';
+  return body
+    .replace(/^#+\s+.*/gm, '') // Remove headings
+    .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+    .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, '') // Remove images
+    .replace(/`[^`]+`/g, '') // Remove inline code
+    .replace(/\n+/g, ' ') // Replace newlines
+    .trim()
+    .substring(0, 200) + '...';
+};
+
+// Extract first image from post content for featured image
+const getFirstImage = (body?: string): string | undefined => {
+  if (!body) return undefined;
+  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return match ? match[1] : undefined;
+};
+
+// Get all unique tags
+const allTags = [...new Set(sortedPosts.flatMap(post => post.data.tags || []))];
+---
+
+<BaseLayout title="Blog" description="Articles about serial killers, forensic psychology, victim resources, and crime awareness.">
+  <section class="py-12">
+    <div class="container">
+      <h1 class="text-4xl font-display font-bold mb-4">Blog</h1>
+      <p class="text-fd-muted text-lg mb-10">
+        Exploring serial killer psychology, forensic science, and victim advocacy.
+      </p>
+
+      <!-- Tags Filter -->
+      {allTags.length > 0 && (
+        <div class="mb-10">
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-fd-primary text-white rounded-full text-sm">All</span>
+            {allTags.slice(0, 10).map(tag => (
+              <a href={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="px-3 py-1.5 bg-fd-card text-fd-muted rounded-full text-sm hover:bg-fd-primary hover:text-white transition-colors">
+                {tag}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Posts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedPosts.map(post => (
+          <ArticleCard
+            title={post.data.title}
+            slug={post.data.slug || post.slug}
+            date={post.data.date}
+            excerpt={getExcerpt(post.body)}
+            image={post.data.image || getFirstImage(post.body)}
+            tags={post.data.tags}
+            author={post.data.author}
+            readingTime={getReadingTime(post.body)}
+          />
+        ))}
+      </div>
+
+      {sortedPosts.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-fd-muted text-lg">No articles published yet.</p>
+          <p class="text-fd-muted">Check back soon for new content!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
