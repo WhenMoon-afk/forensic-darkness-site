@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Try to get the spirituality page content
+const pages = await getCollection('pages');
+const spiritualityPage = pages.find(p => p.data.slug === 'spirituality' || p.slug === 'spirituality');
+let Content = null;
+if (spiritualityPage) {
+  const rendered = await spiritualityPage.render();
+  Content = rendered.Content;
+}
+---
+
+<BaseLayout title="Spirituality" description="Exploring mental health, spiritual healing, and parapsychology in the context of forensic issues.">
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-6">Spirituality</h1>
+
+      <div class="prose-dark">
+        {Content ? (
+          <Content />
+        ) : (
+          <>
+            <p class="lead text-xl text-fd-muted mb-8">
+              At the forefront of forensic issues is mental health, and for those who suffer from depression the thought of suicide may come to mind. Our goal here at Forensic Darkness is to provide hope and healing to those who need help.
+            </p>
+
+            <p>
+              Spirituality is the core of every human being because we are simply souls inside our bodies. Our energy within us lives on because we will live on.
+            </p>
+
+            <h2>Parapsychology</h2>
+            <p>
+              Believe it or not, the field of psychology does recognize the mystic as the study of parapsychology. The things that cannot be explained are indeed unseen, but are ultimately the real part of life's curiosities.
+            </p>
+
+            <p>According to Psychology Today, parapsychology includes the study of:</p>
+
+            <ul>
+              <li><strong>Hauntings and apparitions</strong></li>
+              <li><strong>Clairvoyance</strong> - reading into far-off locations</li>
+              <li><strong>Telepathy</strong> - mind-to-mind communication</li>
+              <li><strong>ESP</strong> - Extrasensory perception outside normal sensory pathways</li>
+              <li><strong>Precognition</strong> - visions of the future</li>
+              <li><strong>Psychokinesis & telekinesis</strong> - using the mind to move objects</li>
+              <li><strong>Out-of-body experiences (OBEs)</strong> - seeing your body from above</li>
+            </ul>
+
+            <h2>Finding Meaning</h2>
+            <p>
+              Many of us ask questions about the evil deeds of serial killers because the subject is very interesting. While most of us live struggling to get through each day, we seek answers so we can gain hope and promise that life can get better.
+            </p>
+
+            <p>
+              Forensic Darkness examines living forensic issues along with the real possible forensic matters of the afterlife. If you are devastated and sad in life, what makes you think you will be any different in death?
+            </p>
+
+            <div class="bg-fd-card p-6 rounded-lg mt-8">
+              <h3 class="text-xl font-display font-bold mb-4">A Message of Hope</h3>
+              <p class="text-fd-muted mb-0">
+                Life is precious, and you don't know how long you have, so make the most of every day. Be the best friend you deserve and never give up. Smile, even if only for yourself!
+              </p>
+            </div>
+
+            <h2 class="mt-8">Need Help?</h2>
+            <p>
+              If you're struggling with depression or thoughts of suicide, please reach out:
+            </p>
+            <ul>
+              <li><strong>988 Suicide & Crisis Lifeline:</strong> Call or text 988</li>
+              <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+            </ul>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
