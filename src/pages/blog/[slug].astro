@@ -1,0 +1,63 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  // Sort by date descending
+  const sortedPosts = allPosts.sort((a, b) =>
+    new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+  );
+
+  return sortedPosts.map((post, index) => {
+    const prevPost = sortedPosts[index + 1];
+    const nextPost = sortedPosts[index - 1];
+
+    return {
+      params: { slug: post.data.slug || post.slug },
+      props: {
+        post,
+        prevPost: prevPost ? { title: prevPost.data.title, slug: prevPost.data.slug || prevPost.slug } : null,
+        nextPost: nextPost ? { title: nextPost.data.title, slug: nextPost.data.slug || nextPost.slug } : null,
+      },
+    };
+  });
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content, headings } = await post.render();
+
+// Calculate word count from the raw body
+const wordCount = post.body ? post.body.split(/\s+/).filter(Boolean).length : 0;
+const currentSlug = post.data.slug || post.slug;
+
+// Strip markdown for clean description
+const cleanDescription = post.body
+  ? post.body
+      .replace(/^#+\s+.*/gm, '') // Remove headings
+      .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+      .replace(/\*([^*]+)\*/g, '$1') // Remove italic
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+      .replace(/!\[[^\]]*\]\([^)]+\)/g, '') // Remove images
+      .replace(/`[^`]+`/g, '') // Remove inline code
+      .replace(/\n+/g, ' ') // Replace newlines with spaces
+      .trim()
+      .substring(0, 160)
+  : '';
+---
+
+<ArticleLayout
+  title={post.data.title}
+  description={cleanDescription}
+  date={post.data.date}
+  author={post.data.author}
+  tags={post.data.tags}
+  image={post.data.image}
+  wordCount={wordCount}
+  slug={currentSlug}
+  headings={headings}
+  prevPost={prevPost}
+  nextPost={nextPost}
+>
+  <Content />
+</ArticleLayout>
