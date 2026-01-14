@@ -1,0 +1,16 @@
+{
+  "name": "Forensic Darkness",
+  "short_name": "Forensic Darkness",
+  "description": "Serial killer analysis, forensic psychology, and victim advocacy",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "/images/2022/06/cropped-aww_logo1-1.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
