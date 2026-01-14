@@ -2,6 +2,8 @@
 
 A modern static website about serial killers, forensic psychology, and victim advocacy. Built with Astro 5 and Tailwind CSS.
 
+**Live site:** https://whenmoon-afk.github.io/forensic-darkness-site/
+
 ## Features
 
 - **Full-text search** - Powered by Pagefind
@@ -37,8 +39,8 @@ A modern static website about serial killers, forensic psychology, and victim ad
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/forensicdarkness.git
-cd forensicdarkness
+git clone https://github.com/WhenMoon-afk/forensic-darkness-site.git
+cd forensic-darkness-site
 
 # Install dependencies
 bun install
