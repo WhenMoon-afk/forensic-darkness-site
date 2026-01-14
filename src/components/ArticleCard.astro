@@ -1,0 +1,62 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  date: string;
+  excerpt?: string;
+  image?: string;
+  tags?: string[];
+  author?: string;
+  readingTime?: number;
+}
+
+const { title, slug, date, excerpt, image, tags, author, readingTime } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<article class="article-card card group">
+  <a href={`/blog/${slug}`} class="block">
+    {image && (
+      <div class="relative h-48 -mx-6 -mt-6 mb-4 overflow-hidden rounded-t-lg">
+        <img
+          src={image}
+          alt={title}
+          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    )}
+
+    <h2 class="text-xl font-display font-bold mb-2 group-hover:text-fd-primary transition-colors">
+      {title}
+    </h2>
+
+    <div class="flex items-center gap-4 text-sm text-fd-muted mb-3">
+      <time datetime={date}>{formattedDate}</time>
+      {readingTime && <span>{readingTime} min read</span>}
+      {author && <span>by {author}</span>}
+    </div>
+
+    {excerpt && (
+      <p class="text-fd-muted line-clamp-3 mb-4">
+        {excerpt}
+      </p>
+    )}
+
+    {tags && tags.length > 0 && (
+      <div class="flex flex-wrap gap-2">
+        {tags.slice(0, 3).map(tag => (
+          <span class="px-2 py-1 text-xs bg-fd-dark rounded-full text-fd-muted">
+            {tag}
+          </span>
+        ))}
+      </div>
+    )}
+  </a>
+</article>
