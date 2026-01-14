@@ -1,0 +1,177 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --fd-dark: #0f0f23;
+    --fd-card: #1a1a3e;
+    --fd-primary: #3b82f6;
+    --fd-accent: #8b5cf6;
+    --fd-text: #e2e8f0;
+    --fd-muted: #94a3b8;
+    --fd-danger: #ef4444;
+    --fd-warning: #f59e0b;
+  }
+
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-fd-dark text-fd-text min-h-screen;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Libre Franklin', system-ui, sans-serif;
+    @apply font-bold text-white;
+  }
+
+  a {
+    @apply text-fd-primary hover:text-fd-accent transition-colors;
+  }
+
+  /* Better focus visibility for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-fd-primary;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply bg-fd-card rounded-lg p-6 border border-gray-700/50;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-md font-medium transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-fd-primary text-white hover:bg-blue-600;
+  }
+
+  .btn-secondary {
+    @apply bg-fd-card text-fd-text border border-gray-600 hover:bg-gray-700;
+  }
+
+  .prose-dark {
+    @apply prose prose-invert prose-lg max-w-none;
+    @apply prose-headings:text-white prose-headings:font-display;
+    @apply prose-a:text-fd-primary prose-a:no-underline hover:prose-a:text-fd-accent;
+    @apply prose-strong:text-white;
+    @apply prose-code:text-fd-accent prose-code:bg-fd-card prose-code:px-1 prose-code:rounded;
+  }
+}
+
+/* Content warning banner */
+.content-warning {
+  @apply bg-fd-warning/20 border-l-4 border-fd-warning p-4 rounded-r-md mb-6;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply text-fd-muted hover:text-white transition-colors py-2;
+}
+
+.nav-link.active {
+  @apply text-fd-primary;
+}
+
+/* Article card hover effect */
+.article-card {
+  @apply transition-transform duration-200 hover:-translate-y-1;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-fd-dark;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  header, footer, nav,
+  .back-to-top, #back-to-top,
+  #reading-progress,
+  .content-warning,
+  .toc,
+  .btn,
+  [data-pagefind-ignore] {
+    display: none !important;
+  }
+
+  a {
+    color: black !important;
+    text-decoration: underline;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  .prose-dark {
+    color: black !important;
+  }
+
+  .prose-dark h1, .prose-dark h2, .prose-dark h3,
+  .prose-dark h4, .prose-dark h5, .prose-dark h6 {
+    color: black !important;
+  }
+
+  article {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: black !important;
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+}
