@@ -40,7 +40,7 @@ const caseNumber = generateCaseNumber(date);
   {image && (
     <div class="relative h-48 -mx-6 mb-5 overflow-hidden">
       <img
-        src={image}
+        src={image.startsWith('/') ? `${baseUrl}${image.slice(1)}` : image}
         alt={`Featured image for ${title}`}
         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         loading="lazy"
