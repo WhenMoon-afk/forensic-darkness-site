@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+  return paginate(sortedPosts, { pageSize: 6 });
+};
+
+interface Props {
+  page: Page;
+}
+
+const { page } = Astro.props;
+
+// Calculate reading time for each post
+const getReadingTime = (body?: string) => {
+  if (!body) return 1;
+  const wordCount = body.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+};
+
+// Strip markdown for clean excerpt
+const getExcerpt = (body?: string) => {
+  if (!body) return '';
+  return body
+    .replace(/^#+\s+.*/gm, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+    .replace(/`[^`]+`/g, '')
+    .replace(/\n+/g, ' ')
+    .trim()
+    .substring(0, 200) + '...';
+};
+
+// Extract first image from post content
+const getFirstImage = (body?: string): string | undefined => {
+  if (!body) return undefined;
+  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return match ? match[1] : undefined;
+};
+
+// Get all unique tags from all posts
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
+---
+
+<BaseLayout title={page.currentPage === 1 ? "Blog" : `Blog - Page ${page.currentPage}`} description="Articles about serial killers, forensic psychology, victim resources, and crime awareness.">
+  <section class="py-12">
+    <div class="container">
+      <div class="flex items-center justify-between mb-4">
+        <h1 class="text-4xl font-display font-bold">Case Archive</h1>
+        <p class="font-mono text-xs text-paper-dim uppercase tracking-widest">
+          Page {page.currentPage} of {page.lastPage}
+        </p>
+      </div>
+      <p class="text-paper-muted text-lg mb-10">
+        Exploring serial killer psychology, forensic science, and victim advocacy.
+      </p>
+
+      <!-- Tags Filter -->
+      {allTags.length > 0 && (
+        <div class="mb-10">
+          <div class="flex flex-wrap gap-2">
+            <span class="evidence-tag bg-amber text-noir-base">All Cases</span>
+            {allTags.slice(0, 10).map(tag => (
+              <a href={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`} class="evidence-tag hover:bg-amber hover:text-noir-base transition-colors">
+                {tag}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <!-- Posts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {page.data.map((post: any) => (
+          <ArticleCard
+            title={post.data.title}
+            slug={post.data.slug || post.slug}
+            date={post.data.date}
+            excerpt={getExcerpt(post.body)}
+            image={post.data.image || getFirstImage(post.body)}
+            tags={post.data.tags}
+            author={post.data.author}
+            readingTime={getReadingTime(post.body)}
+          />
+        ))}
+      </div>
+
+      {page.data.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-paper-muted text-lg">No articles published yet.</p>
+          <p class="text-paper-dim">Check back soon for new content!</p>
+        </div>
+      )}
+
+      <!-- Pagination -->
+      {page.lastPage > 1 && (
+        <nav class="mt-12 flex items-center justify-center gap-2" aria-label="Pagination">
+          {page.url.prev ? (
+            <a
+              href={page.url.prev}
+              class="px-4 py-2 bg-noir-surface border border-noir-border text-paper-muted hover:border-amber hover:text-amber transition-colors flex items-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
+            </a>
+          ) : (
+            <span class="px-4 py-2 bg-noir-surface border border-noir-border text-paper-dim opacity-50 flex items-center gap-2 cursor-not-allowed">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              Previous
+            </span>
+          )}
+
+          <!-- Page Numbers -->
+          <div class="flex items-center gap-1">
+            {Array.from({ length: page.lastPage }, (_, i) => i + 1).map((num) => (
+              <a
+                href={num === 1 ? '/blog' : `/blog/${num}`}
+                class:list={[
+                  'w-10 h-10 flex items-center justify-center border transition-colors font-mono text-sm',
+                  num === page.currentPage
+                    ? 'bg-amber border-amber text-noir-base font-bold'
+                    : 'bg-noir-surface border-noir-border text-paper-muted hover:border-amber hover:text-amber'
+                ]}
+                aria-current={num === page.currentPage ? 'page' : undefined}
+              >
+                {num}
+              </a>
+            ))}
+          </div>
+
+          {page.url.next ? (
+            <a
+              href={page.url.next}
+              class="px-4 py-2 bg-noir-surface border border-noir-border text-paper-muted hover:border-amber hover:text-amber transition-colors flex items-center gap-2"
+            >
+              Next
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          ) : (
+            <span class="px-4 py-2 bg-noir-surface border border-noir-border text-paper-dim opacity-50 flex items-center gap-2 cursor-not-allowed">
+              Next
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          )}
+        </nav>
+      )}
+    </div>
+  </section>
+</BaseLayout>
