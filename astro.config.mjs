@@ -5,8 +5,8 @@ import tailwind from '@astrojs/tailwind';
 import { remarkBaseUrl } from './src/plugins/remark-base-url.mjs';
 
 export default defineConfig({
-  site: 'https://whenmoon-afk.github.io',
-  base: '/forensic-darkness-site/',
+  site: 'https://forensicdarkness.vercel.app',
+  // base: '/forensic-darkness-site/', // Only needed for GitHub Pages subdirectory
   integrations: [mdx(), sitemap(), tailwind()],
   output: 'static',
   prefetch: {

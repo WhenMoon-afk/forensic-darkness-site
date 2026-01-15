@@ -1,10 +1,11 @@
 /**
  * Remark plugin to prepend base URL to internal links and images in MDX content.
- * This ensures all /path URLs work correctly on GitHub Pages with a base path.
+ * For Vercel deployment, BASE_URL is '/' (root).
+ * For GitHub Pages subdirectory, change to '/forensic-darkness-site/'.
  */
 import { visit } from 'unist-util-visit';
 
-const BASE_URL = '/forensic-darkness-site/';
+const BASE_URL = '/';
 
 export function remarkBaseUrl() {
   return (tree) => {
