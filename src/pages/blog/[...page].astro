@@ -71,7 +71,7 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
       </div>
 
       {page.data.length === 0 && (
-        <div class="text-center py-20">
+        <div class="text-center py-20 animate-fade-in">
           <p class="text-paper-muted text-lg">No articles published yet.</p>
           <p class="text-paper-dim">Check back soon for new content!</p>
         </div>

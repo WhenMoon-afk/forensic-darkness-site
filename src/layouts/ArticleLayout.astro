@@ -103,13 +103,13 @@ if (image) {
           <time datetime={isoDate}>{formattedDate}</time>
           {author && (
             <>
-              <span class="text-gray-600">·</span>
+              <span class="text-paper-dim">·</span>
               <span>By {author}</span>
             </>
           )}
           {readingTime && (
             <>
-              <span class="text-gray-600">·</span>
+              <span class="text-paper-dim">·</span>
               <span>{readingTime} min read</span>
             </>
           )}
@@ -141,7 +141,7 @@ if (image) {
       </div>
 
       <!-- Footer -->
-      <footer class="mt-12 pt-8 border-t border-gray-700">
+      <footer class="mt-12 pt-8 border-t border-noir-border">
         <div class="flex items-center justify-between">
           <a href="/blog" class="text-fd-primary hover:text-fd-accent flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -193,7 +193,7 @@ if (image) {
 
         {/* Previous/Next Post Navigation */}
         {(prevPost || nextPost) && (
-          <nav class="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-gray-700" aria-label="Article navigation">
+          <nav class="grid grid-cols-2 gap-4 mt-8 pt-8 border-t border-noir-border" aria-label="Article navigation">
             <p class="col-span-2 text-xs text-fd-muted text-center mb-2">
               <kbd class="px-1.5 py-0.5 bg-fd-dark rounded text-xs">j</kbd> next ·
               <kbd class="px-1.5 py-0.5 bg-fd-dark rounded text-xs">k</kbd> previous
