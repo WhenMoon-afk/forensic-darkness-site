@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Start Here" description="New to Forensic Darkness? Find the right resources for your situation.">
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="w-2 h-2 bg-amber" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
+        <span class="font-mono text-xs uppercase tracking-widest text-amber">Navigation Guide</span>
+      </div>
+
+      <h1 class="text-4xl font-display font-bold mb-6 text-paper-aged">Start Here</h1>
+
+      <p class="text-paper-muted text-lg mb-12 leading-relaxed">
+        Forensic Darkness provides education about violent crime and support resources for those affected by it.
+        This guide will help you find the content most relevant to your needs.
+      </p>
+
+      <!-- Crisis Resources -->
+      <div class="mb-12 p-6 bg-oxide-deep border-2 border-oxide rounded-sm">
+        <h2 class="text-xl font-display font-bold mb-4 text-paper-aged flex items-center gap-3">
+          <svg class="w-6 h-6 text-oxide-bright" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          Need Immediate Help?
+        </h2>
+        <p class="text-paper-muted mb-4">If you or someone you know is in crisis, please reach out:</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="font-mono text-xs text-paper-dim uppercase tracking-wide mb-1">Emergency</p>
+            <a href="tel:911" class="text-2xl font-display font-bold text-amber hover:text-amber-bright">911</a>
+          </div>
+          <div>
+            <p class="font-mono text-xs text-paper-dim uppercase tracking-wide mb-1">Crisis Line</p>
+            <a href="tel:988" class="text-2xl font-display font-bold text-amber hover:text-amber-bright">988</a>
+          </div>
+          <div>
+            <p class="font-mono text-xs text-paper-dim uppercase tracking-wide mb-1">Domestic Violence</p>
+            <a href="tel:18007997233" class="text-lg font-mono text-amber hover:text-amber-bright">1-800-799-7233</a>
+          </div>
+          <div>
+            <p class="font-mono text-xs text-paper-dim uppercase tracking-wide mb-1">All Resources</p>
+            <a href="/resources" class="text-amber hover:text-amber-bright underline">View Full List →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Sections -->
+      <div class="space-y-8">
+
+        <!-- For Victims -->
+        <div class="card">
+          <h2 class="text-xl font-display font-bold mb-4 text-amber">If You Are a Crime Victim</h2>
+          <p class="text-paper-muted mb-4">
+            We provide resources and support for those who have experienced violent crime. You are not alone.
+          </p>
+          <ul class="space-y-2">
+            <li>
+              <a href="/resources" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Victim Resources and Hotlines
+              </a>
+            </li>
+            <li>
+              <a href="/blog/finding-your-path-forward-resources-for-crime-survivors" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Finding Your Path Forward: Resources for Crime Survivors
+              </a>
+            </li>
+            <li>
+              <a href="/blog/understanding-trauma-responses-after-violent-crime" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Understanding Trauma Responses
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- For Families -->
+        <div class="card">
+          <h2 class="text-xl font-display font-bold mb-4 text-amber">If You Are Supporting Someone</h2>
+          <p class="text-paper-muted mb-4">
+            Guidance for family members and friends helping loved ones through trauma and recovery.
+          </p>
+          <ul class="space-y-2">
+            <li>
+              <a href="/blog/how-to-support-loved-one-after-trauma" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                How to Support a Loved One After Trauma
+              </a>
+            </li>
+            <li>
+              <a href="/blog/understanding-trauma-responses-after-violent-crime" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Understanding Trauma Responses
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- For Parents -->
+        <div class="card">
+          <h2 class="text-xl font-display font-bold mb-4 text-amber">If You Are a Parent</h2>
+          <p class="text-paper-muted mb-4">
+            Resources for keeping children safe and talking to them about difficult topics.
+          </p>
+          <ul class="space-y-2">
+            <li>
+              <a href="/blog/talking-to-children-about-safety-without-fear" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Talking to Children About Safety Without Fear
+              </a>
+            </li>
+            <li>
+              <a href="/blog/the-day-children-could-no-longer-play-outside" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                The Samantha Runnion Case: Child Safety Lessons
+              </a>
+            </li>
+            <li>
+              <a href="/blog/recognizing-warning-signs-of-predatory-behavior" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Recognizing Warning Signs of Predatory Behavior
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- For Safety Awareness -->
+        <div class="card">
+          <h2 class="text-xl font-display font-bold mb-4 text-amber">Safety and Prevention</h2>
+          <p class="text-paper-muted mb-4">
+            Practical information to help you recognize danger and protect yourself.
+          </p>
+          <ul class="space-y-2">
+            <li>
+              <a href="/blog/red-flags-warning-signs-in-relationships" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Red Flags in Relationships
+              </a>
+            </li>
+            <li>
+              <a href="/blog/recognizing-dangerous-behavior-in-people-you-know" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Recognizing Dangerous Behavior in People You Know
+              </a>
+            </li>
+            <li>
+              <a href="/blog/digital-safety-protecting-yourself-online" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Digital Safety: Protecting Yourself Online
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- For Education -->
+        <div class="card">
+          <h2 class="text-xl font-display font-bold mb-4 text-amber">Learning About Violent Crime</h2>
+          <p class="text-paper-muted mb-4">
+            Case studies and analysis to understand criminal psychology and forensic science.
+          </p>
+          <ul class="space-y-2">
+            <li>
+              <a href="/category/serial-killers" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Serial Killer Case Files
+              </a>
+            </li>
+            <li>
+              <a href="/blog/serial-killers-societys-true-psychopaths" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Understanding Psychopathy
+              </a>
+            </li>
+            <li>
+              <a href="/blog/golden-state-killer-dna-solved-40-year-mystery" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Forensic Science: DNA Evidence
+              </a>
+            </li>
+            <li>
+              <a href="/blog" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-amber/50"></span>
+                Browse All Articles →
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- About Section -->
+      <div class="mt-12 pt-8 border-t border-noir-border">
+        <h2 class="text-xl font-display font-bold mb-4">About This Site</h2>
+        <p class="text-paper-muted mb-4">
+          Forensic Darkness exists to inform and protect. We believe that understanding the darkness
+          of violent crime helps us better defend against it. Our motto: <em class="text-amber">Don't be scared, be aware.</em>
+        </p>
+        <a href="/about" class="text-amber hover:text-amber-bright">Learn more about our mission →</a>
+      </div>
+
+    </div>
+  </section>
+</BaseLayout>
