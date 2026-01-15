@@ -4,6 +4,7 @@ import ArticleCard from '../../components/ArticleCard.astro';
 import SiteContentNotice from '../../components/SiteContentNotice.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths, Page } from 'astro';
+import { getReadingTime, getExcerpt, getFirstImage } from '../../utils/content';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -17,35 +18,6 @@ interface Props {
 }
 
 const { page } = Astro.props;
-
-// Calculate reading time for each post
-const getReadingTime = (body?: string) => {
-  if (!body) return 1;
-  const wordCount = body.split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(wordCount / 200));
-};
-
-// Strip markdown for clean excerpt
-const getExcerpt = (body?: string) => {
-  if (!body) return '';
-  return body
-    .replace(/^#+\s+.*/gm, '')
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/\*([^*]+)\*/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
-    .replace(/`[^`]+`/g, '')
-    .replace(/\n+/g, ' ')
-    .trim()
-    .substring(0, 200) + '...';
-};
-
-// Extract first image from post content
-const getFirstImage = (body?: string): string | undefined => {
-  if (!body) return undefined;
-  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
-  return match ? match[1] : undefined;
-};
 
 // Get all unique tags from all posts
 const allPosts = await getCollection('posts', ({ data }) => !data.draft);

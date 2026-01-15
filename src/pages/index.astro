@@ -3,40 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import SiteContentNotice from '../components/SiteContentNotice.astro';
 import { getCollection } from 'astro:content';
+import { getReadingTime, getExcerpt, getFirstImage, generateCaseNumber } from '../utils/content';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
 const sortedPosts = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 const featuredPost = sortedPosts[0];
 const recentPosts = sortedPosts.slice(1, 7);
-
-// Calculate reading time
-const getReadingTime = (body?: string) => {
-  if (!body) return 1;
-  const wordCount = body.split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.ceil(wordCount / 200));
-};
-
-// Strip markdown for clean excerpt
-const getExcerpt = (body?: string) => {
-  if (!body) return '';
-  return body
-    .replace(/^#+\s+.*/gm, '')
-    .replace(/\*\*([^*]+)\*\*/g, '$1')
-    .replace(/\*([^*]+)\*/g, '$1')
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
-    .replace(/`[^`]+`/g, '')
-    .replace(/\n+/g, ' ')
-    .trim()
-    .substring(0, 200) + '...';
-};
-
-// Extract first image from post content
-const getFirstImage = (body?: string): string | undefined => {
-  if (!body) return undefined;
-  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
-  return match ? match[1] : undefined;
-};
 ---
 
 <BaseLayout title="Forensic Darkness">
@@ -143,7 +115,7 @@ const getFirstImage = (body?: string): string | undefined => {
 
             <div>
               <div class="case-number mb-3 opacity-60">
-                Case #FD-{new Date(featuredPost.data.date).getFullYear()}-{String(new Date(featuredPost.data.date).getMonth() + 1).padStart(2, '0')}
+                Case #{generateCaseNumber(featuredPost.data.date)}
               </div>
 
               <h3 class="text-2xl md:text-3xl lg:text-4xl font-display font-bold mb-4 text-paper-aged group-hover:text-amber transition-colors leading-tight">
