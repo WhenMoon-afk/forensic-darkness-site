@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import SiteContentNotice from '../../components/SiteContentNotice.astro';
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths, Page } from 'astro';
 
@@ -60,9 +61,12 @@ const allTags = [...new Set(allPosts.flatMap(post => post.data.tags || []))];
           Page {page.currentPage} of {page.lastPage}
         </p>
       </div>
-      <p class="text-paper-muted text-lg mb-10">
+      <p class="text-paper-muted text-lg mb-8">
         Exploring serial killer psychology, forensic science, and victim advocacy.
       </p>
+
+      <!-- Content Notice -->
+      <SiteContentNotice />
 
       <!-- Tags Filter -->
       {allTags.length > 0 && (
