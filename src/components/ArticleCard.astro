@@ -43,14 +43,24 @@ const caseNumber = `FD-${new Date(date).getFullYear()}-${String(new Date(date).g
       </div>
     )}
 
-    <!-- Category Badge -->
-    {category && (
-      <div class="mb-3">
+    <!-- Badges Row -->
+    <div class="mb-3 flex flex-wrap gap-2">
+      {category && (
         <span class="evidence-tag">
           {category}
         </span>
-      </div>
-    )}
+      )}
+      {readingTime && readingTime <= 5 && (
+        <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide bg-amber/20 text-amber border border-amber/30">
+          Quick Read
+        </span>
+      )}
+      {readingTime && readingTime > 15 && (
+        <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide bg-oxide/30 text-oxide-bright border border-oxide/30">
+          Deep Dive
+        </span>
+      )}
+    </div>
 
     <h2 class="text-xl md:text-2xl font-display font-bold mb-3 text-paper-aged group-hover:text-amber transition-colors duration-300 leading-tight">
       {title}
@@ -84,7 +94,15 @@ const caseNumber = `FD-${new Date(date).getFullYear()}-${String(new Date(date).g
       {author && (
         <>
           <span class="text-noir-border">|</span>
-          <span>{author}</span>
+          <span
+            class="hover:text-amber transition-colors cursor-pointer"
+            onclick={`event.preventDefault(); event.stopPropagation(); window.location.href='/author/${author}';`}
+            role="link"
+            tabindex="0"
+            onkeydown={`if(event.key==='Enter'){event.preventDefault();event.stopPropagation();window.location.href='/author/${author}';}`}
+          >
+            {author}
+          </span>
         </>
       )}
     </div>

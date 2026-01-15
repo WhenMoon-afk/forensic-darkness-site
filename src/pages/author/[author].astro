@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const authors = await getCollection('authors');
+
+  // Get unique author IDs from posts
+  const authorIds = [...new Set(posts.map(post => post.data.author).filter(Boolean))];
+
+  return authorIds.map(authorId => {
+    const authorData = authors.find(a => a.id === authorId);
+    const authorPosts = posts
+      .filter(post => post.data.author === authorId)
+      .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+    return {
+      params: { author: authorId },
+      props: {
+        authorId,
+        authorData,
+        posts: authorPosts
+      }
+    };
+  });
+}
+
+interface Props {
+  authorId: string;
+  authorData: any;
+  posts: any[];
+}
+
+const { authorId, authorData, posts } = Astro.props;
+
+// Get author display info
+const authorName = authorData?.data?.name || authorData?.data?.firstName
+  ? `${authorData.data.firstName} ${authorData.data.lastName}`
+  : authorId;
+
+// Calculate reading time for each post
+const getReadingTime = (body?: string) => {
+  if (!body) return 1;
+  const wordCount = body.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.ceil(wordCount / 200));
+};
+
+// Strip markdown for clean excerpt
+const getExcerpt = (body?: string) => {
+  if (!body) return '';
+  return body
+    .replace(/^#+\s+.*/gm, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+    .replace(/`[^`]+`/g, '')
+    .replace(/\n+/g, ' ')
+    .trim()
+    .substring(0, 200) + '...';
+};
+
+// Extract first image from post content
+const getFirstImage = (body?: string): string | undefined => {
+  if (!body) return undefined;
+  const match = body.match(/!\[[^\]]*\]\(([^)]+)\)/);
+  return match ? match[1] : undefined;
+};
+
+// Author descriptions based on known authors
+const authorDescriptions: Record<string, string> = {
+  'foredark2day': 'Jenny brings professional expertise in forensic psychology to her analysis of criminal behavior and victim support resources.',
+  'victorjfisher': 'Victor contributes detailed case studies and forensic analysis, drawing lessons from historical crimes to inform modern awareness.'
+};
+
+const authorCredentials: Record<string, string> = {
+  'foredark2day': 'M.A. Forensic Psychology',
+  'victorjfisher': 'Forensic Science Writer'
+};
+---
+
+<BaseLayout
+  title={`Articles by ${authorName}`}
+  description={`Browse all articles written by ${authorName} on Forensic Darkness.`}
+>
+  <section class="py-12">
+    <div class="container">
+      <!-- Author Header -->
+      <div class="mb-12 pb-8 border-b border-noir-border">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-2 h-2 bg-amber" style="clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);"></div>
+          <span class="font-mono text-xs uppercase tracking-widest text-amber">Author Archive</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-start gap-6">
+          <!-- Author Avatar Placeholder -->
+          <div class="w-24 h-24 bg-noir-elevated border border-noir-border flex items-center justify-center flex-shrink-0">
+            <svg class="w-12 h-12 text-paper-dim" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+
+          <div class="flex-grow">
+            <h1 class="text-3xl md:text-4xl font-display font-bold mb-2 text-paper-aged">
+              {authorName}
+            </h1>
+
+            {authorCredentials[authorId] && (
+              <p class="text-amber font-mono text-sm uppercase tracking-wider mb-3">
+                {authorCredentials[authorId]}
+              </p>
+            )}
+
+            {authorDescriptions[authorId] && (
+              <p class="text-paper-muted max-w-2xl">
+                {authorDescriptions[authorId]}
+              </p>
+            )}
+
+            <div class="mt-4 flex items-center gap-4 text-sm">
+              <span class="text-paper-dim">
+                <span class="text-amber font-bold">{posts.length}</span> article{posts.length !== 1 ? 's' : ''} published
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map(post => (
+          <ArticleCard
+            title={post.data.title}
+            slug={post.data.slug || post.slug}
+            date={post.data.date}
+            excerpt={getExcerpt(post.body)}
+            image={post.data.image || getFirstImage(post.body)}
+            tags={post.data.tags}
+            readingTime={getReadingTime(post.body)}
+          />
+        ))}
+      </div>
+
+      {posts.length === 0 && (
+        <div class="text-center py-20">
+          <p class="text-paper-muted text-lg">No articles by this author yet.</p>
+        </div>
+      )}
+
+      <!-- Back Link -->
+      <div class="mt-12 pt-8 border-t border-noir-border">
+        <a href="/blog" class="inline-flex items-center gap-2 text-amber hover:text-amber-bright transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to all articles
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
