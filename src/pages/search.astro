@@ -79,8 +79,8 @@ const baseUrl = import.meta.env.BASE_URL;
   window.addEventListener('DOMContentLoaded', async () => {
     const pagefindPath = baseUrl + 'pagefind/pagefind-ui.js';
     try {
-      const module = await import(/* @vite-ignore */ pagefindPath);
-      new module.PagefindUI({
+      await import(/* @vite-ignore */ pagefindPath);
+      new window.PagefindUI({
         element: '#search',
         showSubResults: true,
         showImages: false,
