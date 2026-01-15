@@ -63,6 +63,7 @@ module.exports = {
           'muted': '#8b929e',
           'primary': '#9b2335',
           'accent': '#c92d43',
+          'warning': '#d97706',    // Amber warning color
         },
       },
       fontFamily: {

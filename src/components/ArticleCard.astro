@@ -24,98 +24,98 @@ const caseNumber = `FD-${new Date(date).getFullYear()}-${String(new Date(date).g
 ---
 
 <article class="article-card card group relative">
-  <a href={`/blog/${slug}`} class="block">
-    <!-- Case Number -->
-    <div class="case-number mb-3 opacity-60">
-      Case #{caseNumber}
-    </div>
-
-    {image && (
-      <div class="relative h-48 -mx-6 mb-5 overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-noir-surface/80 to-transparent"></div>
-      </div>
-    )}
-
-    <!-- Badges Row -->
-    <div class="mb-3 flex flex-wrap gap-2">
-      {category && (
-        <span class="evidence-tag">
-          {category}
-        </span>
-      )}
-      {readingTime && readingTime <= 5 && (
-        <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide bg-amber/20 text-amber border border-amber/30">
-          Quick Read
-        </span>
-      )}
-      {readingTime && readingTime > 15 && (
-        <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide bg-oxide/30 text-oxide-bright border border-oxide/30">
-          Deep Dive
-        </span>
-      )}
-    </div>
-
-    <h2 class="text-xl md:text-2xl font-display font-bold mb-3 text-paper-aged group-hover:text-amber transition-colors duration-300 leading-tight">
-      {title}
-    </h2>
-
-    {excerpt && (
-      <p class="text-paper-muted line-clamp-2 mb-4 text-sm leading-relaxed">
-        {excerpt}
-      </p>
-    )}
-
-    <!-- Metadata Row -->
-    <div class="flex items-center gap-3 text-xs text-paper-dim font-mono uppercase tracking-wider">
-      <time datetime={date} class="flex items-center gap-1.5">
-        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-        {formattedDate}
-      </time>
-      {readingTime && (
-        <>
-          <span class="text-noir-border">|</span>
-          <span class="flex items-center gap-1.5">
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            {readingTime} min
-          </span>
-        </>
-      )}
-      {author && (
-        <>
-          <span class="text-noir-border">|</span>
-          <span
-            class="hover:text-amber transition-colors cursor-pointer"
-            onclick={`event.preventDefault(); event.stopPropagation(); window.location.href='/author/${author}';`}
-            role="link"
-            tabindex="0"
-            onkeydown={`if(event.key==='Enter'){event.preventDefault();event.stopPropagation();window.location.href='/author/${author}';}`}
-          >
-            {author}
-          </span>
-        </>
-      )}
-    </div>
-
-    <!-- Tags -->
-    {tags && tags.length > 0 && (
-      <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-noir-border/50">
-        {tags.slice(0, 3).map(tag => (
-          <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide text-paper-dim bg-noir-elevated border border-noir-border">
-            {tag}
-          </span>
-        ))}
-      </div>
-    )}
+  <!-- Clickable card overlay using pseudo-element pattern -->
+  <a href={`/blog/${slug}`} class="absolute inset-0 z-10" aria-label={`Read article: ${title}`}>
+    <span class="sr-only">Read full article</span>
   </a>
+
+  <!-- Case Number -->
+  <div class="case-number mb-3 opacity-60">
+    Case #{caseNumber}
+  </div>
+
+  {image && (
+    <div class="relative h-48 -mx-6 mb-5 overflow-hidden">
+      <img
+        src={image}
+        alt=""
+        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-noir-surface/80 to-transparent"></div>
+    </div>
+  )}
+
+  <!-- Badges Row -->
+  <div class="mb-3 flex flex-wrap gap-2">
+    {category && (
+      <span class="evidence-tag">
+        {category}
+      </span>
+    )}
+    {readingTime && readingTime <= 5 && (
+      <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide bg-amber/20 text-amber border border-amber/30">
+        Quick Read
+      </span>
+    )}
+    {readingTime && readingTime > 15 && (
+      <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide bg-oxide/30 text-oxide-bright border border-oxide/30">
+        Deep Dive
+      </span>
+    )}
+  </div>
+
+  <h2 class="text-xl md:text-2xl font-display font-bold mb-3 text-paper-aged group-hover:text-amber transition-colors duration-300 leading-tight">
+    {title}
+  </h2>
+
+  {excerpt && (
+    <p class="text-paper-muted line-clamp-2 mb-4 text-sm leading-relaxed">
+      {excerpt}
+    </p>
+  )}
+
+  <!-- Metadata Row -->
+  <div class="flex items-center gap-3 text-xs text-paper-dim font-mono uppercase tracking-wider">
+    <time datetime={date} class="flex items-center gap-1.5">
+      <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+      {formattedDate}
+    </time>
+    {readingTime && (
+      <>
+        <span class="text-noir-border">|</span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          {readingTime} min
+        </span>
+      </>
+    )}
+    {author && (
+      <>
+        <span class="text-noir-border">|</span>
+        <a
+          href={`/author/${author}`}
+          class="relative z-20 hover:text-amber transition-colors"
+        >
+          {author}
+        </a>
+      </>
+    )}
+  </div>
+
+  <!-- Tags -->
+  {tags && tags.length > 0 && (
+    <div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-noir-border/50">
+      {tags.slice(0, 3).map(tag => (
+        <span class="px-2 py-0.5 text-xs font-mono uppercase tracking-wide text-paper-dim bg-noir-elevated border border-noir-border">
+          {tag}
+        </span>
+      ))}
+    </div>
+  )}
 </article>
