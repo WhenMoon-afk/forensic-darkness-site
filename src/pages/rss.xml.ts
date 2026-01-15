@@ -16,7 +16,7 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       pubDate: new Date(post.data.date),
       description: post.body?.substring(0, 200) + '...',
-      link: `/blog/${post.data.slug || post.slug}/`,
+      link: `/forensic-darkness-site/blog/${post.data.slug || post.slug}/`,
       categories: post.data.tags || [],
     })),
     customData: `<language>en-us</language>`,
