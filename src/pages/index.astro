@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
+import SiteContentNotice from '../components/SiteContentNotice.astro';
 import { getCollection } from 'astro:content';
 
 const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -92,6 +93,11 @@ const getFirstImage = (body?: string): string | undefined => {
       </div>
     </div>
   </section>
+
+  <!-- Content Notice -->
+  <div class="container pt-8">
+    <SiteContentNotice />
+  </div>
 
   <!-- Mission Statement -->
   <section class="py-16 border-b border-gray-800">
