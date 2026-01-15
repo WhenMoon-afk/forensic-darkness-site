@@ -1,0 +1,324 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const warningCategories = [
+  {
+    id: "predatory-behavior",
+    title: "Warning Signs of Predatory Behavior",
+    icon: "eye",
+    description: "Recognizing behaviors that may indicate someone poses a danger to others.",
+    signs: [
+      {
+        sign: "Boundary Testing",
+        detail: "Repeatedly pushing small boundaries to see what they can get away with. This may start with minor violations (standing too close, touching without permission) and escalate over time."
+      },
+      {
+        sign: "Isolation Tactics",
+        detail: "Attempting to separate potential victims from friends, family, or support systems. May criticize your relationships or create situations where you're alone with them."
+      },
+      {
+        sign: "Excessive Charm or Flattery",
+        detail: "Using charm strategically to gain trust and access. While genuine kindness exists, predators often use flattery as a tool, particularly when it seems disproportionate or focused on vulnerable individuals."
+      },
+      {
+        sign: "Ignoring 'No'",
+        detail: "Treating rejection as a challenge rather than a clear answer. Continuing to pursue contact, favors, or relationships after being told no."
+      },
+      {
+        sign: "Targeting Vulnerability",
+        detail: "Showing unusual interest in people who are isolated, new to an area, going through difficult times, or otherwise vulnerable."
+      },
+      {
+        sign: "Creating Debt or Obligation",
+        detail: "Giving unsolicited gifts or favors, then expecting something in return. Using generosity as leverage for compliance."
+      },
+      {
+        sign: "Information Gathering",
+        detail: "Asking detailed questions about routines, living situations, relationships, and vulnerabilities. More interest in your circumstances than in you as a person."
+      },
+      {
+        sign: "Too Good to Be True",
+        detail: "Presenting as the perfect friend, partner, or helper. Real relationships develop gradually; instant intensity often signals manipulation."
+      }
+    ]
+  },
+  {
+    id: "domestic-violence",
+    title: "Domestic Violence Warning Signs",
+    icon: "home",
+    description: "Recognizing patterns that may indicate abuse in intimate relationships.",
+    signs: [
+      {
+        sign: "Controlling Behavior",
+        detail: "Monitoring your activities, communications, and whereabouts. Making decisions for you about friends, work, or daily activities. Controlling finances or transportation."
+      },
+      {
+        sign: "Jealousy and Possessiveness",
+        detail: "Extreme jealousy presented as love. Accusing you of cheating without cause. Demanding to know where you are at all times."
+      },
+      {
+        sign: "Verbal Abuse",
+        detail: "Name-calling, humiliation, constant criticism. Telling you that you're worthless, stupid, or that no one else would want you."
+      },
+      {
+        sign: "Threats",
+        detail: "Threatening to hurt you, themselves, your children, pets, or others. Threatening to take children away, report you to authorities, or reveal secrets."
+      },
+      {
+        sign: "Physical Intimidation",
+        detail: "Blocking exits, standing over you, punching walls, breaking objects, driving recklessly. Violence doesn't have to touch you directly to be terrifying and harmful."
+      },
+      {
+        sign: "Escalation Pattern",
+        detail: "Abuse typically escalates over time. What starts as criticism becomes threats. What starts as grabbing becomes hitting. The cycle tends to intensify."
+      },
+      {
+        sign: "Minimizing and Blaming",
+        detail: "Denying abuse occurred, minimizing its severity, or blaming you for 'making' them act that way. 'Look what you made me do.'"
+      },
+      {
+        sign: "Honeymoon Phases",
+        detail: "Periods of remorse, promises to change, and loving behavior following abusive incidents. These cycles keep victims hoping things will improve."
+      }
+    ],
+    resources: [
+      { name: "National Domestic Violence Hotline", number: "1-800-799-7233", url: "https://www.thehotline.org/" },
+      { name: "Text START to", number: "88788", url: null }
+    ]
+  },
+  {
+    id: "stalking",
+    title: "Stalking Behavior Indicators",
+    icon: "map-pin",
+    description: "Recognizing patterns of harassment and surveillance that constitute stalking.",
+    signs: [
+      {
+        sign: "Unwanted Contact",
+        detail: "Repeated calls, texts, emails, or messages after being asked to stop. Showing up uninvited at home, work, or other locations."
+      },
+      {
+        sign: "Surveillance",
+        detail: "Watching, following, or tracking your movements. Knowing things about your activities they shouldn't know. Using technology to monitor you."
+      },
+      {
+        sign: "Third-Party Contact",
+        detail: "Using friends, family, or coworkers to monitor you or deliver messages. Befriending people in your life to gain information."
+      },
+      {
+        sign: "Unwanted Gifts",
+        detail: "Leaving gifts, notes, or other items at your home, car, or workplace, especially after being told to stop contact."
+      },
+      {
+        sign: "Threats or Intimidation",
+        detail: "Direct or implied threats to you or people you care about. Vandalism or property damage intended to frighten."
+      },
+      {
+        sign: "Online Harassment",
+        detail: "Creating fake profiles to contact you, monitoring your social media, spreading rumors online, or impersonating you."
+      },
+      {
+        sign: "Escalation After Rejection",
+        detail: "Increased contact or intensity after you've ended a relationship or rejected advances. Stalking often follows breakups."
+      }
+    ],
+    resources: [
+      { name: "Stalking Prevention, Awareness, and Resource Center", number: null, url: "https://www.stalkingawareness.org/" },
+      { name: "Victim Connect Resource Center", number: "1-855-484-2846", url: "https://victimconnect.org/" }
+    ]
+  },
+  {
+    id: "child-predators",
+    title: "Child Predator Warning Signs",
+    icon: "shield",
+    description: "Behaviors that may indicate someone poses a risk to children.",
+    signs: [
+      {
+        sign: "Grooming Behavior",
+        detail: "Building special relationships with children through gifts, attention, and privileges. Creating situations to be alone with children."
+      },
+      {
+        sign: "Boundary Violations",
+        detail: "Inappropriate touching presented as playful or accidental. Disregarding children's physical boundaries or privacy."
+      },
+      {
+        sign: "Age-Inappropriate Relationships",
+        detail: "Adults who prefer spending time with children over peers. Treating children as confidants or equals in adult matters."
+      },
+      {
+        sign: "Secrecy",
+        detail: "Encouraging children to keep secrets from parents. Creating private communication channels. Special activities 'just between us.'"
+      },
+      {
+        sign: "Exposure to Sexual Content",
+        detail: "Showing children pornography, discussing sexual topics inappropriately, or normalizing sexual behavior."
+      },
+      {
+        sign: "Testing Reactions",
+        detail: "Making sexual jokes or comments around children to gauge reactions from both children and adults."
+      },
+      {
+        sign: "Targeting Vulnerable Children",
+        detail: "Showing special interest in children from troubled homes, those lacking parental supervision, or those hungry for attention."
+      }
+    ],
+    resources: [
+      { name: "Childhelp National Child Abuse Hotline", number: "1-800-422-4453", url: "https://www.childhelp.org/" },
+      { name: "National Center for Missing & Exploited Children", number: "1-800-843-5678", url: "https://www.missingkids.org/" }
+    ]
+  }
+];
+
+const actionSteps = [
+  {
+    title: "Trust Your Instincts",
+    description: "If something feels wrong, it probably is. Your subconscious often recognizes danger before your conscious mind does. Don't talk yourself out of legitimate concerns."
+  },
+  {
+    title: "Document Everything",
+    description: "Keep records of concerning incidents including dates, times, what happened, and any witnesses. Save messages, photos, and other evidence. Documentation helps if you need to involve authorities."
+  },
+  {
+    title: "Tell Someone",
+    description: "Share your concerns with trusted friends, family, or professionals. Predators rely on secrecy. Having others aware of the situation provides support and witnesses."
+  },
+  {
+    title: "Create Safety Plans",
+    description: "Know your exits. Have emergency contacts ready. Identify safe places to go. Plan responses to likely scenarios. Preparation reduces panic in crisis moments."
+  },
+  {
+    title: "Seek Professional Help",
+    description: "Contact victim advocates, counselors, or law enforcement as appropriate. You don't have to handle dangerous situations alone. Professionals can provide guidance and resources."
+  }
+];
+---
+
+<BaseLayout
+  title="Know the Signs"
+  description="Learn to recognize warning signs of predatory behavior, domestic violence, stalking, and child predators. Practical safety information and resources."
+>
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <!-- Hero -->
+      <div class="mb-12">
+        <h1 class="text-4xl font-display font-bold mb-4">Know the Signs</h1>
+        <p class="text-fd-muted text-lg mb-6">
+          Knowledge is protection. Understanding the warning signs of dangerous behavior
+          can help you recognize threats early and take action to protect yourself and others.
+        </p>
+        <div class="p-4 bg-oxide/20 border border-oxide/50 rounded-lg">
+          <p class="text-sm text-oxide-bright">
+            <strong>If you are in immediate danger, call 911.</strong>
+            The information below is for awareness and prevention. Trust your instincts
+            and seek help if you feel unsafe.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <nav class="mb-12 p-4 bg-fd-card rounded-lg">
+        <p class="text-sm text-fd-muted mb-3">Jump to:</p>
+        <div class="flex flex-wrap gap-2">
+          {warningCategories.map(cat => (
+            <a
+              href={`#${cat.id}`}
+              class="evidence-tag hover:bg-amber hover:text-noir-base transition-colors"
+            >
+              {cat.title}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Warning Sign Categories -->
+      {warningCategories.map(category => (
+        <section id={category.id} class="mb-16 scroll-mt-24">
+          <h2 class="text-2xl font-display font-bold mb-2">{category.title}</h2>
+          <p class="text-fd-muted mb-6">{category.description}</p>
+
+          <div class="space-y-4">
+            {category.signs.map((item, index) => (
+              <div class="p-4 bg-fd-card rounded-lg border-l-4 border-amber">
+                <h3 class="font-semibold text-fd-text mb-1">
+                  <span class="text-amber mr-2">{index + 1}.</span>
+                  {item.sign}
+                </h3>
+                <p class="text-fd-muted text-sm leading-relaxed">
+                  {item.detail}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {category.resources && (
+            <div class="mt-6 p-4 bg-noir-surface border border-noir-border rounded-lg">
+              <p class="text-sm font-semibold mb-2">Resources:</p>
+              <ul class="space-y-1">
+                {category.resources.map(resource => (
+                  <li class="text-sm">
+                    {resource.url ? (
+                      <a href={resource.url} target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">
+                        {resource.name}
+                      </a>
+                    ) : (
+                      <span>{resource.name}</span>
+                    )}
+                    {resource.number && (
+                      <span class="text-fd-muted ml-2">— {resource.number}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </section>
+      ))}
+
+      <!-- What To Do -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-display font-bold mb-6">What To Do If You See Warning Signs</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          {actionSteps.map((step, index) => (
+            <div class="p-4 bg-fd-card rounded-lg">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-8 h-8 bg-amber text-noir-base rounded-full flex items-center justify-center font-bold">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 class="font-semibold mb-1">{step.title}</h3>
+                  <p class="text-fd-muted text-sm">{step.description}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Emergency Resources -->
+      <section class="p-6 bg-oxide/10 border border-oxide/30 rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4 text-oxide-bright">Emergency Resources</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <p class="font-semibold mb-2">Crisis Lines</p>
+            <ul class="text-sm space-y-1 text-fd-muted">
+              <li><strong>Emergency:</strong> 911</li>
+              <li><strong>National DV Hotline:</strong> 1-800-799-7233</li>
+              <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+              <li><strong>988 Suicide & Crisis Lifeline:</strong> 988</li>
+            </ul>
+          </div>
+          <div>
+            <p class="font-semibold mb-2">Online Resources</p>
+            <ul class="text-sm space-y-1">
+              <li><a href="https://www.thehotline.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">National Domestic Violence Hotline</a></li>
+              <li><a href="https://www.rainn.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">RAINN</a></li>
+              <li><a href="https://victimconnect.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">VictimConnect</a></li>
+              <li><a href={`${baseUrl}resources`} class="text-amber hover:text-amber-bright">More Resources →</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

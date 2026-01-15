@@ -1,0 +1,361 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+// Get all serial killer cases from the posts
+const posts = await getCollection('posts', ({ data }) => !data.draft);
+
+// Define the case database
+const cases = [
+  {
+    name: "Ted Bundy",
+    years: "1974-1978",
+    location: "WA, OR, UT, CO, FL",
+    victims: "30+ confirmed",
+    status: "Executed 1989",
+    method: "Bludgeoning, strangulation",
+    captured: "Traffic stop, fingerprint match",
+    articleSlug: "ted-bundy-charisma-and-carnage",
+    tags: ["charismatic", "organized", "escaped custody"]
+  },
+  {
+    name: "Jeffrey Dahmer",
+    years: "1978-1991",
+    location: "OH, WI",
+    victims: "17 confirmed",
+    status: "Killed in prison 1994",
+    method: "Strangulation, drugging",
+    captured: "Victim escaped, alerted police",
+    articleSlug: "captivating-forensic-analysis-of-the-startling-jeffrey-dahmer-series-on-netflix",
+    tags: ["necrophilia", "cannibalism", "kept trophies"]
+  },
+  {
+    name: "John Wayne Gacy",
+    years: "1972-1978",
+    location: "IL",
+    victims: "33+ confirmed",
+    status: "Executed 1994",
+    method: "Strangulation, asphyxiation",
+    captured: "Investigation into missing teen",
+    articleSlug: "john-wayne-gacy-killer-clown",
+    tags: ["community member", "buried victims at home"]
+  },
+  {
+    name: "BTK (Dennis Rader)",
+    years: "1974-1991",
+    location: "KS",
+    victims: "10 confirmed",
+    status: "Life in prison",
+    method: "Strangulation, suffocation",
+    captured: "Digital forensics, floppy disk metadata",
+    articleSlug: "btk-killer-hiding-in-plain-sight",
+    tags: ["community member", "church leader", "sent communications"]
+  },
+  {
+    name: "Golden State Killer (Joseph DeAngelo)",
+    years: "1974-1986",
+    location: "CA",
+    victims: "13+ murders, 50+ rapes",
+    status: "Life in prison",
+    method: "Shooting, bludgeoning",
+    captured: "Genetic genealogy (2018)",
+    articleSlug: "golden-state-killer-dna-solved-40-year-mystery",
+    tags: ["former police officer", "cold case solved", "DNA genealogy"]
+  },
+  {
+    name: "Green River Killer (Gary Ridgway)",
+    years: "1982-1998",
+    location: "WA",
+    victims: "49+ confirmed",
+    status: "Life in prison",
+    method: "Strangulation",
+    captured: "DNA evidence match",
+    articleSlug: "green-river-killer-lessons-in-persistence",
+    tags: ["targeted sex workers", "prolific", "plea deal"]
+  },
+  {
+    name: "Aileen Wuornos",
+    years: "1989-1990",
+    location: "FL",
+    victims: "7 confirmed",
+    status: "Executed 2002",
+    method: "Shooting",
+    captured: "Pawnshop records, girlfriend cooperation",
+    articleSlug: "aileen-wuornos-highway-killer",
+    tags: ["female serial killer", "highway killings", "claimed self-defense"]
+  },
+  {
+    name: "Zodiac Killer",
+    years: "1968-1969",
+    location: "CA",
+    victims: "5 confirmed, possibly more",
+    status: "Unsolved",
+    method: "Shooting, stabbing",
+    captured: "Never identified",
+    articleSlug: "zodiac-killer-unsolved-mystery",
+    tags: ["unsolved", "sent ciphers", "taunted police"]
+  },
+  {
+    name: "Ed Kemper",
+    years: "1964-1973",
+    location: "CA",
+    victims: "10 confirmed",
+    status: "Life in prison",
+    method: "Shooting, stabbing, strangulation",
+    captured: "Turned himself in",
+    articleSlug: "ed-kemper-co-ed-killer",
+    tags: ["high IQ", "killed mother", "turned himself in"]
+  },
+  {
+    name: "Richard Ramirez (Night Stalker)",
+    years: "1984-1985",
+    location: "CA",
+    victims: "13+ confirmed",
+    status: "Died in prison 2013",
+    method: "Various (shooting, stabbing, bludgeoning)",
+    captured: "Fingerprint match, community capture",
+    articleSlug: "richard-ramirez-night-stalker",
+    tags: ["home invasion", "random victims", "satanism"]
+  },
+  {
+    name: "Israel Keyes",
+    years: "2001-2012",
+    location: "Multiple states",
+    victims: "11+ confirmed",
+    status: "Suicide in custody 2012",
+    method: "Various",
+    captured: "Ransom attempt traced to ATM",
+    articleSlug: "israel-keyes-methodical-killer",
+    tags: ["highly organized", "traveled to kill", "buried murder kits"]
+  },
+  {
+    name: "H.H. Holmes",
+    years: "1891-1894",
+    location: "IL, PA, other states",
+    victims: "9-200+ (disputed)",
+    status: "Executed 1896",
+    method: "Various (gas, suffocation)",
+    captured: "Insurance fraud investigation",
+    articleSlug: "hh-holmes-murder-castle",
+    tags: ["historical", "built murder hotel", "insurance fraud"]
+  },
+  {
+    name: "Long Island Serial Killer (Rex Heuermann)",
+    years: "1993-2010",
+    location: "NY",
+    victims: "6+ charged",
+    status: "Awaiting trial",
+    method: "Strangulation",
+    captured: "Genetic genealogy, digital evidence",
+    articleSlug: "long-island-serial-killer-gilgo-beach",
+    tags: ["Gilgo Beach", "targeted sex workers", "recent arrest"]
+  },
+  {
+    name: "Jack the Ripper",
+    years: "1888",
+    location: "London, UK",
+    victims: "5 canonical, possibly more",
+    status: "Unsolved",
+    method: "Stabbing, mutilation",
+    captured: "Never identified",
+    articleSlug: "a-case-of-forensic-darkness-jack-the-ripper",
+    tags: ["historical", "unsolved", "Whitechapel"]
+  }
+];
+
+const statuses = [...new Set(cases.map(c => c.status.split(' ')[0]))];
+const decades = ["1880s", "1890s", "1970s", "1980s", "1990s", "2000s", "2010s"];
+---
+
+<BaseLayout
+  title="Serial Killer Case Database"
+  description="Searchable database of serial killer cases covered on Forensic Darkness. Filter by status, decade, location, and method."
+>
+  <section class="py-12">
+    <div class="container max-w-6xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Case Database</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        A searchable reference of serial killer cases covered on Forensic Darkness.
+        Click any case to read the full analysis.
+      </p>
+
+      <!-- Search and Filters -->
+      <div class="mb-8 p-4 bg-fd-card rounded-lg">
+        <div class="flex flex-wrap gap-4">
+          <div class="flex-1 min-w-[200px]">
+            <label for="search" class="block text-sm text-fd-muted mb-1">Search</label>
+            <input
+              type="text"
+              id="search"
+              placeholder="Search by name, location, method..."
+              class="w-full px-3 py-2 bg-noir-elevated border border-noir-border rounded text-fd-text placeholder-fd-muted focus:border-amber focus:outline-none"
+            />
+          </div>
+          <div>
+            <label for="status-filter" class="block text-sm text-fd-muted mb-1">Status</label>
+            <select
+              id="status-filter"
+              class="px-3 py-2 bg-noir-elevated border border-noir-border rounded text-fd-text focus:border-amber focus:outline-none"
+            >
+              <option value="all">All Statuses</option>
+              <option value="Executed">Executed</option>
+              <option value="Life">Life in Prison</option>
+              <option value="Unsolved">Unsolved</option>
+              <option value="Awaiting">Awaiting Trial</option>
+              <option value="Died">Died</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div class="p-4 bg-fd-card rounded-lg text-center">
+          <p class="text-3xl font-bold text-amber">{cases.length}</p>
+          <p class="text-sm text-fd-muted">Cases Documented</p>
+        </div>
+        <div class="p-4 bg-fd-card rounded-lg text-center">
+          <p class="text-3xl font-bold text-amber">{cases.filter(c => c.status.includes('Unsolved')).length}</p>
+          <p class="text-sm text-fd-muted">Unsolved</p>
+        </div>
+        <div class="p-4 bg-fd-card rounded-lg text-center">
+          <p class="text-3xl font-bold text-amber">{cases.filter(c => c.status.includes('Executed')).length}</p>
+          <p class="text-sm text-fd-muted">Executed</p>
+        </div>
+        <div class="p-4 bg-fd-card rounded-lg text-center">
+          <p class="text-3xl font-bold text-amber">{cases.filter(c => c.status.includes('prison')).length}</p>
+          <p class="text-sm text-fd-muted">Imprisoned</p>
+        </div>
+      </div>
+
+      <!-- Case Table -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm" id="case-table">
+          <thead>
+            <tr class="border-b border-noir-border">
+              <th class="text-left py-3 px-2 text-fd-muted font-mono uppercase text-xs">Name</th>
+              <th class="text-left py-3 px-2 text-fd-muted font-mono uppercase text-xs">Years</th>
+              <th class="text-left py-3 px-2 text-fd-muted font-mono uppercase text-xs hidden md:table-cell">Location</th>
+              <th class="text-left py-3 px-2 text-fd-muted font-mono uppercase text-xs">Victims</th>
+              <th class="text-left py-3 px-2 text-fd-muted font-mono uppercase text-xs hidden lg:table-cell">Method</th>
+              <th class="text-left py-3 px-2 text-fd-muted font-mono uppercase text-xs">Status</th>
+            </tr>
+          </thead>
+          <tbody id="case-tbody">
+            {cases.map(case_ => (
+              <tr
+                class="case-row border-b border-noir-border/50 hover:bg-fd-card transition-colors cursor-pointer"
+                data-name={case_.name.toLowerCase()}
+                data-location={case_.location.toLowerCase()}
+                data-method={case_.method.toLowerCase()}
+                data-status={case_.status.toLowerCase()}
+                data-tags={case_.tags.join(' ').toLowerCase()}
+                data-slug={case_.articleSlug}
+              >
+                <td class="py-3 px-2">
+                  <a href={`${baseUrl}blog/${case_.articleSlug}`} class="text-amber hover:text-amber-bright font-medium">
+                    {case_.name}
+                  </a>
+                  <div class="flex flex-wrap gap-1 mt-1 md:hidden">
+                    {case_.tags.slice(0, 2).map(tag => (
+                      <span class="text-xs px-1.5 py-0.5 bg-noir-elevated text-fd-muted rounded">{tag}</span>
+                    ))}
+                  </div>
+                </td>
+                <td class="py-3 px-2 text-fd-muted font-mono text-xs">{case_.years}</td>
+                <td class="py-3 px-2 text-fd-muted hidden md:table-cell">{case_.location}</td>
+                <td class="py-3 px-2 text-fd-muted">{case_.victims}</td>
+                <td class="py-3 px-2 text-fd-muted hidden lg:table-cell">{case_.method}</td>
+                <td class="py-3 px-2">
+                  <span class={`text-xs px-2 py-1 rounded ${
+                    case_.status.includes('Unsolved') ? 'bg-oxide/30 text-oxide-bright' :
+                    case_.status.includes('Executed') ? 'bg-red-900/30 text-red-400' :
+                    case_.status.includes('prison') ? 'bg-amber/20 text-amber' :
+                    case_.status.includes('Awaiting') ? 'bg-blue-900/30 text-blue-400' :
+                    'bg-noir-elevated text-fd-muted'
+                  }`}>
+                    {case_.status}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 text-sm text-fd-muted text-center" id="results-count">
+        Showing {cases.length} cases
+      </p>
+
+      <!-- Legend -->
+      <div class="mt-8 p-4 bg-noir-surface rounded-lg">
+        <h3 class="text-sm font-semibold mb-2">Status Legend</h3>
+        <div class="flex flex-wrap gap-4 text-xs">
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-red-900/30"></span> Executed</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-amber/20"></span> Imprisoned</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-oxide/30"></span> Unsolved</span>
+          <span class="flex items-center gap-1"><span class="w-3 h-3 rounded bg-blue-900/30"></span> Awaiting Trial</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search') as HTMLInputElement;
+    const statusFilter = document.getElementById('status-filter') as HTMLSelectElement;
+    const rows = document.querySelectorAll('.case-row');
+    const resultsCount = document.getElementById('results-count');
+
+    function filterCases() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const statusTerm = statusFilter.value.toLowerCase();
+      let visibleCount = 0;
+
+      rows.forEach(row => {
+        const name = row.getAttribute('data-name') || '';
+        const location = row.getAttribute('data-location') || '';
+        const method = row.getAttribute('data-method') || '';
+        const status = row.getAttribute('data-status') || '';
+        const tags = row.getAttribute('data-tags') || '';
+
+        const matchesSearch = !searchTerm ||
+          name.includes(searchTerm) ||
+          location.includes(searchTerm) ||
+          method.includes(searchTerm) ||
+          tags.includes(searchTerm);
+
+        const matchesStatus = statusTerm === 'all' || status.includes(statusTerm);
+
+        if (matchesSearch && matchesStatus) {
+          (row as HTMLElement).style.display = '';
+          visibleCount++;
+        } else {
+          (row as HTMLElement).style.display = 'none';
+        }
+      });
+
+      if (resultsCount) {
+        resultsCount.textContent = `Showing ${visibleCount} case${visibleCount !== 1 ? 's' : ''}`;
+      }
+    }
+
+    searchInput?.addEventListener('input', filterCases);
+    statusFilter?.addEventListener('change', filterCases);
+
+    // Make rows clickable
+    rows.forEach(row => {
+      row.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).tagName !== 'A') {
+          const slug = row.getAttribute('data-slug');
+          if (slug) {
+            window.location.href = `${window.location.origin}/forensic-darkness-site/blog/${slug}`;
+          }
+        }
+      });
+    });
+  });
+</script>

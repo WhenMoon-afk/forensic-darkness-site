@@ -12,6 +12,9 @@ const posts = defineCollection({
     draft: z.boolean().default(false),
     description: z.string().optional(),
     image: z.string().optional(),
+    // Content intensity indicators
+    intensity: z.number().min(1).max(5).optional().default(2),
+    contentWarnings: z.array(z.enum(['violence', 'graphic', 'psychological', 'sexual', 'child'])).optional(),
   }),
 });
 

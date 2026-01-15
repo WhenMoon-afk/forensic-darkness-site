@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const coldCases = [
+  {
+    id: "delphi-murders",
+    title: "The Delphi Murders",
+    location: "Delphi, Indiana",
+    date: "February 13, 2017",
+    status: "Arrest Made - Trial Pending",
+    victims: ["Abigail Williams, 13", "Liberty German, 14"],
+    summary: "Two teenage girls were murdered while hiking on the Delphi Historic Trails. Liberty German captured audio and video of the suspect on her phone before the attack. The footage shows a man in jeans and a blue jacket walking on the bridge, with audio of him saying 'down the hill.' Despite widespread publicity of this evidence, the case remained unsolved for years. In October 2022, Richard Allen was arrested and charged with the murders. His trial is pending.",
+    evidence: ["Audio recording of suspect's voice", "Video footage of suspect", "Witness sightings near trail"],
+    tipLine: "Carroll County Sheriff's Office: 765-564-2413",
+    reward: "Over $325,000",
+    lastUpdated: "2024"
+  },
+  {
+    id: "west-mesa-murders",
+    title: "The West Mesa Bone Collector",
+    location: "Albuquerque, New Mexico",
+    date: "2003-2005 (discovered 2009)",
+    status: "Unsolved",
+    victims: ["11 women and 1 fetus identified", "Possibly more unidentified"],
+    summary: "In February 2009, a woman walking her dog discovered human bones on Albuquerque's West Mesa. Subsequent excavation revealed the remains of at least 11 women and one fetus. Most victims were young women involved in prostitution and drug use who had disappeared between 2003 and 2005. The killer buried victims in a systematic pattern, leading investigators to believe this was a single serial offender. Despite extensive investigation, no arrests have been made.",
+    evidence: ["Burial patterns suggest organized offender", "Victims shared similar backgrounds", "Geographic cluster of disappearances"],
+    tipLine: "Albuquerque Police Department: 505-242-COPS",
+    reward: "Up to $100,000",
+    lastUpdated: "2024"
+  },
+  {
+    id: "colonial-parkway-murders",
+    title: "The Colonial Parkway Murders",
+    location: "Colonial Parkway, Virginia",
+    date: "1986-1989",
+    status: "Unsolved",
+    victims: ["8 victims in 4 separate incidents"],
+    summary: "Between 1986 and 1989, four couples were attacked along Virginia's Colonial Parkway and surrounding areas. The victims were young couples in parked cars at isolated locations. Some were found in or near their vehicles; others disappeared entirely. The FBI believes the same person or persons committed all four attacks. No suspect has ever been identified, though theories range from a law enforcement impersonator to a serial killer with knowledge of the area.",
+    evidence: ["Similar victim profiles (young couples)", "Geographic concentration", "Some victims' vehicles moved post-mortem"],
+    tipLine: "FBI Norfolk Field Office: 757-455-0100",
+    reward: "Up to $20,000 per case",
+    lastUpdated: "2024"
+  },
+  {
+    id: "i70-killer",
+    title: "The I-70 Killer",
+    location: "Midwest United States (I-70 corridor)",
+    date: "April-May 1992",
+    status: "Unsolved",
+    victims: ["6 women killed in retail stores"],
+    summary: "Over a three-week period in spring 1992, a serial killer murdered six women in retail stores along the Interstate 70 corridor through Indiana, Kansas, Missouri, and Texas. All victims were dark-haired women working alone in small shops. Each was shot with a .22 caliber handgun. The killer struck quickly and left few witnesses. A composite sketch was developed from witness descriptions, but no suspect has been identified.",
+    evidence: ["Consistent victim type (dark-haired women)", "Same caliber weapon used", "All victims worked alone in retail", "Composite sketch available"],
+    tipLine: "FBI Kansas City: 816-512-8200",
+    reward: "Up to $25,000",
+    lastUpdated: "2024"
+  },
+  {
+    id: "long-island-unsolved",
+    title: "Long Island Serial Killer - Remaining Victims",
+    location: "Long Island, New York",
+    date: "1996-2011 (discoveries)",
+    status: "Partially Solved - Additional Victims Unidentified",
+    victims: ["Several unidentified victims remain"],
+    summary: "While Rex Heuermann has been charged with several Gilgo Beach murders, additional victims found along Ocean Parkway remain unidentified or unconnected to the main suspect. These include 'Jane Doe No. 6,' an Asian male victim and toddler found together, and a woman found in a burlap sack. Some may be victims of other perpetrators. Investigators continue working to identify all remains and determine how many killers used this location.",
+    evidence: ["Multiple dump sites along Ocean Parkway", "Some victims in burlap similar to charged cases", "Other victims differ in profile"],
+    tipLine: "Suffolk County Crime Stoppers: 1-800-220-8477",
+    reward: "Various rewards for individual identifications",
+    lastUpdated: "2024"
+  }
+];
+---
+
+<BaseLayout
+  title="Cold Case Spotlight"
+  description="Featured unsolved cases that need public attention. Help bring justice to victims and closure to families by spreading awareness and reporting tips."
+>
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Cold Case Spotlight</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        These cases remain unsolved or partially solved. Someone knows something.
+        If you have any information about these cases, please contact the appropriate tip line.
+        Even small details can break a case.
+      </p>
+
+      <div class="mb-8 p-4 bg-amber/10 border border-amber/30 rounded-lg">
+        <p class="text-sm">
+          <strong class="text-amber">Your Information Matters:</strong> Tips can be submitted anonymously.
+          You don't need to know who committed the crime—details about victim movements, suspicious
+          vehicles, or unusual behavior can help investigators connect dots.
+        </p>
+      </div>
+
+      <!-- Case Cards -->
+      <div class="space-y-8">
+        {coldCases.map(case_ => (
+          <article id={case_.id} class="bg-fd-card rounded-lg overflow-hidden scroll-mt-24">
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <h2 class="text-2xl font-display font-bold">{case_.title}</h2>
+                  <p class="text-fd-muted text-sm">{case_.location} • {case_.date}</p>
+                </div>
+                <span class={`px-3 py-1 text-xs font-mono uppercase rounded ${
+                  case_.status.includes('Unsolved') ? 'bg-oxide/30 text-oxide-bright' :
+                  case_.status.includes('Arrest') ? 'bg-amber/30 text-amber' :
+                  'bg-noir-elevated text-fd-muted'
+                }`}>
+                  {case_.status}
+                </span>
+              </div>
+
+              <div class="mb-4">
+                <h3 class="text-sm font-semibold text-fd-muted mb-1">Victims</h3>
+                <ul class="text-sm">
+                  {case_.victims.map(victim => (
+                    <li class="text-fd-text">{victim}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="mb-4">
+                <h3 class="text-sm font-semibold text-fd-muted mb-1">Case Summary</h3>
+                <p class="text-fd-muted text-sm leading-relaxed">{case_.summary}</p>
+              </div>
+
+              <div class="mb-4">
+                <h3 class="text-sm font-semibold text-fd-muted mb-1">Key Evidence</h3>
+                <ul class="text-sm text-fd-muted list-disc list-inside">
+                  {case_.evidence.map(item => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="mt-6 p-4 bg-noir-surface rounded-lg">
+                <div class="flex flex-wrap gap-6">
+                  <div>
+                    <p class="text-xs font-semibold text-fd-muted uppercase tracking-wide mb-1">Submit Tips To</p>
+                    <p class="text-amber font-mono text-sm">{case_.tipLine}</p>
+                  </div>
+                  {case_.reward && (
+                    <div>
+                      <p class="text-xs font-semibold text-fd-muted uppercase tracking-wide mb-1">Reward</p>
+                      <p class="text-amber font-mono text-sm">{case_.reward}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- How to Submit Tips -->
+      <section class="mt-12 p-6 bg-noir-surface border border-noir-border rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4">How to Submit Tips</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <h3 class="font-semibold mb-2">When Reporting, Include:</h3>
+            <ul class="text-sm text-fd-muted space-y-1 list-disc list-inside">
+              <li>What you observed (be specific)</li>
+              <li>When and where it occurred</li>
+              <li>Descriptions of people, vehicles, or objects</li>
+              <li>Your contact information (optional but helpful)</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">General Tip Lines:</h3>
+            <ul class="text-sm text-fd-muted space-y-1">
+              <li><strong>FBI Tips:</strong> tips.fbi.gov or 1-800-CALL-FBI</li>
+              <li><strong>Crime Stoppers:</strong> Contact your local chapter</li>
+              <li><strong>National Missing Persons:</strong> NamUs.gov</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <p class="mt-8 text-fd-muted text-sm text-center">
+        Know of a cold case that should be featured? <a href={`${baseUrl}contact`} class="text-amber hover:text-amber-bright">Contact us</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

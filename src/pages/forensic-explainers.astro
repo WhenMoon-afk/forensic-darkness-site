@@ -1,0 +1,292 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const explainers = [
+  {
+    id: "dna-analysis",
+    title: "DNA Analysis & Genetic Genealogy",
+    icon: "🧬",
+    intro: "How genetic evidence revolutionized criminal investigation",
+    sections: [
+      {
+        heading: "How DNA Evidence Works",
+        content: `DNA (deoxyribonucleic acid) is the genetic blueprint found in nearly every cell of the human body. In forensic science, analysts examine specific regions called STRs (Short Tandem Repeats)—sections where nucleotide sequences repeat. The number of repeats varies between individuals, creating a unique genetic "fingerprint."
+
+When biological evidence is collected from a crime scene—blood, semen, skin cells, hair with follicles—technicians extract and amplify the DNA using PCR (Polymerase Chain Reaction). The resulting profile is compared against known samples or database entries.`
+      },
+      {
+        heading: "CODIS: The DNA Database",
+        content: `The Combined DNA Index System (CODIS) is the FBI's database containing DNA profiles from convicted offenders, arrestees, and forensic evidence from unsolved cases. When investigators enter a crime scene profile, CODIS searches for matches against millions of records. A "hit" can link crimes to each other or identify suspects.
+
+However, CODIS only works if the perpetrator's DNA is already in the system. This limitation led to the development of genetic genealogy.`
+      },
+      {
+        heading: "Genetic Genealogy Revolution",
+        content: `In 2018, investigators identified the Golden State Killer using a technique called investigative genetic genealogy. Rather than searching law enforcement databases, they uploaded crime scene DNA to public genealogy sites like GEDmatch. By finding distant relatives and building family trees, they narrowed suspects to Joseph DeAngelo.
+
+This technique has since solved hundreds of cold cases, including the Long Island Serial Killer case. It works because even partial matches to third or fourth cousins can, through genealogical research, lead to specific suspects.`
+      },
+      {
+        heading: "Limitations & Controversies",
+        content: `DNA evidence isn't infallible. Contamination can occur during collection or processing. Touch DNA (from skin cells) can transfer innocently—you can leave DNA on objects you never touched if it transferred from your handshake. Identical twins share DNA profiles.
+
+Genetic genealogy raises privacy concerns: people who submitted DNA for ancestry research didn't consent to criminal investigations. Some databases now require explicit opt-in for law enforcement searches.`
+      }
+    ],
+    caseExample: "The Golden State Killer case demonstrated genetic genealogy's power. After 40 years, DNA from 1970s crime scenes matched distant relatives in genealogy databases, leading to Joseph DeAngelo's 2018 arrest.",
+    furtherReading: ["golden-state-killer-dna-solved-40-year-mystery"]
+  },
+  {
+    id: "criminal-profiling",
+    title: "Criminal Profiling & Behavioral Analysis",
+    icon: "🧠",
+    intro: "Understanding how investigators build psychological portraits of unknown offenders",
+    sections: [
+      {
+        heading: "Origins of Profiling",
+        content: `Criminal profiling emerged from the FBI's Behavioral Science Unit in the 1970s. Agents like Robert Ressler and John Douglas interviewed imprisoned serial killers to understand their psychology, methodology, and backgrounds. These interviews formed the basis for predictive profiles.
+
+The goal isn't to identify a specific person, but to narrow the suspect pool by predicting characteristics: age range, employment type, relationship history, geographic familiarity, and psychological traits.`
+      },
+      {
+        heading: "Organized vs. Disorganized",
+        content: `The FBI's original classification divided offenders into two categories. Organized offenders plan their crimes, bring weapons, control victims, and leave minimal evidence. They're often intelligent, socially competent, and employed. Ted Bundy exemplifies this type.
+
+Disorganized offenders act impulsively, use weapons found at scenes, leave abundant evidence, and show less victim control. They're often younger, unemployed, and live near crime scenes. Reality is more complex—most offenders show mixed characteristics.`
+      },
+      {
+        heading: "Geographic Profiling",
+        content: `Criminals don't act randomly in space. Geographic profiling analyzes crime locations to predict where an offender lives or works. The technique relies on the principle that most serial offenders operate within a "comfort zone"—familiar territory where they feel safe.
+
+Software like Rigel analyzes spatial patterns, distance decay (criminals prefer nearby victims), and the "buffer zone" (many offenders avoid areas immediately around their home). This helped identify the Yorkshire Ripper and numerous other cases.`
+      },
+      {
+        heading: "Modern Behavioral Analysis",
+        content: `Today's FBI Behavioral Analysis Unit (BAU) uses more nuanced approaches than the original organized/disorganized dichotomy. Analysts consider crime scene dynamics, victimology (why this victim?), risk assessment, and offender motivation.
+
+Profiling works best combined with traditional investigation. It provides investigative direction, not identification. Critics note that profiles can be vague, subject to confirmation bias, and have led investigators astray in some high-profile cases.`
+      }
+    ],
+    caseExample: "The BTK case showed profiling's limitations. The profile suggested someone younger and unmarried. Dennis Rader was a middle-aged family man and church leader—demonstrating that killers don't always fit expected patterns.",
+    furtherReading: ["btk-killer-hiding-in-plain-sight"]
+  },
+  {
+    id: "digital-forensics",
+    title: "Digital Forensics",
+    icon: "💻",
+    intro: "How electronic evidence helps solve modern crimes",
+    sections: [
+      {
+        heading: "The Digital Crime Scene",
+        content: `Modern criminals leave electronic footprints: cell phone location data, internet searches, social media activity, email communications, financial transactions, and vehicle GPS records. Digital forensics extracts, preserves, and analyzes this evidence.
+
+Every digital action creates metadata—information about information. A photo contains GPS coordinates, device identifiers, and timestamps. A document records editing history. An email header reveals routing information. This hidden data often proves more valuable than content.`
+      },
+      {
+        heading: "Cell Phone Analysis",
+        content: `Cell phones are tracking devices we carry voluntarily. Cell tower records show which towers a phone connected to and when. Cell Site Location Information (CSLI) can place a suspect at a crime scene or contradict an alibi.
+
+Smartphone forensics goes deeper: extracting deleted texts, call logs, photos, app data, and browsing history. Even "deleted" data often persists until overwritten. Tools like Cellebrite and GrayKey can bypass phone security, though encryption increasingly protects content.`
+      },
+      {
+        heading: "Internet & Social Media Evidence",
+        content: `Online activity leaves extensive traces. Internet Service Providers log connection times and IP addresses. Search engines may retain query history. Social media platforms store messages, posts, and location check-ins.
+
+In the Chris Watts case, his internet searches for "how to dispose of a body" and "what happens to someone's body in oil" helped prove premeditation. Rex Heuermann's alleged searches about the Long Island case contributed to his identification.`
+      },
+      {
+        heading: "The Metadata that Catches Killers",
+        content: `BTK's downfall came from a floppy disk. Dennis Rader asked police if a disk could be traced. They said no. But the disk's metadata contained his church's name and "Dennis" as the last user. He was arrested within days.
+
+This case demonstrates why metadata matters. The content of Rader's message was less important than the digital fingerprints it carried. Modern investigators routinely analyze metadata from documents, images, and electronic communications.`
+      }
+    ],
+    caseExample: "The Long Island Serial Killer investigation used digital evidence extensively. Cell phone records, internet searches, and digital communications helped build the case against Rex Heuermann after years of traditional investigation failed.",
+    furtherReading: ["long-island-serial-killer-gilgo-beach", "btk-killer-hiding-in-plain-sight"]
+  },
+  {
+    id: "forensic-pathology",
+    title: "Forensic Pathology & Autopsy",
+    icon: "⚕️",
+    intro: "How medical examiners determine cause and manner of death",
+    sections: [
+      {
+        heading: "The Autopsy Process",
+        content: `A forensic autopsy is a comprehensive examination to determine cause of death (what killed the person), manner of death (homicide, suicide, accident, natural, undetermined), and contributing factors. The medical examiner documents injuries, collects evidence, and reconstructs events.
+
+External examination records wounds, identifying marks, and signs of struggle. Internal examination assesses organ condition and internal injuries. Toxicology screens for drugs, poisons, and alcohol. The complete picture often reveals what happened and how.`
+      },
+      {
+        heading: "Time of Death Estimation",
+        content: `Determining when someone died helps establish timelines and alibis. Forensic pathologists use multiple indicators: body temperature (bodies cool at roughly 1.5°F per hour initially), rigor mortis (muscle stiffening beginning 2-6 hours after death), livor mortis (blood pooling creating discoloration), and decomposition stages.
+
+These estimates are ranges, not precise times. Environmental factors—temperature, humidity, insect activity—significantly affect decomposition. A body in summer heat decomposes faster than one in cold water. Pathologists provide windows, not timestamps.`
+      },
+      {
+        heading: "Wound Analysis",
+        content: `Wounds tell stories. The shape and depth of stab wounds can indicate weapon type. Gunshot wounds reveal caliber, range, and direction. Defensive wounds on hands and arms suggest the victim fought back. Ligature marks indicate binding or strangulation.
+
+Pattern analysis compares wound patterns to potential weapons. Blood spatter analysis reconstructs movement during an attack. Together, wound analysis can distinguish murder from suicide, identify weapons, and reconstruct violent events.`
+      },
+      {
+        heading: "When Bodies Can't Speak Clearly",
+        content: `Advanced decomposition, burning, or dismemberment can obscure cause of death. Forensic anthropologists analyze skeletal remains for trauma evidence. Forensic entomologists use insect activity to estimate post-mortem interval. Forensic odontologists identify remains through dental records.
+
+Cold cases often rely on these specialists. When the Green River Killer's victims were found as skeletal remains, forensic anthropologists identified tool marks on bones consistent with Gary Ridgway's methods.`
+      }
+    ],
+    caseExample: "In the Jeffrey Dahmer case, forensic pathology identified victims from partial remains. Skull examination, dental records, and other techniques identified 17 victims despite severe post-mortem mutilation.",
+    furtherReading: ["captivating-forensic-analysis-of-the-startling-jeffrey-dahmer-series-on-netflix"]
+  },
+  {
+    id: "crime-scene-investigation",
+    title: "Crime Scene Investigation",
+    icon: "🔍",
+    intro: "The systematic process of documenting and collecting physical evidence",
+    sections: [
+      {
+        heading: "Securing and Documenting the Scene",
+        content: `The first responders' priority is securing the crime scene. Establishing a perimeter prevents contamination—every person who enters potentially adds or removes evidence. A crime scene log tracks everyone who enters and when.
+
+Before anything is moved, investigators document everything: photographs from multiple angles, video walkthroughs, detailed sketches with measurements. This documentation preserves the scene as found, allowing later analysis even after evidence is collected.`
+      },
+      {
+        heading: "Evidence Collection Protocol",
+        content: `Physical evidence must be collected, packaged, and preserved following strict protocols. Chain of custody documentation tracks evidence from scene to courtroom. Biological evidence requires refrigeration. Trace evidence needs specialized containers to prevent loss.
+
+Different evidence types require different approaches: fingerprints are lifted with powder or chemical treatments, blood samples are collected on sterile swabs, fibers are collected with tape lifts. Improper collection can destroy evidence or make it inadmissible.`
+      },
+      {
+        heading: "Fingerprint Analysis",
+        content: `Fingerprints have been used for identification since the early 1900s. The friction ridges on our fingers form unique patterns that don't change over a lifetime. Latent prints (invisible to the naked eye) are developed using powders, chemicals, or alternative light sources.
+
+The Automated Fingerprint Identification System (AFIS) can search millions of prints in minutes. However, partial prints and smudged prints require human expert comparison. Fingerprint analysis remains one of forensic science's most reliable tools.`
+      },
+      {
+        heading: "Trace Evidence: Locard's Exchange Principle",
+        content: `Edmond Locard established that "every contact leaves a trace." When a criminal enters a crime scene, they leave something behind (hair, fibers, fingerprints) and take something away (victim's DNA, carpet fibers, soil). Trace evidence analysis identifies these transferred materials.
+
+Hair and fiber analysis can link suspects to scenes. Soil analysis can prove a vehicle was at a location. Paint transfer analysis connects hit-and-run vehicles. Even microscopic evidence can establish connections that witness testimony cannot.`
+      }
+    ],
+    caseExample: "The Ted Bundy case demonstrated the importance of trace evidence. Bite mark analysis and hair fiber evidence from multiple crime scenes linked Bundy to victims across several states.",
+    furtherReading: ["ted-bundy-charisma-and-carnage"]
+  }
+];
+---
+
+<BaseLayout
+  title="Forensic Science Explainers"
+  description="Educational deep-dives into forensic science techniques: DNA analysis, criminal profiling, digital forensics, autopsy procedures, and crime scene investigation."
+>
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Forensic Science Explainers</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        Understanding how investigators solve crimes. These explainers cover the science
+        behind criminal investigation—from DNA analysis to digital forensics.
+      </p>
+
+      <div class="mb-8 p-4 bg-fd-card rounded-lg">
+        <p class="text-sm text-fd-muted">
+          <strong class="text-fd-text">Educational Purpose:</strong> These explainers
+          provide general education about forensic techniques. Real investigations are
+          more complex and nuanced than any summary can capture. For academic research,
+          see our <a href={`${baseUrl}bibliography`} class="text-amber hover:text-amber-bright">Research Bibliography</a>.
+        </p>
+      </div>
+
+      <!-- Quick Navigation -->
+      <nav class="mb-12 p-4 bg-noir-surface rounded-lg">
+        <h2 class="text-sm font-semibold text-fd-muted uppercase tracking-wide mb-3">Jump to Topic</h2>
+        <div class="flex flex-wrap gap-2">
+          {explainers.map(exp => (
+            <a
+              href={`#${exp.id}`}
+              class="px-3 py-1.5 bg-noir-elevated text-fd-text text-sm rounded hover:bg-amber/20 hover:text-amber transition-colors"
+            >
+              <span class="mr-1">{exp.icon}</span> {exp.title.split(' ')[0]}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Explainer Sections -->
+      <div class="space-y-16">
+        {explainers.map((exp, index) => (
+          <article id={exp.id} class="scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+              <span class="text-4xl">{exp.icon}</span>
+              <div>
+                <h2 class="text-2xl font-display font-bold">{exp.title}</h2>
+                <p class="text-fd-muted">{exp.intro}</p>
+              </div>
+            </div>
+
+            <div class="space-y-8">
+              {exp.sections.map(section => (
+                <div>
+                  <h3 class="text-lg font-semibold mb-3 text-amber">{section.heading}</h3>
+                  <div class="prose prose-invert max-w-none">
+                    {section.content.split('\n\n').map(para => (
+                      <p class="text-fd-muted leading-relaxed mb-4">{para}</p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <!-- Case Example -->
+            <div class="mt-8 p-4 bg-fd-card border-l-4 border-amber rounded-r-lg">
+              <h4 class="text-sm font-semibold uppercase tracking-wide text-fd-muted mb-2">Case Example</h4>
+              <p class="text-fd-text">{exp.caseExample}</p>
+              {exp.furtherReading && exp.furtherReading.length > 0 && (
+                <div class="mt-3">
+                  <span class="text-xs text-fd-muted">Read more: </span>
+                  {exp.furtherReading.map((slug, i) => (
+                    <a
+                      href={`${baseUrl}blog/${slug}`}
+                      class="text-xs text-amber hover:text-amber-bright"
+                    >
+                      {slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}
+                      {i < exp.furtherReading.length - 1 && ', '}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {index < explainers.length - 1 && (
+              <hr class="mt-12 border-noir-border" />
+            )}
+          </article>
+        ))}
+      </div>
+
+      <!-- Related Resources -->
+      <section class="mt-16 p-6 bg-noir-surface border border-noir-border rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4">Continue Learning</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <h3 class="font-semibold mb-2">On This Site</h3>
+            <ul class="text-sm space-y-1">
+              <li><a href={`${baseUrl}glossary`} class="text-amber hover:text-amber-bright">Forensic Glossary →</a></li>
+              <li><a href={`${baseUrl}case-database`} class="text-amber hover:text-amber-bright">Case Database →</a></li>
+              <li><a href={`${baseUrl}bibliography`} class="text-amber hover:text-amber-bright">Research Bibliography →</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">External Resources</h3>
+            <ul class="text-sm text-fd-muted space-y-1">
+              <li><a href="https://www.fbi.gov/about/leadership-and-structure/intelligence-branch/strategic-intelligence-and-analysis-directorate/behavioral-analysis-unit" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">FBI Behavioral Analysis Unit</a></li>
+              <li><a href="https://www.nist.gov/forensic-science" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">NIST Forensic Science</a></li>
+              <li><a href="https://www.aafs.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">American Academy of Forensic Sciences</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

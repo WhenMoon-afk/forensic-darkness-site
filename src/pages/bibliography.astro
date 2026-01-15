@@ -1,0 +1,262 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const categories = [
+  {
+    title: "Serial Murder & Criminal Psychology",
+    resources: [
+      {
+        title: "Sexual Homicide: Patterns and Motives",
+        authors: "Ressler, R. K., Burgess, A. W., & Douglas, J. E.",
+        year: "1988",
+        publisher: "Free Press",
+        description: "Foundational FBI research on serial killers based on interviews with 36 convicted murderers. Introduced the organized/disorganized classification system."
+      },
+      {
+        title: "The Anatomy of Motive",
+        authors: "Douglas, J., & Olshaker, M.",
+        year: "1999",
+        publisher: "Scribner",
+        description: "Former FBI profiler John Douglas examines the psychological motivations behind violent crimes."
+      },
+      {
+        title: "Without Conscience: The Disturbing World of the Psychopaths Among Us",
+        authors: "Hare, R. D.",
+        year: "1993",
+        publisher: "Guilford Press",
+        description: "Dr. Robert Hare's seminal work on psychopathy, including the development of the PCL-R assessment tool."
+      },
+      {
+        title: "The Psychopathology of Crime: Criminal Behavior as a Clinical Disorder",
+        authors: "Raine, A.",
+        year: "1993",
+        publisher: "Academic Press",
+        description: "Comprehensive examination of the biological and psychological factors contributing to criminal behavior."
+      },
+      {
+        title: "Serial Killers: The Method and Madness of Monsters",
+        authors: "Vronsky, P.",
+        year: "2004",
+        publisher: "Berkley Books",
+        description: "Historical and psychological analysis of serial murder from ancient times to the present."
+      },
+      {
+        title: "Whoever Fights Monsters",
+        authors: "Ressler, R. K., & Shachtman, T.",
+        year: "1992",
+        publisher: "St. Martin's Press",
+        description: "Robert Ressler's account of developing criminal profiling at the FBI and his interviews with serial killers."
+      }
+    ]
+  },
+  {
+    title: "Forensic Science & Investigation",
+    resources: [
+      {
+        title: "Forensic Science: An Introduction to Scientific and Investigative Techniques",
+        authors: "James, S. H., & Nordby, J. J. (Eds.)",
+        year: "2009",
+        publisher: "CRC Press",
+        description: "Comprehensive textbook covering all major areas of forensic science used in criminal investigations."
+      },
+      {
+        title: "Practical Homicide Investigation: Tactics, Procedures, and Forensic Techniques",
+        authors: "Geberth, V. J.",
+        year: "2015",
+        publisher: "CRC Press",
+        description: "The standard reference for homicide detectives, now in its fifth edition. Covers crime scene management, forensic techniques, and case studies."
+      },
+      {
+        title: "Forensic DNA Typing: Biology, Technology, and Genetics of STR Markers",
+        authors: "Butler, J. M.",
+        year: "2005",
+        publisher: "Academic Press",
+        description: "Technical reference on DNA analysis methods used in criminal investigations."
+      },
+      {
+        title: "Criminal Profiling: An Introduction to Behavioral Evidence Analysis",
+        authors: "Turvey, B. E.",
+        year: "2011",
+        publisher: "Academic Press",
+        description: "Comprehensive guide to behavioral evidence analysis and criminal profiling methodology."
+      }
+    ]
+  },
+  {
+    title: "Victimology & Trauma",
+    resources: [
+      {
+        title: "Trauma and Recovery: The Aftermath of Violence",
+        authors: "Herman, J. L.",
+        year: "1992",
+        publisher: "Basic Books",
+        description: "Groundbreaking work on psychological trauma, including PTSD in crime victims. Essential reading for understanding victim experiences."
+      },
+      {
+        title: "The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma",
+        authors: "Van der Kolk, B.",
+        year: "2014",
+        publisher: "Viking",
+        description: "Modern understanding of how trauma affects the body and mind, with implications for treatment and recovery."
+      },
+      {
+        title: "Victimology: Theories and Applications",
+        authors: "Burgess, A. W., Regehr, C., & Roberts, A. R.",
+        year: "2012",
+        publisher: "Jones & Bartlett Learning",
+        description: "Academic textbook on victimology covering theory, research, and practical applications."
+      },
+      {
+        title: "Crime Victims: An Introduction to Victimology",
+        authors: "Karmen, A.",
+        year: "2015",
+        publisher: "Cengage Learning",
+        description: "Comprehensive introduction to victimology as an academic discipline."
+      }
+    ]
+  },
+  {
+    title: "Case Studies & Historical Accounts",
+    resources: [
+      {
+        title: "The Devil in the White City",
+        authors: "Larson, E.",
+        year: "2003",
+        publisher: "Crown",
+        description: "Narrative history of H.H. Holmes and the 1893 Chicago World's Fair. Meticulously researched true crime writing."
+      },
+      {
+        title: "Helter Skelter: The True Story of the Manson Murders",
+        authors: "Bugliosi, V., & Gentry, C.",
+        year: "1974",
+        publisher: "W. W. Norton",
+        description: "Prosecutor Vincent Bugliosi's account of the Manson Family murders and trial."
+      },
+      {
+        title: "I'll Be Gone in the Dark",
+        authors: "McNamara, M.",
+        year: "2018",
+        publisher: "Harper",
+        description: "Investigation into the Golden State Killer, published shortly before his identification through genetic genealogy."
+      },
+      {
+        title: "The Stranger Beside Me",
+        authors: "Rule, A.",
+        year: "1980",
+        publisher: "W. W. Norton",
+        description: "Ann Rule's account of Ted Bundy, whom she knew personally before his crimes were discovered."
+      },
+      {
+        title: "Mindhunter: Inside the FBI's Elite Serial Crime Unit",
+        authors: "Douglas, J., & Olshaker, M.",
+        year: "1995",
+        publisher: "Scribner",
+        description: "John Douglas's memoir of developing criminal profiling at the FBI and famous cases he worked."
+      }
+    ]
+  },
+  {
+    title: "Academic Journals",
+    resources: [
+      {
+        title: "Journal of Forensic Sciences",
+        authors: "American Academy of Forensic Sciences",
+        year: "Ongoing",
+        publisher: "Wiley",
+        description: "Peer-reviewed journal covering all forensic science disciplines."
+      },
+      {
+        title: "Homicide Studies",
+        authors: "Various",
+        year: "Ongoing",
+        publisher: "SAGE",
+        description: "Academic journal focused on homicide research, including serial murder."
+      },
+      {
+        title: "Journal of Criminal Psychology",
+        authors: "Various",
+        year: "Ongoing",
+        publisher: "Emerald",
+        description: "Research on the psychology of criminal behavior."
+      },
+      {
+        title: "Trauma, Violence, & Abuse",
+        authors: "Various",
+        year: "Ongoing",
+        publisher: "SAGE",
+        description: "Review journal synthesizing research on interpersonal violence and its effects."
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="Research Bibliography"
+  description="Curated list of academic books, journals, and authoritative sources for researching serial killers, forensic science, and victimology."
+>
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Research Bibliography</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        A curated collection of authoritative sources for those seeking deeper understanding
+        of serial murder, forensic science, criminal psychology, and victimology.
+        These works inform the content on Forensic Darkness.
+      </p>
+
+      <div class="mb-8 p-4 bg-fd-card rounded-lg">
+        <p class="text-sm text-fd-muted">
+          <strong class="text-fd-text">Note for researchers:</strong> This bibliography focuses on
+          well-regarded academic and journalistic works. For specific citations, use library databases
+          like JSTOR, PsycINFO, or your institution's resources. Our
+          <a href={`${baseUrl}glossary`} class="text-amber hover:text-amber-bright">Forensic Glossary</a>
+          can help with terminology.
+        </p>
+      </div>
+
+      {categories.map(category => (
+        <section class="mb-12">
+          <h2 class="text-2xl font-display font-bold mb-6 pb-2 border-b border-noir-border">
+            {category.title}
+          </h2>
+          <div class="space-y-6">
+            {category.resources.map(resource => (
+              <div class="p-4 bg-fd-card rounded-lg">
+                <h3 class="font-semibold text-fd-text mb-1">{resource.title}</h3>
+                <p class="text-sm text-amber mb-2">
+                  {resource.authors} ({resource.year}). {resource.publisher}.
+                </p>
+                <p class="text-fd-muted text-sm">{resource.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+
+      <section class="p-6 bg-noir-surface border border-noir-border rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4">Additional Resources</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <h3 class="font-semibold mb-2">Online Databases</h3>
+            <ul class="text-sm text-fd-muted space-y-1">
+              <li><a href="https://www.fbi.gov/stats-services/publications" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">FBI Publications & Statistics</a></li>
+              <li><a href="https://bjs.ojp.gov/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">Bureau of Justice Statistics</a></li>
+              <li><a href="https://namus.nij.ojp.gov/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">NamUs (Missing Persons)</a></li>
+              <li><a href="https://www.icpsr.umich.edu/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">ICPSR Criminal Justice Data</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="font-semibold mb-2">Professional Organizations</h3>
+            <ul class="text-sm text-fd-muted space-y-1">
+              <li><a href="https://www.aafs.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">American Academy of Forensic Sciences</a></li>
+              <li><a href="https://www.apa.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">American Psychological Association</a></li>
+              <li><a href="https://victimsofcrime.org/" target="_blank" rel="noopener noreferrer" class="text-amber hover:text-amber-bright">National Center for Victims of Crime</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

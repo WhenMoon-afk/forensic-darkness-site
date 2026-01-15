@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const glossaryTerms = [
+  {
+    term: "Antisocial Personality Disorder (ASPD)",
+    definition: "A mental health condition characterized by a persistent pattern of disregard for and violation of others' rights. Individuals may display deceitfulness, impulsivity, irritability, and lack of remorse. Not all people with ASPD become violent, but many serial offenders meet diagnostic criteria.",
+    category: "Psychology"
+  },
+  {
+    term: "Behavioral Analysis",
+    definition: "The study of an offender's actions before, during, and after a crime to understand their psychology, predict future behavior, and aid in identification. The FBI's Behavioral Analysis Unit (BAU) pioneered many techniques in this field.",
+    category: "Investigation"
+  },
+  {
+    term: "Chain of Custody",
+    definition: "The documented trail showing the seizure, custody, control, transfer, and disposition of physical evidence. Maintaining proper chain of custody ensures evidence remains admissible in court.",
+    category: "Forensics"
+  },
+  {
+    term: "CODIS",
+    definition: "Combined DNA Index System - the FBI's national DNA database containing DNA profiles from convicted offenders, crime scene evidence, and missing persons. CODIS enables law enforcement to match DNA across jurisdictions.",
+    category: "Forensics"
+  },
+  {
+    term: "Cooling-Off Period",
+    definition: "The time between a serial offender's crimes during which they return to seemingly normal behavior. This period distinguishes serial killers from spree killers or mass murderers. Cooling-off periods can range from days to years.",
+    category: "Terminology"
+  },
+  {
+    term: "Criminal Profiling",
+    definition: "An investigative technique that attempts to identify likely characteristics of an unknown offender based on crime scene evidence, victim information, and behavioral patterns. Also called offender profiling or psychological profiling.",
+    category: "Investigation"
+  },
+  {
+    term: "Disorganized Offender",
+    definition: "A classification describing offenders who commit crimes impulsively with little planning. Crime scenes are chaotic, weapons are often found at the scene, and the body is usually left where the murder occurred. Often associated with mental illness or lower intelligence.",
+    category: "Terminology"
+  },
+  {
+    term: "DNA Evidence",
+    definition: "Biological material (blood, saliva, hair, skin cells, semen) containing genetic information that can identify individuals with near-certainty. DNA analysis has revolutionized criminal investigation since the 1980s and has both convicted the guilty and exonerated the innocent.",
+    category: "Forensics"
+  },
+  {
+    term: "Fantasy",
+    definition: "In criminal psychology, the mental imagery and scenarios that drive serial offenders. These fantasies typically develop over years before the first crime and become increasingly elaborate. Understanding an offender's fantasy can help predict their behavior.",
+    category: "Psychology"
+  },
+  {
+    term: "Geographic Profiling",
+    definition: "An investigative methodology that analyzes the locations of connected crimes to determine the most probable area of an offender's residence or base of operations. Based on the principle that criminals tend to operate in areas they know.",
+    category: "Investigation"
+  },
+  {
+    term: "Linkage Analysis",
+    definition: "The process of determining whether multiple crimes were committed by the same offender by analyzing similarities in method, signature, victim type, and other factors.",
+    category: "Investigation"
+  },
+  {
+    term: "Locard's Exchange Principle",
+    definition: "The forensic theory that every contact leaves a trace. When two objects come into contact, material is exchanged between them. This principle underlies much of forensic science - offenders leave evidence at scenes and take evidence with them.",
+    category: "Forensics"
+  },
+  {
+    term: "Mass Murder",
+    definition: "The killing of four or more victims in a single event at one location, with no cooling-off period between deaths. Distinguished from serial murder by the lack of emotional cooling-off between killings.",
+    category: "Terminology"
+  },
+  {
+    term: "Modus Operandi (MO)",
+    definition: "Latin for 'method of operating.' The specific techniques and behaviors an offender uses to commit crimes. MO is functional and may evolve as the offender learns from experience. Distinguished from signature, which is psychological rather than practical.",
+    category: "Terminology"
+  },
+  {
+    term: "Necrophilia",
+    definition: "Sexual attraction to or sexual acts involving corpses. A paraphilia sometimes present in serial killers, where the desire for complete control over victims extends beyond death.",
+    category: "Psychology"
+  },
+  {
+    term: "Organized Offender",
+    definition: "A classification describing offenders who plan their crimes carefully, select victims deliberately, maintain control at the crime scene, and take steps to avoid detection. Often of average or above-average intelligence with social competence.",
+    category: "Terminology"
+  },
+  {
+    term: "Paraphilia",
+    definition: "Intense and persistent sexual interest in atypical objects, situations, or individuals. Some paraphilias (such as sadism) are associated with violent offending when acted upon without consent.",
+    category: "Psychology"
+  },
+  {
+    term: "Post-Mortem Interval (PMI)",
+    definition: "The time elapsed since death. Forensic pathologists estimate PMI using factors like body temperature, rigor mortis, livor mortis, and decomposition to help establish when a victim died.",
+    category: "Forensics"
+  },
+  {
+    term: "Psychopathy",
+    definition: "A personality construct characterized by persistent antisocial behavior, impaired empathy and remorse, and bold, disinhibited traits. Measured using tools like the PCL-R (Psychopathy Checklist-Revised). Not all psychopaths are violent, but many violent serial offenders score high on psychopathy measures.",
+    category: "Psychology"
+  },
+  {
+    term: "Serial Murder",
+    definition: "The unlawful killing of two or more victims by the same offender(s) in separate events, typically with a cooling-off period between murders. The FBI's definition requires at least two murders with a temporal separation.",
+    category: "Terminology"
+  },
+  {
+    term: "Signature",
+    definition: "Behaviors that go beyond what is necessary to commit the crime and reflect the offender's psychological needs or fantasies. Unlike MO, signature behaviors remain relatively consistent because they fulfill emotional needs. Examples include posing victims, taking souvenirs, or excessive violence.",
+    category: "Terminology"
+  },
+  {
+    term: "Sociopathy",
+    definition: "Often used interchangeably with psychopathy, though some researchers distinguish them. Sociopathy is sometimes considered more environmentally influenced, with sociopaths capable of forming attachments to specific individuals or groups while still displaying antisocial behavior toward others.",
+    category: "Psychology"
+  },
+  {
+    term: "Spree Killing",
+    definition: "Multiple murders committed in two or more locations with almost no cooling-off period between them. Distinguished from serial murder by the continuous nature of the crime spree and from mass murder by occurring at multiple locations.",
+    category: "Terminology"
+  },
+  {
+    term: "Staging",
+    definition: "The deliberate alteration of a crime scene to mislead investigators about what actually occurred. May include making a murder appear as suicide or accident, or adding elements to suggest a different motive or offender type.",
+    category: "Investigation"
+  },
+  {
+    term: "Toxicology",
+    definition: "The study of drugs, poisons, and chemicals in the body. Forensic toxicology analyzes biological samples to determine whether substances contributed to death or impairment.",
+    category: "Forensics"
+  },
+  {
+    term: "Trophy",
+    definition: "An item taken from a victim or crime scene as a memento. Trophies allow offenders to relive the crime and may include personal items, photographs, or body parts. Distinguished from souvenirs, though terms are sometimes used interchangeably.",
+    category: "Terminology"
+  },
+  {
+    term: "Victimology",
+    definition: "The study of victims - their characteristics, behaviors, and relationships - to understand why they were targeted and to identify patterns that may help identify offenders. Includes both the academic study of victimization and the practical analysis of victims in criminal investigations.",
+    category: "Investigation"
+  },
+  {
+    term: "ViCAP",
+    definition: "Violent Criminal Apprehension Program - an FBI database designed to collect and analyze information about homicides, sexual assaults, and other violent crimes, particularly those with characteristics suggesting serial offending. Helps identify patterns across jurisdictions.",
+    category: "Investigation"
+  }
+];
+
+const categories = [...new Set(glossaryTerms.map(t => t.category))].sort();
+---
+
+<BaseLayout
+  title="Forensic Glossary"
+  description="A comprehensive glossary of forensic psychology and criminal investigation terms. Understand the language used in serial killer analysis and forensic science."
+>
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Forensic Glossary</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        Understanding the terminology used in forensic psychology and criminal investigation.
+        This glossary defines key terms you'll encounter in our case analyses and educational content.
+      </p>
+
+      <!-- Category Filter -->
+      <div class="mb-8">
+        <div class="flex flex-wrap gap-2">
+          <button
+            class="glossary-filter evidence-tag bg-amber text-noir-base"
+            data-category="all"
+          >
+            All Terms
+          </button>
+          {categories.map(category => (
+            <button
+              class="glossary-filter evidence-tag hover:bg-amber hover:text-noir-base transition-colors"
+              data-category={category}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <!-- Alphabetical Jump Links -->
+      <div class="mb-8 p-4 bg-fd-card rounded-lg">
+        <p class="text-sm text-fd-muted mb-2">Jump to:</p>
+        <div class="flex flex-wrap gap-2">
+          {[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map(letter => {
+            const hasTerms = glossaryTerms.some(t => t.term.toUpperCase().startsWith(letter));
+            return hasTerms ? (
+              <a
+                href={`#letter-${letter}`}
+                class="w-8 h-8 flex items-center justify-center text-sm font-mono bg-noir-elevated hover:bg-amber hover:text-noir-base transition-colors rounded"
+              >
+                {letter}
+              </a>
+            ) : (
+              <span class="w-8 h-8 flex items-center justify-center text-sm font-mono text-fd-muted/30">
+                {letter}
+              </span>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- Glossary Terms -->
+      <div class="space-y-6" id="glossary-list">
+        {[...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'].map(letter => {
+          const letterTerms = glossaryTerms.filter(t => t.term.toUpperCase().startsWith(letter));
+          if (letterTerms.length === 0) return null;
+
+          return (
+            <div id={`letter-${letter}`} class="scroll-mt-24">
+              <h2 class="text-2xl font-display font-bold text-amber mb-4 pb-2 border-b border-noir-border">
+                {letter}
+              </h2>
+              <dl class="space-y-4">
+                {letterTerms.map(item => (
+                  <div
+                    class="glossary-term p-4 bg-fd-card rounded-lg"
+                    data-category={item.category}
+                  >
+                    <dt class="text-lg font-semibold text-fd-text mb-1 flex items-center gap-2">
+                      {item.term}
+                      <span class="text-xs font-mono px-2 py-0.5 bg-noir-elevated text-fd-muted rounded">
+                        {item.category}
+                      </span>
+                    </dt>
+                    <dd class="text-fd-muted leading-relaxed">
+                      {item.definition}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          );
+        })}
+      </div>
+
+      <!-- Educational Note -->
+      <div class="mt-12 p-6 bg-noir-surface border border-noir-border rounded-lg">
+        <h3 class="font-display font-bold mb-2">About This Glossary</h3>
+        <p class="text-fd-muted text-sm leading-relaxed">
+          This glossary is intended for educational purposes. Definitions are simplified for general
+          understanding and may not capture all nuances used in academic or professional contexts.
+          For in-depth study, we recommend consulting the academic sources listed in our
+          <a href={`${baseUrl}bibliography`} class="text-amber hover:text-amber-bright">Research Bibliography</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filters = document.querySelectorAll('.glossary-filter');
+    const terms = document.querySelectorAll('.glossary-term');
+
+    filters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const category = filter.getAttribute('data-category');
+
+        // Update active filter styling
+        filters.forEach(f => {
+          f.classList.remove('bg-amber', 'text-noir-base');
+          f.classList.add('hover:bg-amber', 'hover:text-noir-base');
+        });
+        filter.classList.add('bg-amber', 'text-noir-base');
+        filter.classList.remove('hover:bg-amber', 'hover:text-noir-base');
+
+        // Filter terms
+        terms.forEach(term => {
+          if (category === 'all' || term.getAttribute('data-category') === category) {
+            term.style.display = 'block';
+          } else {
+            term.style.display = 'none';
+          }
+        });
+
+        // Show/hide letter sections based on visible terms
+        document.querySelectorAll('[id^="letter-"]').forEach(section => {
+          const visibleTerms = section.querySelectorAll('.glossary-term[style="display: block"], .glossary-term:not([style])');
+          const hasVisible = Array.from(section.querySelectorAll('.glossary-term')).some(t => t.style.display !== 'none');
+          section.style.display = hasVisible ? 'block' : 'none';
+        });
+      });
+    });
+  });
+</script>

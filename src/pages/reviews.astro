@@ -1,0 +1,322 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const reviews = [
+  {
+    id: "ill-be-gone-in-the-dark",
+    title: "I'll Be Gone in the Dark",
+    type: "book",
+    author: "Michelle McNamara",
+    year: "2018",
+    rating: 5,
+    subject: "Golden State Killer",
+    summary: "Michelle McNamara's obsessive investigation into the Golden State Killer became her life's work—and tragically, she didn't live to see his capture. This book is part true crime investigation, part memoir of obsession, and part tribute to the victims whose stories she refused to let fade.",
+    review: `What sets this book apart from standard true crime is McNamara's literary approach. She writes with genuine empathy for victims while maintaining the rigor of investigative journalism. Her chapters on individual survivors are devastating and necessary—she gives names and stories to people often reduced to statistics.
+
+The book is also remarkably prescient about genetic genealogy, the technique that would ultimately identify Joseph DeAngelo. McNamara understood before most that DNA databases held the key to cold cases.
+
+Published posthumously (McNamara died in 2016), the book was completed by her husband Patton Oswalt and researchers Paul Haynes and Billy Jensen. The seams occasionally show, but the core work represents true crime writing at its finest—compassionate, rigorous, and purposeful.`,
+    verdict: "Essential reading for anyone interested in cold cases, victim-centered true crime, or the Golden State Killer case. A model for how to write about violence with both rigor and humanity.",
+    accuracy: "Excellent. McNamara's research was meticulous, and the book's conclusions were largely validated by DeAngelo's arrest.",
+    tags: ["cold case", "victim-centered", "literary true crime"]
+  },
+  {
+    id: "mindhunter-book",
+    title: "Mindhunter: Inside the FBI's Elite Serial Crime Unit",
+    type: "book",
+    author: "John Douglas & Mark Olshaker",
+    year: "1995",
+    rating: 4,
+    subject: "FBI Profiling / Multiple Cases",
+    summary: "John Douglas's memoir of developing criminal profiling at the FBI, including his interviews with killers like Ed Kemper, Charles Manson, and Richard Speck. The book that launched the modern public fascination with profiling.",
+    review: `Mindhunter offers an insider's view of how behavioral profiling evolved from an experimental technique to a standard investigative tool. Douglas's case studies—from the Atlanta Child Murders to the Green River Killer—demonstrate how profiling can direct investigations and how it sometimes fails.
+
+The book is compelling but should be read critically. Douglas writes himself as more central to cases than documentation sometimes supports. The certainty he expresses about profiling techniques has been challenged by subsequent research showing profiling's limitations.
+
+That said, the interviews with convicted killers remain valuable primary sources. Douglas's conversations with Ed Kemper are particularly chilling and informative. For understanding how investigators think about serial crime, this remains a foundational text.`,
+    verdict: "Important historical document for understanding FBI behavioral science, but readers should supplement with more critical analyses of profiling's actual effectiveness.",
+    accuracy: "Mostly accurate on cases, though Douglas's self-presentation and profiling's efficacy are sometimes overstated.",
+    tags: ["FBI", "profiling", "memoir", "foundational text"]
+  },
+  {
+    id: "monster-dahmer-netflix",
+    title: "Monster: The Jeffrey Dahmer Story",
+    type: "documentary",
+    author: "Netflix / Ryan Murphy",
+    year: "2022",
+    rating: 3,
+    subject: "Jeffrey Dahmer",
+    summary: "Netflix's dramatized series on Jeffrey Dahmer, starring Evan Peters. The show attempts to center victim experiences but generated significant controversy over its approach and its impact on victims' families.",
+    review: `The series makes genuine efforts to humanize Dahmer's victims and criticize the systemic failures that enabled his crimes—particularly the police's dismissal of Glenda Cleveland's concerns and their return of Konerak Sinthasomphone to Dahmer.
+
+However, the show's approach raises ethical questions. Victims' families weren't consulted and expressed distress at reliving trauma without consent. The dramatization inevitably turns real suffering into entertainment, regardless of intent.
+
+Evan Peters's portrayal is technically impressive but contributes to true crime's tendency to make killers fascinating while victims remain abstractions. Despite episodes dedicated to victims, Dahmer remains the center of the narrative.
+
+The show sparked important conversations about true crime ethics and victim exploitation. Whether that justifies the show's existence is a question viewers must answer for themselves.`,
+    verdict: "Technically well-made with some genuine attempts at victim-centered storytelling, but the ethics of dramatizing these events without family consent remain troubling.",
+    accuracy: "Generally accurate on major events, with some timeline compression and composite characters. The Glenda Cleveland and Konerak Sinthasomphone sequences are largely factual.",
+    tags: ["dramatization", "controversial", "victim stories", "systemic failure"]
+  },
+  {
+    id: "the-stranger-beside-me",
+    title: "The Stranger Beside Me",
+    type: "book",
+    author: "Ann Rule",
+    year: "1980",
+    rating: 5,
+    subject: "Ted Bundy",
+    summary: "Ann Rule's unique account of Ted Bundy—a man she knew personally before his crimes were discovered. Part true crime, part memoir of a horrifying realization.",
+    review: `No other true crime book offers this perspective: Rule worked alongside Bundy at a suicide hotline and considered him a friend. Her gradual recognition that her charming colleague was a serial killer gives this book an authenticity impossible to replicate.
+
+Rule writes as someone who liked Bundy, who trusted him, who is still processing the cognitive dissonance. This makes the book invaluable for understanding how charm and manipulation function. Bundy fooled someone trained in psychology who was literally researching serial killers.
+
+Updated editions include Bundy's final confessions, making this the most comprehensive single volume on his crimes. Rule's professionalism as a former police officer shows in her meticulous case documentation.`,
+    verdict: "The definitive Bundy book and one of the greatest true crime works ever written. Essential for understanding the banality of evil and how predators hide in plain sight.",
+    accuracy: "Highly accurate. Rule's law enforcement background and personal access gave her unparalleled sourcing.",
+    tags: ["personal account", "classic true crime", "essential reading"]
+  },
+  {
+    id: "making-a-murderer",
+    title: "Making a Murderer",
+    type: "documentary",
+    author: "Netflix / Laura Ricciardi & Moira Demos",
+    year: "2015",
+    rating: 4,
+    subject: "Steven Avery / Teresa Halbach Case",
+    summary: "The documentary that launched Netflix's true crime era, following Steven Avery's case from his wrongful conviction exoneration through his subsequent murder trial.",
+    review: `Making a Murderer is compelling television that raised important questions about the criminal justice system, evidence handling, and the reliability of confessions. The filmmakers' access over a decade produced an intimate portrait of the Avery family and the legal process.
+
+However, the series has been criticized for omitting evidence that supported Avery's guilt, creating a narrative more sympathetic to the defense than a balanced presentation would support. Viewers should research the full case, including evidence not shown.
+
+The series also struggles with Teresa Halbach's representation—she becomes almost incidental to a story about her alleged killer. This is a recurring true crime problem: victim as catalyst rather than person.
+
+Despite these issues, the documentary raised legitimate concerns about Brendan Dassey's interrogation and confession, leading to ongoing legal challenges.`,
+    verdict: "Groundbreaking documentary that shaped true crime media, but viewers should seek additional sources for a complete picture. Better as a study in narrative construction than definitive case analysis.",
+    accuracy: "Accurate in what it shows, but significant omissions create a misleading overall picture. Supplementary research essential.",
+    tags: ["wrongful conviction", "controversial", "justice system", "influential"]
+  },
+  {
+    id: "helter-skelter",
+    title: "Helter Skelter: The True Story of the Manson Murders",
+    type: "book",
+    author: "Vincent Bugliosi & Curt Gentry",
+    year: "1974",
+    rating: 4,
+    subject: "Charles Manson / Tate-LaBianca Murders",
+    summary: "Prosecutor Vincent Bugliosi's account of the Manson Family murders and trial, the best-selling true crime book of all time.",
+    review: `Helter Skelter established the template for prosecutor-authored true crime: methodical case construction, insider access to investigation and trial, and authoritative tone. Bugliosi's narrative of building the case against Manson remains compelling decades later.
+
+The book excels at explaining the complexity of prosecuting a conspiracy case where the leader didn't personally commit the murders. Bugliosi's legal strategy—using the "Helter Skelter" race war motive—is presented in detail.
+
+Critics note Bugliosi presents his theories as more certain than evidence supported, and subsequent research has complicated the Helter Skelter narrative. Some evidence suggests the murders may have had different motivations than Bugliosi argued.
+
+Despite these caveats, the book remains essential for understanding the Manson case and the intersection of the counterculture era with violent crime.`,
+    verdict: "A true crime landmark that shaped the genre, though readers should supplement with newer scholarship that complicates Bugliosi's narrative.",
+    accuracy: "Accurate on trial facts but Bugliosi's motive theory has been challenged by subsequent research.",
+    tags: ["classic true crime", "prosecutor account", "1960s", "cult"]
+  },
+  {
+    id: "evil-genius",
+    title: "Evil Genius: The True Story of America's Most Diabolical Bank Heist",
+    type: "documentary",
+    author: "Netflix / Trey Borzillieri & Barbara Schroeder",
+    year: "2018",
+    rating: 4,
+    subject: "Pizza Bomber Case / Brian Wells",
+    summary: "Documentary series on the bizarre 2003 'pizza bomber' case, where a man robbed a bank with a bomb locked around his neck—a bomb that detonated, killing him.",
+    review: `Evil Genius unfolds like fiction: a bank robbery, a bomb collar, a dead deliveryman, and a conspiracy involving con artists, murder, and frozen body parts. The documentary wisely lets the story's inherent strangeness carry the narrative.
+
+The series examines whether Brian Wells was a victim or participant, eventually revealing a conspiracy more elaborate than initial appearances suggested. Marjorie Diehl-Armstrong emerges as a terrifying figure whose manipulation shaped multiple lives and deaths.
+
+The documentary handles Wells's death footage respectfully while not shying from the horror of his final moments. It raises uncomfortable questions about his possible complicity without definitively resolving them.
+
+The pacing occasionally drags, but the patience allows for complexity. This isn't a simple story, and the documentary honors that complexity.`,
+    verdict: "A genuinely strange true crime story told with appropriate care. One of Netflix's better documentary series.",
+    accuracy: "Thorough and well-sourced, with appropriate acknowledgment of remaining uncertainties.",
+    tags: ["bizarre case", "conspiracy", "well-made", "Netflix"]
+  },
+  {
+    id: "devil-in-white-city",
+    title: "The Devil in the White City",
+    type: "book",
+    author: "Erik Larson",
+    year: "2003",
+    rating: 5,
+    subject: "H.H. Holmes / 1893 Chicago World's Fair",
+    summary: "Erik Larson's narrative history interweaving the construction of the 1893 Chicago World's Fair with the crimes of serial killer H.H. Holmes.",
+    review: `Larson's genius is recognizing that Holmes's story and the World's Fair are the same story—both about the possibilities and dangers of the Gilded Age, about ambition and exploitation, about facades concealing rot.
+
+The World's Fair sections are as compelling as the murder chapters. Larson makes you understand why Holmes chose this moment and place: a city bursting with newcomers, a fair drawing young women seeking opportunity, a boom time when verification failed and reinvention was easy.
+
+The book is meticulously researched—Larson works only from primary sources—and beautifully written. It reads like a novel while maintaining historical rigor. The parallel structure builds to an inevitably tragic convergence.
+
+Some historians note that Holmes's actual victim count is much debated and likely lower than legend suggests. Larson acknowledges uncertainties while telling the story.`,
+    verdict: "A masterpiece of narrative nonfiction that elevates true crime to literature. Essential reading.",
+    accuracy: "Excellent historical research, though Holmes's victim count remains disputed among historians.",
+    tags: ["literary true crime", "historical", "essential reading", "Chicago"]
+  }
+];
+
+const types = [...new Set(reviews.map(r => r.type))];
+---
+
+<BaseLayout
+  title="Book & Documentary Reviews"
+  description="Critical reviews of true crime books and documentaries, evaluating accuracy, ethics, and value for researchers and general readers."
+>
+  <section class="py-12">
+    <div class="container max-w-4xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Book & Documentary Reviews</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        Critical assessments of true crime media. We evaluate not just entertainment value,
+        but accuracy, ethics, and how well each work treats victims and their families.
+      </p>
+
+      <div class="mb-8 p-4 bg-fd-card rounded-lg">
+        <p class="text-sm text-fd-muted">
+          <strong class="text-fd-text">Our Review Philosophy:</strong> We prioritize accuracy,
+          victim-centered storytelling, and ethical considerations. High production value
+          doesn't excuse exploitation. We note when works sensationalize or omit important context.
+        </p>
+      </div>
+
+      <!-- Filter -->
+      <div class="mb-8 flex gap-2">
+        <button class="filter-btn active px-4 py-2 bg-amber text-noir-bg rounded text-sm font-medium" data-filter="all">
+          All
+        </button>
+        <button class="filter-btn px-4 py-2 bg-noir-elevated text-fd-text rounded text-sm hover:bg-amber/20" data-filter="book">
+          Books
+        </button>
+        <button class="filter-btn px-4 py-2 bg-noir-elevated text-fd-text rounded text-sm hover:bg-amber/20" data-filter="documentary">
+          Documentaries
+        </button>
+      </div>
+
+      <!-- Reviews -->
+      <div class="space-y-8" id="reviews-container">
+        {reviews.map(review => (
+          <article
+            id={review.id}
+            class="review-card bg-fd-card rounded-lg overflow-hidden scroll-mt-24"
+            data-type={review.type}
+          >
+            <div class="p-6">
+              <div class="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class={`px-2 py-0.5 text-xs font-mono uppercase rounded ${
+                      review.type === 'book' ? 'bg-amber/20 text-amber' : 'bg-oxide/20 text-oxide-bright'
+                    }`}>
+                      {review.type}
+                    </span>
+                    <span class="text-fd-muted text-sm">{review.year}</span>
+                  </div>
+                  <h2 class="text-xl font-display font-bold">{review.title}</h2>
+                  <p class="text-fd-muted text-sm">
+                    {review.type === 'book' ? `by ${review.author}` : review.author}
+                  </p>
+                </div>
+                <div class="flex items-center gap-1">
+                  {[...Array(5)].map((_, i) => (
+                    <span class={`text-lg ${i < review.rating ? 'text-amber' : 'text-noir-border'}`}>
+                      ★
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <span class="text-xs font-semibold text-fd-muted uppercase tracking-wide">Subject: </span>
+                <span class="text-sm text-fd-text">{review.subject}</span>
+              </div>
+
+              <p class="text-fd-muted mb-4 italic">{review.summary}</p>
+
+              <details class="group">
+                <summary class="cursor-pointer text-amber hover:text-amber-bright text-sm font-medium">
+                  Read full review
+                </summary>
+                <div class="mt-4 space-y-4">
+                  <div class="prose prose-invert max-w-none">
+                    {review.review.split('\n\n').map(para => (
+                      <p class="text-fd-muted leading-relaxed mb-4">{para}</p>
+                    ))}
+                  </div>
+
+                  <div class="p-4 bg-noir-surface rounded-lg space-y-3">
+                    <div>
+                      <h4 class="text-xs font-semibold text-fd-muted uppercase tracking-wide mb-1">Verdict</h4>
+                      <p class="text-fd-text text-sm">{review.verdict}</p>
+                    </div>
+                    <div>
+                      <h4 class="text-xs font-semibold text-fd-muted uppercase tracking-wide mb-1">Accuracy Assessment</h4>
+                      <p class="text-fd-muted text-sm">{review.accuracy}</p>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-2">
+                    {review.tags.map(tag => (
+                      <span class="px-2 py-1 bg-noir-elevated text-fd-muted text-xs rounded">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </details>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Submit Review -->
+      <section class="mt-12 p-6 bg-noir-surface border border-noir-border rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4">Suggest a Review</h2>
+        <p class="text-fd-muted mb-4">
+          Know of a book or documentary we should review? We prioritize works that are:
+        </p>
+        <ul class="text-sm text-fd-muted list-disc list-inside mb-4 space-y-1">
+          <li>Well-researched and accurate</li>
+          <li>Respectful of victims and families</li>
+          <li>Offer genuine insight rather than sensationalism</li>
+          <li>Fill gaps in available true crime coverage</li>
+        </ul>
+        <a href={`${baseUrl}contact`} class="btn btn-primary inline-flex">
+          Suggest a Review
+        </a>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const reviewCards = document.querySelectorAll('.review-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'bg-amber', 'text-noir-bg');
+          b.classList.add('bg-noir-elevated', 'text-fd-text');
+        });
+        btn.classList.add('active', 'bg-amber', 'text-noir-bg');
+        btn.classList.remove('bg-noir-elevated', 'text-fd-text');
+
+        // Filter cards
+        reviewCards.forEach(card => {
+          const type = card.getAttribute('data-type');
+          if (filter === 'all' || type === filter) {
+            (card as HTMLElement).style.display = '';
+          } else {
+            (card as HTMLElement).style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

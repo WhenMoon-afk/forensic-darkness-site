@@ -5,6 +5,8 @@ import Breadcrumb from '../components/Breadcrumb.astro';
 import RelatedPosts from '../components/RelatedPosts.astro';
 import TableOfContents from '../components/TableOfContents.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
+import CitationGenerator from '../components/CitationGenerator.astro';
+import ContentIntensity from '../components/ContentIntensity.astro';
 
 interface Heading {
   depth: number;
@@ -24,9 +26,11 @@ interface Props {
   headings?: Heading[];
   prevPost?: { title: string; slug: string };
   nextPost?: { title: string; slug: string };
+  intensity?: 1 | 2 | 3 | 4 | 5;
+  contentWarnings?: ('violence' | 'graphic' | 'psychological' | 'sexual' | 'child')[];
 }
 
-const { title, description, date, author, tags, image, wordCount, slug, headings = [], prevPost, nextPost } = Astro.props;
+const { title, description, date, author, tags, image, wordCount, slug, headings = [], prevPost, nextPost, intensity, contentWarnings } = Astro.props;
 
 // Base URL for asset paths
 const baseUrl = import.meta.env.BASE_URL;
@@ -136,6 +140,11 @@ if (image) {
       <!-- Content Warning -->
       <ContentWarning type="disturbing" />
 
+      <!-- Content Intensity Indicator -->
+      {intensity && (
+        <ContentIntensity level={intensity} categories={contentWarnings} />
+      )}
+
       <!-- Table of Contents -->
       <TableOfContents headings={headings} />
 
@@ -143,6 +152,13 @@ if (image) {
       <div class="prose-dark">
         <slot />
       </div>
+
+      <!-- Citation Generator -->
+      <CitationGenerator
+        title={title}
+        author={author}
+        date={date}
+      />
 
       <!-- Footer -->
       <footer class="mt-12 pt-8 border-t border-noir-border">

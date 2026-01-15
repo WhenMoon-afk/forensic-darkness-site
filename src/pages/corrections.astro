@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Corrections Policy"
+  description="Our commitment to accuracy and how we handle corrections to published content on Forensic Darkness."
+>
+  <section class="py-12">
+    <div class="container max-w-3xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Corrections Policy</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        Accuracy matters, especially when discussing serious topics like violent crime
+        and victim experiences. We are committed to getting the facts right and
+        correcting errors promptly when they occur.
+      </p>
+
+      <div class="prose prose-invert max-w-none">
+        <section class="mb-10">
+          <h2 class="text-2xl font-display font-bold mb-4">Our Commitment</h2>
+          <p class="text-fd-muted leading-relaxed mb-4">
+            Forensic Darkness strives for accuracy in all published content. We research
+            thoroughly, cite reputable sources, and verify facts before publication.
+            However, we recognize that errors can occur. When they do, we believe in
+            transparency and prompt correction.
+          </p>
+          <p class="text-fd-muted leading-relaxed">
+            We owe this to our readers, to the victims and families we write about,
+            and to the integrity of the educational mission we pursue.
+          </p>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="text-2xl font-display font-bold mb-4">Types of Corrections</h2>
+
+          <div class="space-y-6">
+            <div class="p-4 bg-fd-card rounded-lg">
+              <h3 class="font-semibold mb-2">Minor Corrections</h3>
+              <p class="text-fd-muted text-sm">
+                Typos, grammatical errors, broken links, and minor factual errors that
+                do not substantially change the meaning or conclusions of an article.
+                These are corrected silently in most cases.
+              </p>
+            </div>
+
+            <div class="p-4 bg-fd-card rounded-lg">
+              <h3 class="font-semibold mb-2">Significant Corrections</h3>
+              <p class="text-fd-muted text-sm">
+                Errors in dates, names, victim counts, case details, or other facts
+                that materially affect the accuracy of the content. These corrections
+                are noted at the end of the article with an explanation of what was changed.
+              </p>
+            </div>
+
+            <div class="p-4 bg-fd-card rounded-lg">
+              <h3 class="font-semibold mb-2">Major Corrections & Retractions</h3>
+              <p class="text-fd-muted text-sm">
+                Fundamental errors that undermine the premise or conclusions of an article,
+                or content that should not have been published. These warrant prominent
+                correction notices at the top of articles or, in extreme cases, retraction
+                of the entire piece with explanation.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="text-2xl font-display font-bold mb-4">Correction Format</h2>
+          <p class="text-fd-muted leading-relaxed mb-4">
+            When we issue a correction, we include:
+          </p>
+          <ul class="list-disc list-inside text-fd-muted space-y-2 mb-4">
+            <li>The date of the correction</li>
+            <li>A clear description of what was incorrect</li>
+            <li>The accurate information</li>
+            <li>An explanation if context is needed</li>
+          </ul>
+          <div class="p-4 bg-noir-surface border border-noir-border rounded-lg">
+            <p class="text-sm text-fd-muted italic">
+              <strong>Example:</strong> "Correction (January 15, 2025): An earlier version
+              of this article stated that John Doe was arrested in 1985. He was actually
+              arrested in 1987. The article has been updated to reflect this."
+            </p>
+          </div>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="text-2xl font-display font-bold mb-4">How to Report Errors</h2>
+          <p class="text-fd-muted leading-relaxed mb-4">
+            If you believe we have published inaccurate information, please contact us:
+          </p>
+          <ul class="list-disc list-inside text-fd-muted space-y-2 mb-4">
+            <li>Use our <a href={`${baseUrl}contact`} class="text-amber hover:text-amber-bright">contact form</a></li>
+            <li>Include the article title and URL</li>
+            <li>Specify the error you've identified</li>
+            <li>Provide sources for the correct information if available</li>
+          </ul>
+          <p class="text-fd-muted leading-relaxed">
+            We review all correction requests promptly. If we determine a correction is
+            warranted, we will update the content and note the correction as appropriate.
+          </p>
+        </section>
+
+        <section class="mb-10">
+          <h2 class="text-2xl font-display font-bold mb-4">Requests from Families</h2>
+          <p class="text-fd-muted leading-relaxed mb-4">
+            We give special attention to concerns raised by victims' families and
+            survivors. If you are a family member or survivor and have concerns about
+            how we have portrayed your loved one or your experience, please contact us.
+            We are committed to treating victims with dignity and will work with families
+            to address legitimate concerns.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-display font-bold mb-4">Update Log</h2>
+          <p class="text-fd-muted leading-relaxed mb-4">
+            Major corrections and updates are logged here for transparency.
+          </p>
+          <div class="p-4 bg-fd-card rounded-lg">
+            <p class="text-fd-muted text-sm italic">
+              No major corrections have been issued to date.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

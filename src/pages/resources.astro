@@ -1,6 +1,59 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const baseUrl = import.meta.env.BASE_URL;
+
+const siteResources = [
+  {
+    title: "Know the Signs",
+    href: "safety-signs",
+    description: "Recognize warning signs of predatory behavior, domestic violence, stalking, and child predators.",
+    icon: "warning"
+  },
+  {
+    title: "Cold Case Spotlight",
+    href: "cold-cases",
+    description: "Featured unsolved cases that need public attention. Information on how to submit tips.",
+    icon: "search"
+  },
+  {
+    title: "Survivor Stories",
+    href: "survivor-stories",
+    description: "First-person accounts from survivors of violent crime, shared with permission to help others.",
+    icon: "heart"
+  },
+  {
+    title: "Case Database",
+    href: "case-database",
+    description: "Searchable database of serial killer cases covered on Forensic Darkness.",
+    icon: "database"
+  },
+  {
+    title: "Forensic Glossary",
+    href: "glossary",
+    description: "Definitions of forensic science, legal, and psychological terms used in true crime coverage.",
+    icon: "book"
+  },
+  {
+    title: "Forensic Science Explainers",
+    href: "forensic-explainers",
+    description: "Educational deep-dives into DNA analysis, criminal profiling, digital forensics, and more.",
+    icon: "science"
+  },
+  {
+    title: "Book & Documentary Reviews",
+    href: "reviews",
+    description: "Critical assessments of true crime media, evaluating accuracy, ethics, and value.",
+    icon: "star"
+  },
+  {
+    title: "Research Bibliography",
+    href: "bibliography",
+    description: "Curated academic sources for serial murder, forensic science, and victimology research.",
+    icon: "library"
+  }
+];
+
 const resources = [
   {
     category: 'Crime Victim Support',
@@ -141,12 +194,36 @@ const resources = [
         </div>
       </div>
 
+      <!-- Site Resources -->
+      <div class="mb-12">
+        <h2 class="text-2xl font-display font-bold mb-6 pb-2 border-b border-noir-border">
+          Forensic Darkness Resources
+        </h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {siteResources.map(resource => (
+            <a
+              href={`${baseUrl}${resource.href}`}
+              class="card hover:border-amber transition-colors group p-4"
+            >
+              <h3 class="font-display font-bold mb-2 group-hover:text-amber text-sm">
+                {resource.title}
+              </h3>
+              <p class="text-xs text-fd-muted">{resource.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <h2 class="text-2xl font-display font-bold mb-6 pb-2 border-b border-noir-border">
+        External Support Resources
+      </h2>
+
       <div class="grid gap-8">
         {resources.map(section => (
           <div>
-            <h2 class="text-2xl font-display font-bold mb-4 pb-2 border-b border-noir-border">
+            <h3 class="text-xl font-display font-bold mb-4 pb-2 border-b border-noir-border/50">
               {section.category}
-            </h2>
+            </h3>
             <div class="grid md:grid-cols-2 gap-4">
               {section.items.map(resource => (
                 <a

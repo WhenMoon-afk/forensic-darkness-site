@@ -1,0 +1,108 @@
+---
+interface Props {
+  title: string;
+  author?: string;
+  date: Date | string;
+  url?: string;
+}
+
+const { title, author = "Forensic Darkness", date, url } = Astro.props;
+
+// Format date
+const pubDate = date instanceof Date ? date : new Date(date);
+const year = pubDate.getFullYear();
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const month = monthNames[pubDate.getMonth()];
+const day = pubDate.getDate();
+
+// ISO date for schema
+const isoDate = pubDate.toISOString().split('T')[0];
+
+// Current date for access date
+const accessDate = new Date();
+const accessMonth = monthNames[accessDate.getMonth()];
+const accessDay = accessDate.getDate();
+const accessYear = accessDate.getFullYear();
+---
+
+<div class="citation-generator mt-8 p-4 bg-noir-surface border border-noir-border rounded-lg">
+  <div class="flex items-center justify-between mb-3">
+    <h3 class="text-sm font-semibold">Cite This Article</h3>
+    <div class="flex gap-2">
+      <button class="citation-format-btn active px-2 py-1 text-xs bg-amber text-noir-bg rounded" data-format="apa">APA</button>
+      <button class="citation-format-btn px-2 py-1 text-xs bg-noir-elevated text-fd-muted rounded hover:bg-amber/20" data-format="mla">MLA</button>
+      <button class="citation-format-btn px-2 py-1 text-xs bg-noir-elevated text-fd-muted rounded hover:bg-amber/20" data-format="chicago">Chicago</button>
+    </div>
+  </div>
+
+  <div class="citation-text text-sm text-fd-muted font-mono p-3 bg-noir-elevated rounded select-all" id="citation-output">
+    <!-- Default APA format -->
+    {author}. ({year}, {month} {day}). {title}. <em>Forensic Darkness</em>. Retrieved {accessMonth} {accessDay}, {accessYear}
+  </div>
+
+  <button class="copy-citation mt-3 px-3 py-1.5 text-xs bg-fd-card border border-noir-border rounded hover:border-amber transition-colors flex items-center gap-2">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>
+    <span>Copy Citation</span>
+  </button>
+</div>
+
+<script define:vars={{ title, author, year, month, day, accessMonth, accessDay, accessYear }}>
+  document.addEventListener('DOMContentLoaded', () => {
+    const formatBtns = document.querySelectorAll('.citation-format-btn');
+    const output = document.getElementById('citation-output');
+    const copyBtn = document.querySelector('.copy-citation');
+
+    const citations = {
+      apa: `${author}. (${year}, ${month} ${day}). ${title}. <em>Forensic Darkness</em>. Retrieved ${accessMonth} ${accessDay}, ${accessYear}`,
+      mla: `${author}. "${title}." <em>Forensic Darkness</em>, ${day} ${month} ${year}. Accessed ${accessDay} ${accessMonth} ${accessYear}.`,
+      chicago: `${author}. "${title}." <em>Forensic Darkness</em>. ${month} ${day}, ${year}. Accessed ${accessMonth} ${accessDay}, ${accessYear}.`
+    };
+
+    const plainCitations = {
+      apa: `${author}. (${year}, ${month} ${day}). ${title}. Forensic Darkness. Retrieved ${accessMonth} ${accessDay}, ${accessYear}`,
+      mla: `${author}. "${title}." Forensic Darkness, ${day} ${month} ${year}. Accessed ${accessDay} ${accessMonth} ${accessYear}.`,
+      chicago: `${author}. "${title}." Forensic Darkness. ${month} ${day}, ${year}. Accessed ${accessMonth} ${accessDay}, ${accessYear}.`
+    };
+
+    let currentFormat = 'apa';
+
+    formatBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const format = btn.getAttribute('data-format');
+        currentFormat = format;
+
+        // Update active state
+        formatBtns.forEach(b => {
+          b.classList.remove('active', 'bg-amber', 'text-noir-bg');
+          b.classList.add('bg-noir-elevated', 'text-fd-muted');
+        });
+        btn.classList.add('active', 'bg-amber', 'text-noir-bg');
+        btn.classList.remove('bg-noir-elevated', 'text-fd-muted');
+
+        // Update citation
+        if (output) {
+          output.innerHTML = citations[format];
+        }
+      });
+    });
+
+    copyBtn?.addEventListener('click', async () => {
+      const text = plainCitations[currentFormat];
+      try {
+        await navigator.clipboard.writeText(text);
+        const span = copyBtn.querySelector('span');
+        if (span) {
+          const original = span.textContent;
+          span.textContent = 'Copied!';
+          setTimeout(() => {
+            span.textContent = original;
+          }, 2000);
+        }
+      } catch (err) {
+        console.error('Failed to copy:', err);
+      }
+    });
+  });
+</script>

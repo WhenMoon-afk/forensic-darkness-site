@@ -1,0 +1,87 @@
+---
+interface Props {
+  level: 1 | 2 | 3 | 4 | 5;
+  categories?: ('violence' | 'graphic' | 'psychological' | 'sexual' | 'child')[];
+}
+
+const { level, categories = [] } = Astro.props;
+
+const levels = {
+  1: {
+    label: "General",
+    description: "Suitable for general audiences. Discusses crimes without graphic detail.",
+    color: "bg-green-500/20 text-green-400 border-green-500/30"
+  },
+  2: {
+    label: "Moderate",
+    description: "Some mature themes. Violence discussed but not graphically described.",
+    color: "bg-amber/20 text-amber border-amber/30"
+  },
+  3: {
+    label: "Mature",
+    description: "Contains detailed descriptions of violence or disturbing themes.",
+    color: "bg-orange-500/20 text-orange-400 border-orange-500/30"
+  },
+  4: {
+    label: "Intense",
+    description: "Graphic content including detailed violence or disturbing imagery.",
+    color: "bg-red-500/20 text-red-400 border-red-500/30"
+  },
+  5: {
+    label: "Extreme",
+    description: "Highly graphic content. Reader discretion strongly advised.",
+    color: "bg-red-700/30 text-red-300 border-red-700/50"
+  }
+};
+
+const categoryLabels = {
+  violence: "Violence",
+  graphic: "Graphic Details",
+  psychological: "Psychological",
+  sexual: "Sexual Content",
+  child: "Child Victims"
+};
+
+const currentLevel = levels[level];
+---
+
+<div class="content-intensity mb-6">
+  <div class={`inline-flex items-center gap-3 px-3 py-2 rounded border ${currentLevel.color}`}>
+    <div class="flex items-center gap-1.5">
+      <span class="text-xs font-mono uppercase tracking-wide">Intensity:</span>
+      <div class="flex gap-0.5">
+        {[1, 2, 3, 4, 5].map(i => (
+          <div
+            class={`w-2 h-4 rounded-sm ${i <= level ? 'bg-current' : 'bg-noir-border'}`}
+          />
+        ))}
+      </div>
+      <span class="text-sm font-semibold ml-1">{currentLevel.label}</span>
+    </div>
+  </div>
+
+  {categories.length > 0 && (
+    <div class="flex flex-wrap gap-1.5 mt-2">
+      <span class="text-xs text-fd-muted">Contains:</span>
+      {categories.map(cat => (
+        <span class="px-1.5 py-0.5 text-xs bg-noir-elevated text-fd-muted rounded">
+          {categoryLabels[cat]}
+        </span>
+      ))}
+    </div>
+  )}
+
+  <details class="mt-2">
+    <summary class="text-xs text-fd-muted cursor-pointer hover:text-fd-text">
+      What do intensity levels mean?
+    </summary>
+    <div class="mt-2 p-3 bg-noir-surface rounded text-xs space-y-2">
+      {Object.entries(levels).map(([lvl, info]) => (
+        <div class="flex gap-2">
+          <span class={`font-semibold ${info.color.split(' ')[1]}`}>{info.label}:</span>
+          <span class="text-fd-muted">{info.description}</span>
+        </div>
+      ))}
+    </div>
+  </details>
+</div>

@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const stories = [
+  {
+    id: "maria",
+    name: "Maria",
+    type: "Domestic Violence Survivor",
+    quote: "For years I thought I was the only one. I thought it was my fault. Learning that my experience was part of a pattern—that there was a name for what he did—was the first step toward freedom.",
+    story: `I met him when I was 22. He was charming, attentive, everything I thought I wanted. The changes were so gradual I didn't see them happening. First, he didn't like my friends. Then he needed to know where I was at all times. Then the first time he grabbed my arm hard enough to bruise.
+
+Each incident had an explanation. Each was followed by apologies, by promises, by being the man I'd fallen in love with again. I kept thinking if I just tried harder, if I just didn't make him angry, things would be okay.
+
+It took me seven years to leave. Seven years of escalating violence, of isolation from everyone who cared about me, of believing his voice in my head that told me I deserved it, that no one else would want me, that I couldn't survive alone.
+
+The turning point came when I found a website—not unlike this one—that described the cycle of abuse. Reading those patterns was like reading a script of my life. For the first time, I understood that what was happening to me had a name, and that it wasn't my fault.
+
+I'm sharing this because someone reading needs to know: you are not alone. What's happening to you is not normal, not love, and not your fault. And you can survive leaving. It's the hardest thing I've ever done, but five years later, I'm alive. I'm free. I'm me again.`,
+    resources: ["National Domestic Violence Hotline: 1-800-799-7233"]
+  },
+  {
+    id: "james",
+    name: "James",
+    type: "Child of a Homicide Victim",
+    quote: "People don't talk about what happens after. The investigation, the trial, the media—and then everyone moves on except you. Learning to carry grief without being consumed by it took years.",
+    story: `My mother was murdered when I was sixteen. The details aren't important for this story—what matters is what came after.
+
+In the immediate aftermath, there was chaos. Police, questions, well-meaning relatives making decisions for us. My father was a suspect for weeks until evidence cleared him. I learned what it meant to grieve while being investigated, to bury your mother while reporters called the house.
+
+The trial came two years later. I sat in that courtroom and heard details no child should know about their parent's death. I watched the man who killed her, tried to understand something that can't be understood. The verdict was guilty. Justice, people said.
+
+But justice doesn't bring her back. Justice doesn't fill the empty chair at graduation, at my wedding, at the birth of my children. Justice is a word for the legal system. It's not a word for grief.
+
+What helped me was finding others who understood—support groups for families of homicide victims, therapists who specialized in violent crime trauma. Learning that my complicated feelings—the rage, the guilt, the inability to move on when everyone expected me to—were normal.
+
+Twenty years later, I still miss her every day. But I've learned that grief and life can coexist. I've learned that honoring her memory means living fully, not being consumed by how she died.
+
+To anyone walking this road: the pain doesn't go away, but it does change. Seek help. Connect with others who understand. And know that surviving is not betraying those we've lost.`,
+    resources: ["Parents of Murdered Children: pomc.org", "Victim Connect: 1-855-484-2846"]
+  },
+  {
+    id: "sarah",
+    name: "Sarah",
+    type: "Stalking Survivor",
+    quote: "He didn't need to touch me to terrorize me. For two years, I was a prisoner in my own life, always looking over my shoulder. Recovery meant reclaiming my sense of safety one small step at a time.",
+    story: `It started after I ended a three-month relationship. I thought he was just having trouble accepting the breakup. I didn't realize I was being stalked until I was deep in it.
+
+First came the constant texts and calls—dozens a day. Then showing up at my work, my gym, my mother's house. Then the "gifts" left on my car. Then the messages from fake accounts after I blocked his real ones. Then the feeling that someone was always watching.
+
+I went to the police. They were sympathetic but said there wasn't much they could do until he did something "actionable." I learned that the law often fails stalking victims—that the behaviors that terrorize us aren't always illegal until they escalate to violence.
+
+I documented everything. I changed my routines, my phone number, eventually my job. I lived in a state of hypervigilance that exhausted me physically and mentally. I was afraid to date, afraid to make new friends, afraid to exist normally because normal felt dangerous.
+
+After two years, he finally moved on to someone else. (I carry guilt about that—did my escape just transfer my nightmare to another woman?) The stalking stopped, but the effects didn't. I still check my mirrors obsessively. I still feel panic when I see someone who looks like him.
+
+Recovery is ongoing. Therapy helps. Support groups help. Time helps, though less than people think. What I want others to know is that stalking is real, it's terrifying, and you're not overreacting. Document everything. Tell people. And know that the fear doesn't make you weak—surviving it makes you strong.`,
+    resources: ["Stalking Prevention Center: stalkingawareness.org", "Safety planning resources available at our Resources page"]
+  }
+];
+---
+
+<BaseLayout
+  title="Survivor Stories"
+  description="First-person accounts from survivors of violent crime and their families. Shared with permission to provide hope and connection for others on similar journeys."
+>
+  <section class="py-12">
+    <div class="container max-w-3xl">
+      <h1 class="text-4xl font-display font-bold mb-4">Survivor Stories</h1>
+      <p class="text-fd-muted text-lg mb-8">
+        These stories are shared by survivors who want others to know they're not alone.
+        Each person has given permission to share their experience in hopes of helping
+        someone on a similar journey.
+      </p>
+
+      <div class="mb-8 p-4 bg-oxide/10 border border-oxide/30 rounded-lg">
+        <p class="text-sm text-oxide-bright">
+          <strong>Content Warning:</strong> These stories contain descriptions of violence,
+          abuse, and trauma. Please prioritize your own wellbeing. If you need immediate
+          support, contact the <a href="tel:988" class="underline">988 Suicide & Crisis Lifeline</a>
+          or the <a href="tel:1-800-799-7233" class="underline">National Domestic Violence Hotline</a>.
+        </p>
+      </div>
+
+      <!-- Stories -->
+      <div class="space-y-12">
+        {stories.map(story => (
+          <article id={story.id} class="scroll-mt-24">
+            <div class="mb-4">
+              <span class="evidence-tag">{story.type}</span>
+            </div>
+
+            <blockquote class="text-xl text-fd-text font-display italic mb-6 pl-4 border-l-4 border-amber">
+              "{story.quote}"
+              <footer class="text-sm text-fd-muted mt-2 not-italic">— {story.name}</footer>
+            </blockquote>
+
+            <div class="prose prose-invert max-w-none">
+              {story.story.split('\n\n').map(paragraph => (
+                <p class="text-fd-muted leading-relaxed mb-4">{paragraph}</p>
+              ))}
+            </div>
+
+            {story.resources && (
+              <div class="mt-6 p-4 bg-noir-surface rounded-lg">
+                <p class="text-sm font-semibold mb-2">Related Resources:</p>
+                <ul class="text-sm text-fd-muted space-y-1">
+                  {story.resources.map(resource => (
+                    <li>{resource}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <!-- Share Your Story -->
+      <section class="mt-16 p-6 bg-fd-card rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4">Share Your Story</h2>
+        <p class="text-fd-muted mb-4">
+          If you are a survivor who would like to share your experience to help others,
+          we would be honored to hear from you. All submissions are reviewed carefully,
+          and nothing is published without your explicit permission.
+        </p>
+        <p class="text-fd-muted mb-4">
+          You can share as much or as little identifying information as you're comfortable with.
+          We can use a pseudonym, change identifying details, or publish anonymously—whatever
+          makes you feel safe.
+        </p>
+        <a href={`${baseUrl}contact`} class="btn btn-primary inline-flex">
+          Contact Us to Share
+        </a>
+      </section>
+
+      <!-- Resources -->
+      <section class="mt-8 p-6 bg-noir-surface border border-noir-border rounded-lg">
+        <h2 class="text-xl font-display font-bold mb-4">Need Support?</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div>
+            <p class="text-sm font-semibold mb-2">Crisis Lines</p>
+            <ul class="text-sm text-fd-muted space-y-1">
+              <li><strong>988</strong> - Suicide & Crisis Lifeline</li>
+              <li><strong>1-800-799-7233</strong> - Domestic Violence</li>
+              <li><strong>1-800-656-4673</strong> - RAINN</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-sm font-semibold mb-2">Find More Help</p>
+            <ul class="text-sm space-y-1">
+              <li><a href={`${baseUrl}resources`} class="text-amber hover:text-amber-bright">Victim Resources →</a></li>
+              <li><a href={`${baseUrl}safety-signs`} class="text-amber hover:text-amber-bright">Know the Warning Signs →</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
