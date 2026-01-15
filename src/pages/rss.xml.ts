@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: 'Forensic Darkness',
     description: 'Serial Killers & Awareness - Victims being informed with help and resources',
-    site: context.site || 'https://forensicdarkness.com',
+    site: context.site || 'https://whenmoon-afk.github.io/forensic-darkness-site',
     items: sortedPosts.map((post) => ({
       title: post.data.title,
       pubDate: new Date(post.data.date),
