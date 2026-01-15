@@ -5,40 +5,70 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Case File Noir - Deep documentary aesthetic
-        'noir': {
-          'void': '#06060a',      // Deepest black
-          'base': '#0a0a0c',      // Primary background
-          'surface': '#12121a',   // Cards, elevated surfaces
-          'elevated': '#1a1a24',  // Modals, dropdowns
-          'border': '#2a2a36',    // Subtle borders
+        // Cold Case Archives - Investigative Documentary Aesthetic
+        'slate': {
+          'void': '#080a0f',        // Deepest darkness
+          'base': '#0f1219',        // Primary background - cooler than noir
+          'surface': '#1a1f2e',     // Cards, elevated surfaces
+          'elevated': '#252b3d',    // Modals, dropdowns
+          'border': '#3a4256',      // Subtle borders
         },
-        'amber': {
-          'muted': '#8b7355',     // Subtle amber
-          'DEFAULT': '#c9a227',   // Evidence amber - primary accent
-          'bright': '#e4b82d',    // Hover states
-          'pale': '#f5e6c4',      // Highlighted text
+        'crimson': {
+          'deep': '#4a1520',        // Darkest crimson
+          'muted': '#6b2535',       // Subtle crimson
+          'DEFAULT': '#9b2335',     // Evidence crimson - primary accent
+          'bright': '#c92d43',      // Hover states
         },
-        'oxide': {
-          'deep': '#3d1f1f',      // Darkest red
-          'DEFAULT': '#6b2d2d',   // Blood oxide - danger/warnings
-          'bright': '#8b3a3a',    // Hover states
-        },
-        'paper': {
-          'aged': '#f5f0e8',      // Primary text - warm white
-          'muted': '#a69f91',     // Secondary text
-          'dim': '#6b665c',       // Tertiary text
+        'ice': {
+          'dim': '#5a6275',         // Tertiary text
+          'muted': '#8b929e',       // Secondary text
+          'DEFAULT': '#c4cad6',     // Body text
+          'bright': '#f2f4f7',      // Primary text - cool white
         },
         'steel': {
-          'dark': '#2d2d38',      // Dark steel
-          'DEFAULT': '#4a4a5c',   // Medium steel
-          'light': '#6e6e82',     // Light steel
+          'dark': '#2d3344',
+          'DEFAULT': '#4a5268',
+          'light': '#6b7489',
+        },
+        // Compatibility aliases for existing components
+        'noir': {
+          'void': '#080a0f',
+          'base': '#0f1219',
+          'surface': '#1a1f2e',
+          'elevated': '#252b3d',
+          'border': '#3a4256',
+        },
+        'amber': {
+          'muted': '#6b2535',
+          'DEFAULT': '#9b2335',
+          'bright': '#c92d43',
+          'pale': '#f2f4f7',
+        },
+        'oxide': {
+          'deep': '#4a1520',
+          'DEFAULT': '#6b2535',
+          'bright': '#9b2335',
+        },
+        'paper': {
+          'aged': '#f2f4f7',
+          'muted': '#8b929e',
+          'dim': '#5a6275',
+        },
+        // FD color scheme aliases
+        'fd': {
+          'bg': '#0f1219',
+          'card': '#1a1f2e',
+          'dark': '#080a0f',
+          'text': '#f2f4f7',
+          'muted': '#8b929e',
+          'primary': '#9b2335',
+          'accent': '#c92d43',
         },
       },
       fontFamily: {
-        'display': ['"Playfair Display"', 'Georgia', 'serif'],
-        'body': ['"Source Serif 4"', 'Georgia', 'serif'],
-        'mono': ['"JetBrains Mono"', 'monospace'],
+        'display': ['"Libre Baskerville"', 'Georgia', 'serif'],
+        'body': ['"Lora"', 'Georgia', 'serif'],
+        'mono': ['"IBM Plex Mono"', 'monospace'],
         'sans': ['"Inter"', 'system-ui', 'sans-serif'],
       },
       fontSize: {
@@ -48,13 +78,17 @@ module.exports = {
       },
       backgroundImage: {
         'grain': "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
-        'vignette': 'radial-gradient(ellipse at center, transparent 0%, rgba(6,6,10,0.4) 100%)',
+        'vignette': 'radial-gradient(ellipse at center, transparent 0%, rgba(8,10,15,0.5) 100%)',
       },
       boxShadow: {
-        'noir': '0 4px 20px -2px rgba(0, 0, 0, 0.5)',
-        'noir-lg': '0 10px 40px -4px rgba(0, 0, 0, 0.6)',
-        'amber-glow': '0 0 20px -4px rgba(201, 162, 39, 0.3)',
-        'inner-dark': 'inset 0 2px 4px rgba(0, 0, 0, 0.3)',
+        'archive': '0 4px 20px -2px rgba(0, 0, 0, 0.6)',
+        'archive-lg': '0 10px 40px -4px rgba(0, 0, 0, 0.7)',
+        'crimson-glow': '0 0 20px -4px rgba(155, 35, 53, 0.3)',
+        'inner-dark': 'inset 0 2px 4px rgba(0, 0, 0, 0.4)',
+        // Compatibility
+        'noir': '0 4px 20px -2px rgba(0, 0, 0, 0.6)',
+        'noir-lg': '0 10px 40px -4px rgba(0, 0, 0, 0.7)',
+        'amber-glow': '0 0 20px -4px rgba(155, 35, 53, 0.3)',
       },
       animation: {
         'typewriter': 'typewriter 2s steps(40) forwards',
@@ -62,7 +96,7 @@ module.exports = {
         'fade-up': 'fadeUp 0.6s ease-out forwards',
         'slide-in': 'slideIn 0.4s ease-out forwards',
         'reveal': 'reveal 0.8s ease-out forwards',
-        'flicker': 'flicker 0.15s ease-in-out',
+        'pulse-subtle': 'pulseSubtle 2s ease-in-out infinite',
       },
       keyframes: {
         typewriter: {
@@ -84,9 +118,9 @@ module.exports = {
           'from': { clipPath: 'inset(0 100% 0 0)' },
           'to': { clipPath: 'inset(0 0 0 0)' },
         },
-        flicker: {
+        pulseSubtle: {
           '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.8' },
+          '50%': { opacity: '0.85' },
         },
       },
     },
