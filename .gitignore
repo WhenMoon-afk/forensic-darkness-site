@@ -30,3 +30,6 @@ import/
 # Scratchpad
 /tmp/
 .claude/
+
+# Claude Code
+CLAUDE.md

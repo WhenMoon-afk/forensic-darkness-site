@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0f1219"/>
+
+  <!-- Soft radial glow -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#9b2335" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0f1219" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="200" cy="150" rx="150" ry="100" fill="url(#glow)"/>
+
+  <!-- Left hand reaching up -->
+  <g transform="translate(100, 120)">
+    <path d="M30 80 C20 70 15 50 20 30 C25 10 40 0 55 5 C70 10 80 25 85 45
+             L90 60 C95 40 110 35 120 45 C130 55 125 75 115 85
+             L70 130 C50 145 25 130 30 80 Z"
+          fill="#1a1f2e" stroke="#3a4256" stroke-width="2"/>
+    <!-- Finger details -->
+    <path d="M55 5 L60 40" stroke="#252b3d" stroke-width="1"/>
+    <path d="M75 15 L78 45" stroke="#252b3d" stroke-width="1"/>
+  </g>
+
+  <!-- Right hand reaching down -->
+  <g transform="translate(190, 80) scale(-1,1) translate(-100, 0)">
+    <path d="M30 80 C20 70 15 50 20 30 C25 10 40 0 55 5 C70 10 80 25 85 45
+             L90 60 C95 40 110 35 120 45 C130 55 125 75 115 85
+             L70 130 C50 145 25 130 30 80 Z"
+          fill="#252b3d" stroke="#3a4256" stroke-width="2"/>
+  </g>
+
+  <!-- Connection point - heart shape -->
+  <path d="M200 160 C200 145 185 135 175 145 C165 155 165 170 200 195
+           C235 170 235 155 225 145 C215 135 200 145 200 160 Z"
+        fill="#9b2335" opacity="0.8"/>
+
+  <!-- Support circles -->
+  <circle cx="200" cy="170" r="60" fill="none" stroke="#3a4256" stroke-width="1" stroke-dasharray="4 4"/>
+  <circle cx="200" cy="170" r="80" fill="none" stroke="#3a4256" stroke-width="0.5" stroke-dasharray="2 6"/>
+
+  <!-- Corner accents -->
+  <g fill="#9b2335" opacity="0.4">
+    <polygon points="30,30 38,38 30,46 22,38"/>
+    <polygon points="370,30 378,38 370,46 362,38"/>
+    <polygon points="30,270 38,278 30,286 22,278"/>
+    <polygon points="370,270 378,278 370,286 362,278"/>
+  </g>
+
+  <!-- Label -->
+  <text x="200" y="285" font-family="monospace" font-size="10" fill="#5a6275" text-anchor="middle" letter-spacing="2">SUPPORT</text>
+</svg>

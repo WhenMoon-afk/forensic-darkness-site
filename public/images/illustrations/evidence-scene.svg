@@ -1,55 +1,64 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
   <!-- Background -->
-  <rect width="400" height="300" fill="#0a0a0c"/>
+  <rect width="400" height="300" fill="#0f1219"/>
 
-  <!-- Crime Scene Tape - Top -->
+  <!-- Crime scene tape banner -->
   <g transform="rotate(-5 200 40)">
-    <rect x="0" y="30" width="400" height="25" fill="#c9a227"/>
-    <text x="20" y="48" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0a0a0c" letter-spacing="8">CRIME SCENE DO NOT CROSS CRIME SCENE DO NOT</text>
+    <rect x="20" y="25" width="360" height="30" fill="#9b2335"/>
+    <text x="200" y="47" font-family="monospace" font-size="11" fill="#f2f4f7" text-anchor="middle" letter-spacing="2">CRIME SCENE DO NOT CROSS</text>
   </g>
 
-  <!-- Evidence Markers -->
+  <!-- Floor grid perspective -->
+  <g stroke="#3a4256" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="280" x2="200" y2="150"/>
+    <line x1="100" y1="280" x2="200" y2="150"/>
+    <line x1="200" y1="280" x2="200" y2="150"/>
+    <line x1="300" y1="280" x2="200" y2="150"/>
+    <line x1="400" y1="280" x2="200" y2="150"/>
+    <line x1="50" y1="200" x2="350" y2="200"/>
+    <line x1="75" y1="220" x2="325" y2="220"/>
+    <line x1="100" y1="240" x2="300" y2="240"/>
+    <line x1="125" y1="260" x2="275" y2="260"/>
+  </g>
+
+  <!-- Evidence markers -->
   <g>
     <!-- Marker 1 -->
-    <path d="M80 200 L95 200 L95 240 L87.5 250 L80 240 Z" fill="#c9a227"/>
-    <text x="87.5" y="225" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0a0a0c" text-anchor="middle">1</text>
-
+    <g transform="translate(100, 180)">
+      <path d="M0 40 L15 0 L30 40 Z" fill="#9b2335" stroke="#6b2535" stroke-width="1"/>
+      <text x="15" y="32" font-family="sans-serif" font-size="16" fill="#f2f4f7" text-anchor="middle" font-weight="bold">1</text>
+    </g>
     <!-- Marker 2 -->
-    <path d="M180 180 L195 180 L195 220 L187.5 230 L180 220 Z" fill="#c9a227"/>
-    <text x="187.5" y="205" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0a0a0c" text-anchor="middle">2</text>
-
+    <g transform="translate(200, 200)">
+      <path d="M0 40 L15 0 L30 40 Z" fill="#9b2335" stroke="#6b2535" stroke-width="1"/>
+      <text x="15" y="32" font-family="sans-serif" font-size="16" fill="#f2f4f7" text-anchor="middle" font-weight="bold">2</text>
+    </g>
     <!-- Marker 3 -->
-    <path d="M290 210 L305 210 L305 250 L297.5 260 L290 250 Z" fill="#c9a227"/>
-    <text x="297.5" y="235" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0a0a0c" text-anchor="middle">3</text>
+    <g transform="translate(280, 170)">
+      <path d="M0 40 L15 0 L30 40 Z" fill="#9b2335" stroke="#6b2535" stroke-width="1"/>
+      <text x="15" y="32" font-family="sans-serif" font-size="16" fill="#f2f4f7" text-anchor="middle" font-weight="bold">3</text>
+    </g>
   </g>
 
-  <!-- Magnifying Glass -->
-  <g transform="translate(300, 100)">
-    <circle cx="0" cy="0" r="35" fill="none" stroke="#8b7355" stroke-width="4"/>
-    <circle cx="0" cy="0" r="30" fill="#12121a" fill-opacity="0.5" stroke="#6b665c" stroke-width="2"/>
-    <line x1="25" y1="25" x2="55" y2="55" stroke="#8b7355" stroke-width="6" stroke-linecap="round"/>
-    <!-- Magnified detail -->
-    <circle cx="-5" cy="5" r="3" fill="#c9a227"/>
+  <!-- Magnifying glass -->
+  <g transform="translate(300, 80)">
+    <circle cx="30" cy="30" r="25" fill="none" stroke="#3a4256" stroke-width="4"/>
+    <circle cx="30" cy="30" r="20" fill="#1a1f2e" opacity="0.5"/>
+    <line x1="48" y1="48" x2="70" y2="70" stroke="#3a4256" stroke-width="6" stroke-linecap="round"/>
   </g>
 
-  <!-- Floor Grid Pattern -->
-  <g stroke="#1a1a24" stroke-width="1">
-    <line x1="0" y1="150" x2="400" y2="170"/>
-    <line x1="0" y1="180" x2="400" y2="200"/>
-    <line x1="0" y1="210" x2="400" y2="230"/>
-    <line x1="0" y1="240" x2="400" y2="260"/>
-    <line x1="50" y1="150" x2="30" y2="300"/>
-    <line x1="150" y1="150" x2="130" y2="300"/>
-    <line x1="250" y1="150" x2="230" y2="300"/>
-    <line x1="350" y1="150" x2="330" y2="300"/>
-  </g>
-
-  <!-- Spotlight Effect -->
-  <ellipse cx="200" cy="200" rx="100" ry="60" fill="url(#spotlight)" opacity="0.3"/>
+  <!-- Spotlight effect -->
   <defs>
-    <radialGradient id="spotlight">
-      <stop offset="0%" stop-color="#c9a227"/>
-      <stop offset="100%" stop-color="transparent"/>
+    <radialGradient id="spotlight" cx="50%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#f2f4f7" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#0f1219" stop-opacity="0"/>
     </radialGradient>
   </defs>
+  <ellipse cx="200" cy="200" rx="100" ry="60" fill="url(#spotlight)"/>
+
+  <!-- Corner diamonds -->
+  <g fill="#9b2335" opacity="0.5">
+    <polygon points="30,280 38,288 30,296 22,288"/>
+    <polygon points="370,280 378,288 370,296 362,288"/>
+  </g>
 </svg>

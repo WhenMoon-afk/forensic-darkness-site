@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
   <!-- Background -->
-  <rect width="400" height="300" fill="#0a0a0c"/>
+  <rect width="400" height="300" fill="#0f1219"/>
 
   <!-- Fingerprint Pattern -->
-  <g transform="translate(200, 150)" stroke="#c9a227" stroke-width="1.5" fill="none" opacity="0.9">
+  <g transform="translate(200, 150)" stroke="#9b2335" stroke-width="1.5" fill="none" opacity="0.9">
     <!-- Core -->
     <ellipse cx="0" cy="0" rx="15" ry="20"/>
     <ellipse cx="0" cy="0" rx="25" ry="35"/>
@@ -14,14 +14,14 @@
     <ellipse cx="0" cy="0" rx="75" ry="110"/>
 
     <!-- Ridge breaks for realism -->
-    <line x1="-20" y1="-30" x2="-20" y2="-45" stroke="#0a0a0c" stroke-width="4"/>
-    <line x1="30" y1="20" x2="30" y2="40" stroke="#0a0a0c" stroke-width="4"/>
-    <line x1="-40" y1="50" x2="-40" y2="70" stroke="#0a0a0c" stroke-width="4"/>
-    <line x1="50" y1="-40" x2="50" y2="-60" stroke="#0a0a0c" stroke-width="4"/>
+    <line x1="-20" y1="-30" x2="-20" y2="-45" stroke="#0f1219" stroke-width="4"/>
+    <line x1="30" y1="20" x2="30" y2="40" stroke="#0f1219" stroke-width="4"/>
+    <line x1="-40" y1="50" x2="-40" y2="70" stroke="#0f1219" stroke-width="4"/>
+    <line x1="50" y1="-40" x2="50" y2="-60" stroke="#0f1219" stroke-width="4"/>
   </g>
 
   <!-- Analysis Markers -->
-  <g stroke="#8b3a3a" stroke-width="2" fill="none">
+  <g stroke="#c92d43" stroke-width="2" fill="none">
     <circle cx="185" cy="120" r="8"/>
     <line x1="177" y1="120" x2="193" y2="120"/>
     <line x1="185" y1="112" x2="185" y2="128"/>
@@ -32,7 +32,7 @@
   </g>
 
   <!-- Grid Overlay -->
-  <g stroke="#2a2a36" stroke-width="0.5" opacity="0.5">
+  <g stroke="#3a4256" stroke-width="0.5" opacity="0.5">
     <line x1="100" y1="50" x2="100" y2="250"/>
     <line x1="150" y1="50" x2="150" y2="250"/>
     <line x1="200" y1="50" x2="200" y2="250"/>
@@ -45,5 +45,11 @@
   </g>
 
   <!-- Label -->
-  <text x="200" y="280" font-family="monospace" font-size="10" fill="#6b665c" text-anchor="middle" letter-spacing="2">LATENT PRINT ANALYSIS</text>
+  <text x="200" y="280" font-family="monospace" font-size="10" fill="#5a6275" text-anchor="middle" letter-spacing="2">LATENT PRINT ANALYSIS</text>
+
+  <!-- Corner diamonds -->
+  <g fill="#9b2335" opacity="0.5">
+    <polygon points="30,30 38,38 30,46 22,38"/>
+    <polygon points="370,30 378,38 370,46 362,38"/>
+  </g>
 </svg>

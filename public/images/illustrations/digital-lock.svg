@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0f1219"/>
+
+  <!-- Binary background pattern -->
+  <defs>
+    <pattern id="binary" width="60" height="30" patternUnits="userSpaceOnUse">
+      <text x="0" y="10" font-family="monospace" font-size="8" fill="#1a1f2e">10110</text>
+      <text x="30" y="25" font-family="monospace" font-size="8" fill="#1a1f2e">01001</text>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="url(#binary)"/>
+
+  <!-- Lock shackle -->
+  <path d="M150 130 L150 100 C150 60 200 40 200 40 C200 40 250 60 250 100 L250 130"
+        fill="none" stroke="#3a4256" stroke-width="16" stroke-linecap="round"/>
+  <path d="M155 130 L155 105 C155 70 200 55 200 55 C200 55 245 70 245 105 L245 130"
+        fill="none" stroke="#252b3d" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Lock body -->
+  <rect x="130" y="125" width="140" height="100" rx="8" fill="#1a1f2e" stroke="#3a4256" stroke-width="2"/>
+  <rect x="140" y="135" width="120" height="80" rx="4" fill="#252b3d"/>
+
+  <!-- Keyhole -->
+  <circle cx="200" cy="165" r="15" fill="#0f1219" stroke="#9b2335" stroke-width="2"/>
+  <rect x="195" y="170" width="10" height="25" rx="2" fill="#0f1219" stroke="#9b2335" stroke-width="2"/>
+
+  <!-- Digital circuit lines -->
+  <g stroke="#9b2335" stroke-width="1" opacity="0.5">
+    <path d="M130 175 L80 175 L80 120 L60 120"/>
+    <path d="M270 175 L320 175 L320 120 L340 120"/>
+    <path d="M200 225 L200 250 L150 250 L150 270"/>
+    <path d="M200 225 L200 250 L250 250 L250 270"/>
+    <circle cx="60" cy="120" r="4" fill="#9b2335"/>
+    <circle cx="340" cy="120" r="4" fill="#9b2335"/>
+    <circle cx="150" cy="270" r="4" fill="#9b2335"/>
+    <circle cx="250" cy="270" r="4" fill="#9b2335"/>
+  </g>
+
+  <!-- Shield outline around lock -->
+  <path d="M200 30 L300 60 L300 200 C300 230 250 260 200 270 C150 260 100 230 100 200 L100 60 Z"
+        fill="none" stroke="#3a4256" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- Corner diamonds -->
+  <g fill="#9b2335" opacity="0.5">
+    <polygon points="30,30 38,38 30,46 22,38"/>
+    <polygon points="370,30 378,38 370,46 362,38"/>
+    <polygon points="30,270 38,278 30,286 22,278"/>
+    <polygon points="370,270 378,278 370,286 362,278"/>
+  </g>
+
+  <!-- Label -->
+  <text x="200" y="290" font-family="monospace" font-size="10" fill="#5a6275" text-anchor="middle" letter-spacing="2">ENCRYPTED</text>
+</svg>

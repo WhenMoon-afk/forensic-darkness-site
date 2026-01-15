@@ -1,38 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
   <!-- Background -->
-  <rect width="400" height="300" fill="#0a0a0c"/>
+  <rect width="400" height="300" fill="#0f1219"/>
 
   <!-- Folder Back -->
-  <path d="M60 80 L60 250 L340 250 L340 80 L200 80 L180 60 L80 60 L60 80 Z" fill="#1a1a24" stroke="#2a2a36" stroke-width="2"/>
+  <path d="M60 80 L60 250 L340 250 L340 80 L200 80 L180 60 L80 60 L60 80 Z" fill="#1a1f2e" stroke="#3a4256" stroke-width="2"/>
 
   <!-- Folder Tab -->
-  <path d="M80 60 L180 60 L200 80 L100 80 Z" fill="#12121a" stroke="#2a2a36" stroke-width="1"/>
+  <path d="M80 60 L180 60 L200 80 L100 80 Z" fill="#252b3d" stroke="#3a4256" stroke-width="1"/>
 
   <!-- Paper Stack -->
-  <rect x="90" y="100" width="220" height="130" fill="#f5f0e8" rx="2"/>
-  <rect x="95" y="105" width="210" height="120" fill="#e8e3db" rx="1"/>
+  <rect x="90" y="100" width="220" height="130" fill="#f2f4f7" rx="2"/>
+  <rect x="95" y="105" width="210" height="120" fill="#c4cad6" rx="1"/>
 
   <!-- Text Lines on Paper -->
-  <rect x="110" y="120" width="140" height="4" fill="#6b665c" rx="1"/>
-  <rect x="110" y="135" width="170" height="3" fill="#a69f91" rx="1"/>
-  <rect x="110" y="148" width="150" height="3" fill="#a69f91" rx="1"/>
-  <rect x="110" y="161" width="165" height="3" fill="#a69f91" rx="1"/>
-  <rect x="110" y="174" width="130" height="3" fill="#a69f91" rx="1"/>
-  <rect x="110" y="187" width="155" height="3" fill="#a69f91" rx="1"/>
+  <rect x="110" y="120" width="140" height="4" fill="#5a6275" rx="1"/>
+  <rect x="110" y="135" width="170" height="3" fill="#8b929e" rx="1"/>
+  <rect x="110" y="148" width="150" height="3" fill="#8b929e" rx="1"/>
+  <rect x="110" y="161" width="165" height="3" fill="#8b929e" rx="1"/>
+  <rect x="110" y="174" width="130" height="3" fill="#8b929e" rx="1"/>
+  <rect x="110" y="187" width="155" height="3" fill="#8b929e" rx="1"/>
 
   <!-- Confidential Stamp -->
   <g transform="rotate(-15 280 160)">
-    <rect x="230" y="145" width="100" height="30" fill="none" stroke="#8b3a3a" stroke-width="3" rx="2"/>
-    <text x="238" y="166" font-family="monospace" font-size="12" font-weight="bold" fill="#8b3a3a">CLASSIFIED</text>
+    <rect x="230" y="145" width="100" height="30" fill="none" stroke="#9b2335" stroke-width="3" rx="2"/>
+    <text x="238" y="166" font-family="monospace" font-size="12" font-weight="bold" fill="#9b2335">CLASSIFIED</text>
   </g>
 
   <!-- Evidence Tag -->
   <g transform="translate(300, 220)">
-    <path d="M0 0 L35 0 L35 25 L17.5 35 L0 25 Z" fill="#c9a227" stroke="#8b7355" stroke-width="1"/>
-    <circle cx="17.5" cy="8" r="3" fill="#0a0a0c"/>
-    <text x="17.5" y="22" font-family="monospace" font-size="8" fill="#0a0a0c" text-anchor="middle">FD</text>
+    <path d="M0 0 L35 0 L35 25 L17.5 35 L0 25 Z" fill="#9b2335" stroke="#6b2535" stroke-width="1"/>
+    <circle cx="17.5" cy="8" r="3" fill="#0f1219"/>
+    <text x="17.5" y="22" font-family="monospace" font-size="8" fill="#f2f4f7" text-anchor="middle">FD</text>
   </g>
 
   <!-- Folder Front Lip -->
-  <path d="M60 250 L60 240 L340 240 L340 250 Z" fill="#12121a" stroke="#2a2a36" stroke-width="1"/>
+  <path d="M60 250 L60 240 L340 240 L340 250 Z" fill="#252b3d" stroke="#3a4256" stroke-width="1"/>
+
+  <!-- Corner diamonds -->
+  <g fill="#9b2335" opacity="0.5">
+    <polygon points="30,30 38,38 30,46 22,38"/>
+    <polygon points="370,30 378,38 370,46 362,38"/>
+  </g>
 </svg>

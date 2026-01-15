@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0f1219"/>
+
+  <!-- Warning triangle -->
+  <path d="M200 50 L320 230 L80 230 Z" fill="#1a1f2e" stroke="#3a4256" stroke-width="2"/>
+  <path d="M200 70 L300 215 L100 215 Z" fill="#252b3d" stroke="#3a4256" stroke-width="1"/>
+
+  <!-- Exclamation mark -->
+  <rect x="192" y="100" width="16" height="70" rx="4" fill="#9b2335"/>
+  <circle cx="200" cy="190" r="10" fill="#9b2335"/>
+
+  <!-- Alert waves -->
+  <g stroke="#9b2335" stroke-width="2" fill="none" opacity="0.5">
+    <path d="M340 100 Q360 120 340 140"/>
+    <path d="M350 90 Q380 120 350 150"/>
+    <path d="M60 100 Q40 120 60 140"/>
+    <path d="M50 90 Q20 120 50 150"/>
+  </g>
+
+  <!-- Red flags on sides -->
+  <g transform="translate(50, 180)">
+    <rect x="0" y="0" width="4" height="60" fill="#3a4256"/>
+    <path d="M4 5 L35 15 L4 30 Z" fill="#9b2335" opacity="0.7"/>
+  </g>
+  <g transform="translate(346, 180)">
+    <rect x="0" y="0" width="4" height="60" fill="#3a4256"/>
+    <path d="M0 5 L-31 15 L0 30 Z" fill="#9b2335" opacity="0.7"/>
+  </g>
+
+  <!-- Dotted border -->
+  <rect x="20" y="20" width="360" height="260" fill="none" stroke="#3a4256" stroke-width="1" stroke-dasharray="8 4"/>
+
+  <!-- Corner diamonds -->
+  <g fill="#9b2335" opacity="0.6">
+    <polygon points="30,30 38,38 30,46 22,38"/>
+    <polygon points="370,30 378,38 370,46 362,38"/>
+    <polygon points="30,270 38,278 30,286 22,278"/>
+    <polygon points="370,270 378,278 370,286 362,278"/>
+  </g>
+
+  <!-- Label -->
+  <text x="200" y="265" font-family="monospace" font-size="10" fill="#5a6275" text-anchor="middle" letter-spacing="2">WARNING</text>
+</svg>

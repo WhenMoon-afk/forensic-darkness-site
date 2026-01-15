@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0f1219"/>
+
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1a1f2e" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="300" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Shield shape -->
+  <path d="M200 40 L280 70 L280 160 C280 200 240 240 200 260 C160 240 120 200 120 160 L120 70 Z"
+        fill="#1a1f2e" stroke="#3a4256" stroke-width="2"/>
+
+  <!-- Shield inner glow -->
+  <path d="M200 55 L265 80 L265 155 C265 190 230 225 200 242 C170 225 135 190 135 155 L135 80 Z"
+        fill="#252b3d" stroke="#3a4256" stroke-width="1"/>
+
+  <!-- Checkmark inside shield -->
+  <path d="M165 145 L185 170 L240 110"
+        fill="none" stroke="#9b2335" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Protection rays -->
+  <g opacity="0.3">
+    <line x1="200" y1="150" x2="80" y2="80" stroke="#9b2335" stroke-width="1"/>
+    <line x1="200" y1="150" x2="320" y2="80" stroke="#9b2335" stroke-width="1"/>
+    <line x1="200" y1="150" x2="60" y2="200" stroke="#9b2335" stroke-width="1"/>
+    <line x1="200" y1="150" x2="340" y2="200" stroke="#9b2335" stroke-width="1"/>
+  </g>
+
+  <!-- Corner accent diamonds -->
+  <g fill="#9b2335" opacity="0.6">
+    <polygon points="30,30 38,38 30,46 22,38"/>
+    <polygon points="370,30 378,38 370,46 362,38"/>
+    <polygon points="30,270 38,278 30,286 22,278"/>
+    <polygon points="370,270 378,278 370,286 362,278"/>
+  </g>
+
+  <!-- Label -->
+  <text x="200" y="285" font-family="monospace" font-size="10" fill="#5a6275" text-anchor="middle" letter-spacing="2">PROTECTED</text>
+</svg>
