@@ -1,4 +1,6 @@
 ---
+import { generateCaseNumber } from '../utils/content';
+
 interface Props {
   title: string;
   slug: string;
@@ -19,8 +21,7 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   day: 'numeric',
 });
 
-// Generate case number from date
-const caseNumber = `FD-${new Date(date).getFullYear()}-${String(new Date(date).getMonth() + 1).padStart(2, '0')}`;
+const caseNumber = generateCaseNumber(date);
 ---
 
 <article class="article-card card group relative">
