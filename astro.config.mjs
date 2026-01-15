@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
+import { remarkBaseUrl } from './src/plugins/remark-base-url.mjs';
 
 export default defineConfig({
   site: 'https://whenmoon-afk.github.io',
@@ -16,6 +17,7 @@ export default defineConfig({
     assets: '_assets'
   },
   markdown: {
+    remarkPlugins: [remarkBaseUrl],
     shikiConfig: {
       theme: 'github-dark'
     }
