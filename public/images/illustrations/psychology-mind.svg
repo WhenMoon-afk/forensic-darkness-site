@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background -->
+  <rect width="400" height="300" fill="#0a0a0c"/>
+
+  <!-- Head Silhouette -->
+  <path d="M200 260
+           C140 260 100 220 100 160
+           C100 100 140 50 200 50
+           C260 50 300 100 300 160
+           C300 200 280 230 260 245
+           L260 260
+           L200 260 Z"
+        fill="#12121a" stroke="#2a2a36" stroke-width="2"/>
+
+  <!-- Brain Regions -->
+  <g transform="translate(200, 140)">
+    <!-- Frontal Lobe -->
+    <path d="M-60,-60 Q-30,-80 0,-70 Q30,-80 60,-60 Q40,-30 0,-40 Q-40,-30 -60,-60 Z"
+          fill="#1a1a24" stroke="#c9a227" stroke-width="1.5"/>
+
+    <!-- Temporal Lobes -->
+    <path d="M-70,-30 Q-80,0 -70,30 Q-50,20 -40,0 Q-50,-20 -70,-30 Z"
+          fill="#1a1a24" stroke="#8b7355" stroke-width="1.5"/>
+    <path d="M70,-30 Q80,0 70,30 Q50,20 40,0 Q50,-20 70,-30 Z"
+          fill="#1a1a24" stroke="#8b7355" stroke-width="1.5"/>
+
+    <!-- Parietal -->
+    <path d="M-30,-50 Q0,-60 30,-50 Q20,-20 0,-30 Q-20,-20 -30,-50 Z"
+          fill="#1a1a24" stroke="#6b665c" stroke-width="1"/>
+
+    <!-- Neural Pathways -->
+    <g stroke="#c9a227" stroke-width="0.5" opacity="0.6">
+      <line x1="0" y1="-50" x2="-20" y2="0"/>
+      <line x1="0" y1="-50" x2="20" y2="0"/>
+      <line x1="-20" y1="0" x2="-40" y2="30"/>
+      <line x1="20" y1="0" x2="40" y2="30"/>
+      <line x1="-20" y1="0" x2="0" y2="40"/>
+      <line x1="20" y1="0" x2="0" y2="40"/>
+    </g>
+
+    <!-- Activity Nodes -->
+    <g fill="#8b3a3a">
+      <circle cx="-10" cy="-55" r="5">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="15" cy="-45" r="4">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+    <g fill="#c9a227">
+      <circle cx="-50" cy="10" r="3">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="50" cy="10" r="3">
+        <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- Labels -->
+  <g font-family="monospace" font-size="9" fill="#6b665c">
+    <text x="320" y="80">PREFRONTAL</text>
+    <text x="320" y="95">CORTEX</text>
+    <line x1="260" y1="85" x2="315" y2="85" stroke="#2a2a36" stroke-width="1"/>
+
+    <text x="40" y="180">AMYGDALA</text>
+    <line x1="95" y1="175" x2="140" y2="155" stroke="#2a2a36" stroke-width="1"/>
+  </g>
+
+  <!-- Title -->
+  <text x="200" y="285" font-family="monospace" font-size="10" fill="#8b7355" text-anchor="middle" letter-spacing="3">FORENSIC PSYCHOLOGY</text>
+</svg>
