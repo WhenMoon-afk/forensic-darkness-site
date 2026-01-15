@@ -1,5 +1,7 @@
 ---
 const currentYear = new Date().getFullYear();
+const baseUrl = import.meta.env.BASE_URL;
+const internalUrl = (path: string) => `${baseUrl}${path.startsWith('/') ? path.slice(1) : path}`;
 
 const resourceLinks = [
   { label: 'Office for Victims of Crime', href: 'https://ovc.ojp.gov/' },
@@ -76,13 +78,13 @@ const socialLinks = [
         &copy; {currentYear} Forensic Darkness. All rights reserved.
       </p>
       <p class="text-fd-muted text-xs mt-2">
-        <a href="/contact" class="hover:text-fd-primary">Contact</a>
+        <a href={internalUrl('/contact')} class="hover:text-fd-primary">Contact</a>
         {' · '}
-        <a href="/rss.xml" class="hover:text-fd-primary">RSS Feed</a>
+        <a href={internalUrl('/rss.xml')} class="hover:text-fd-primary">RSS Feed</a>
         {' · '}
-        <a href="/privacy" class="hover:text-fd-primary">Privacy Policy</a>
+        <a href={internalUrl('/privacy')} class="hover:text-fd-primary">Privacy Policy</a>
         {' · '}
-        <a href="/disclaimer" class="hover:text-fd-primary">Disclaimer</a>
+        <a href={internalUrl('/disclaimer')} class="hover:text-fd-primary">Disclaimer</a>
       </p>
     </div>
   </div>

@@ -1,5 +1,6 @@
 ---
 // A site-wide content notice for pages listing multiple articles
+const baseUrl = import.meta.env.BASE_URL;
 ---
 
 <div class="mb-8 p-4 bg-noir-surface/50 border border-noir-border rounded-sm" role="note" aria-label="Content notice">
@@ -13,7 +14,7 @@
       <p class="text-sm text-paper-muted">
         <span class="font-semibold text-oxide-bright">Content Notice:</span>
         This site contains detailed discussions of violent crimes, serial killers, and disturbing subject matter for educational purposes.
-        <a href="/resources" class="text-amber hover:text-amber-bright ml-1">Support resources available →</a>
+        <a href={`${baseUrl}resources`} class="text-amber hover:text-amber-bright ml-1">Support resources available →</a>
       </p>
     </div>
   </div>

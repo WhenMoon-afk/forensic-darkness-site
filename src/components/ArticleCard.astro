@@ -15,6 +15,8 @@ interface Props {
 
 const { title, slug, date, excerpt, image, tags, category, author, readingTime } = Astro.props;
 
+const baseUrl = import.meta.env.BASE_URL;
+
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'short',
@@ -26,7 +28,7 @@ const caseNumber = generateCaseNumber(date);
 
 <article class="article-card card group relative">
   <!-- Clickable card overlay using pseudo-element pattern -->
-  <a href={`/blog/${slug}`} class="absolute inset-0 z-10" aria-label={`Read article: ${title}`}>
+  <a href={`${baseUrl}blog/${slug}`} class="absolute inset-0 z-10" aria-label={`Read article: ${title}`}>
     <span class="sr-only">Read full article</span>
   </a>
 
@@ -100,7 +102,7 @@ const caseNumber = generateCaseNumber(date);
       <>
         <span class="text-noir-border">|</span>
         <a
-          href={`/author/${author}`}
+          href={`${baseUrl}author/${author}`}
           class="relative z-20 hover:text-amber transition-colors"
         >
           {author}

@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+const internalUrl = (path: string) => `${baseUrl}${path.startsWith('/') ? path.slice(1) : path}`;
 ---
 
 <BaseLayout title="Start Here" description="New to Forensic Darkness? Find the right resources for your situation.">
@@ -41,7 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
           <div>
             <p class="font-mono text-xs text-paper-dim uppercase tracking-wide mb-1">All Resources</p>
-            <a href="/resources" class="text-amber hover:text-amber-bright underline">View Full List →</a>
+            <a href={internalUrl('/resources')} class="text-amber hover:text-amber-bright underline">View Full List →</a>
           </div>
         </div>
       </div>
@@ -57,19 +60,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <ul class="space-y-2">
             <li>
-              <a href="/resources" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/resources')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Victim Resources and Hotlines
               </a>
             </li>
             <li>
-              <a href="/blog/finding-your-path-forward-resources-for-crime-survivors" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/finding-your-path-forward-resources-for-crime-survivors')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Finding Your Path Forward: Resources for Crime Survivors
               </a>
             </li>
             <li>
-              <a href="/blog/understanding-trauma-responses-after-violent-crime" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/understanding-trauma-responses-after-violent-crime')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Understanding Trauma Responses
               </a>
@@ -85,13 +88,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <ul class="space-y-2">
             <li>
-              <a href="/blog/how-to-support-loved-one-after-trauma" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/how-to-support-loved-one-after-trauma')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 How to Support a Loved One After Trauma
               </a>
             </li>
             <li>
-              <a href="/blog/understanding-trauma-responses-after-violent-crime" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/understanding-trauma-responses-after-violent-crime')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Understanding Trauma Responses
               </a>
@@ -107,19 +110,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <ul class="space-y-2">
             <li>
-              <a href="/blog/talking-to-children-about-safety-without-fear" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/talking-to-children-about-safety-without-fear')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Talking to Children About Safety Without Fear
               </a>
             </li>
             <li>
-              <a href="/blog/the-day-children-could-no-longer-play-outside" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/the-day-children-could-no-longer-play-outside')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 The Samantha Runnion Case: Child Safety Lessons
               </a>
             </li>
             <li>
-              <a href="/blog/recognizing-warning-signs-of-predatory-behavior" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/recognizing-warning-signs-of-predatory-behavior')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Recognizing Warning Signs of Predatory Behavior
               </a>
@@ -135,19 +138,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <ul class="space-y-2">
             <li>
-              <a href="/blog/red-flags-warning-signs-in-relationships" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/red-flags-warning-signs-in-relationships')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Red Flags in Relationships
               </a>
             </li>
             <li>
-              <a href="/blog/recognizing-dangerous-behavior-in-people-you-know" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/recognizing-dangerous-behavior-in-people-you-know')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Recognizing Dangerous Behavior in People You Know
               </a>
             </li>
             <li>
-              <a href="/blog/digital-safety-protecting-yourself-online" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/digital-safety-protecting-yourself-online')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Digital Safety: Protecting Yourself Online
               </a>
@@ -163,25 +166,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </p>
           <ul class="space-y-2">
             <li>
-              <a href="/category/serial-killers" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/category/serial-killers')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Serial Killer Case Files
               </a>
             </li>
             <li>
-              <a href="/blog/serial-killers-societys-true-psychopaths" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/serial-killers-societys-true-psychopaths')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Understanding Psychopathy
               </a>
             </li>
             <li>
-              <a href="/blog/golden-state-killer-dna-solved-40-year-mystery" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog/golden-state-killer-dna-solved-40-year-mystery')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Forensic Science: DNA Evidence
               </a>
             </li>
             <li>
-              <a href="/blog" class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
+              <a href={internalUrl('/blog')} class="text-paper-aged hover:text-amber transition-colors flex items-center gap-2">
                 <span class="w-1.5 h-1.5 bg-amber/50"></span>
                 Browse All Articles →
               </a>
@@ -198,7 +201,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Forensic Darkness exists to inform and protect. We believe that understanding the darkness
           of violent crime helps us better defend against it. Our motto: <em class="text-amber">Don't be scared, be aware.</em>
         </p>
-        <a href="/about" class="text-amber hover:text-amber-bright">Learn more about our mission →</a>
+        <a href={internalUrl('/about')} class="text-amber hover:text-amber-bright">Learn more about our mission →</a>
       </div>
 
     </div>

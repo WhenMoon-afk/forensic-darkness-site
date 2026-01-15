@@ -92,8 +92,8 @@ if (image) {
     <div class="container max-w-4xl">
       <!-- Breadcrumb -->
       <Breadcrumb items={[
-        { label: 'Home', href: '/' },
-        { label: 'Blog', href: '/blog' },
+        { label: 'Home', href: baseUrl },
+        { label: 'Blog', href: `${baseUrl}blog` },
         { label: title }
       ]} />
 
@@ -123,7 +123,7 @@ if (image) {
           <div class="flex flex-wrap gap-2 mt-4">
             {tags.map(tag => (
               <a
-                href={`/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
+                href={`${baseUrl}tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
                 class="px-2 py-1 text-xs bg-fd-card rounded-full text-fd-muted hover:text-fd-primary transition-colors"
               >
                 {tag}
@@ -147,7 +147,7 @@ if (image) {
       <!-- Footer -->
       <footer class="mt-12 pt-8 border-t border-noir-border">
         <div class="flex items-center justify-between">
-          <a href="/blog" class="text-fd-primary hover:text-fd-accent flex items-center gap-2">
+          <a href={`${baseUrl}blog`} class="text-fd-primary hover:text-fd-accent flex items-center gap-2">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
@@ -204,7 +204,7 @@ if (image) {
             </p>
             <div>
               {prevPost && (
-                <a href={`/blog/${prevPost.slug}`} class="group block">
+                <a href={`${baseUrl}blog/${prevPost.slug}`} class="group block">
                   <span class="text-xs text-fd-muted uppercase tracking-wide">Previous</span>
                   <span class="block text-fd-primary group-hover:text-fd-accent transition-colors line-clamp-2">
                     {prevPost.title}
@@ -214,7 +214,7 @@ if (image) {
             </div>
             <div class="text-right">
               {nextPost && (
-                <a href={`/blog/${nextPost.slug}`} class="group block">
+                <a href={`${baseUrl}blog/${nextPost.slug}`} class="group block">
                   <span class="text-xs text-fd-muted uppercase tracking-wide">Next</span>
                   <span class="block text-fd-primary group-hover:text-fd-accent transition-colors line-clamp-2">
                     {nextPost.title}
@@ -266,7 +266,7 @@ if (image) {
 
   <!-- Keyboard Navigation -->
   {(prevPost || nextPost) && (
-    <script is:inline define:vars={{ prevUrl: prevPost ? `/blog/${prevPost.slug}` : null, nextUrl: nextPost ? `/blog/${nextPost.slug}` : null }}>
+    <script is:inline define:vars={{ prevUrl: prevPost ? `${baseUrl}blog/${prevPost.slug}` : null, nextUrl: nextPost ? `${baseUrl}blog/${nextPost.slug}` : null }}>
       document.addEventListener('keydown', (e) => {
         if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
