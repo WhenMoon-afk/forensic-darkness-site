@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://forensicdarkness.com/sitemap-index.xml
+Sitemap: https://whenmoon-afk.github.io/forensic-darkness-site/sitemap-index.xml
